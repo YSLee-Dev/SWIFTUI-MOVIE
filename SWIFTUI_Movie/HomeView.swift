@@ -110,6 +110,7 @@ struct ScrollViewPageing: ScrollTargetBehavior {
     let totalCount: Int
     
     func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {
+        if context.originalTarget.rect.origin.x <= 0 && target.rect.origin.y <= 0 {return}
         let wantX = context.contentSize.width / CGFloat(totalCount)
         let xValue = context.originalTarget.rect.origin.x + (target.rect.origin.x >= context.originalTarget.rect.origin.x ? wantX: -wantX) *  abs(round(context.velocity.dx))
         
