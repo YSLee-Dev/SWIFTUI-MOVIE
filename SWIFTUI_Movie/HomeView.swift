@@ -31,7 +31,7 @@ struct HomeView: View {
             Text("홈")
                 .font(.title)
                 .fontWeight(.bold)
-                .padding(.bottom, 20)
+                .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
             
             ScrollView {
                 Button(action: {
@@ -56,12 +56,13 @@ struct HomeView: View {
                         }
                 }
                 .frame(height: 50)
-                .padding(.bottom, 20)
+                .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
                 
                 VStack(alignment: .leading) {
                     Text("금일 박스 오피스")
                         .font(.title2)
                         .bold()
+                        .padding(.horizontal, 20)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack(alignment: .center) {
@@ -72,7 +73,7 @@ struct HomeView: View {
                     }
                     .frame(height: 200)
                     .background {
-                        RoundedRectangle(cornerRadius: 15)
+                        RoundedRectangle(cornerRadius: 0)
                             .fill(Color.gray.opacity(0.1))
                     }
                 }
@@ -83,18 +84,19 @@ struct HomeView: View {
                     Text("금주 박스 오피스")
                         .font(.title2)
                         .bold()
+                        .padding(.horizontal, 20)
                     
-                    ScrollView(.horizontal) {
+                    ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack(alignment: .center) {
                             ForEach(tempData, id: \.self) {
                                 HomeMovieView(rank: $0.rank, title: $0.title, urlURL: $0.image, date: $0.date)
                             }
                         }
-                        .frame(height: 200)
-                        .background {
-                            RoundedRectangle(cornerRadius: 15)
-                                .fill(Color.gray.opacity(0.1))
-                        }
+                    }
+                    .frame(height: 200)
+                    .background {
+                        RoundedRectangle(cornerRadius: 0)
+                            .fill(Color.gray.opacity(0.1))
                     }
                     .scrollTargetBehavior(ScrollViewPageing(totalCount: tempData.count))
                     
@@ -102,7 +104,7 @@ struct HomeView: View {
                 }
             }
         }
-        .padding(EdgeInsets(top: 30, leading: 20, bottom: 30, trailing: 20))
+        .padding(EdgeInsets(top: 30, leading: 0, bottom: 30, trailing: 0))
     }
 }
 
