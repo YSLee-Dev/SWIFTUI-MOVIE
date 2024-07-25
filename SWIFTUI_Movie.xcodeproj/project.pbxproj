@@ -17,6 +17,13 @@
 		FF9C9F932C50C368006BB902 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F922C50C368006BB902 /* HomeView.swift */; };
 		FF9C9F952C50C387006BB902 /* HomeFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F942C50C387006BB902 /* HomeFeature.swift */; };
 		FF9C9F992C50CBE3006BB902 /* HomeMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F982C50CBE3006BB902 /* HomeMovieView.swift */; };
+		FF9C9F9B2C523380006BB902 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FF9C9F9A2C523380006BB902 /* ComposableArchitecture */; };
+		FF9C9F9E2C52355E006BB902 /* DependencyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F9D2C52355E006BB902 /* DependencyValues.swift */; };
+		FF9C9FA02C523618006BB902 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F9F2C523618006BB902 /* NetworkManager.swift */; };
+		FF9C9FA22C523D99006BB902 /* RequestToken.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF9C9FA12C523D99006BB902 /* RequestToken.plist */; };
+		FF9C9FA62C523E71006BB902 /* KobisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9FA52C523E71006BB902 /* KobisManager.swift */; };
+		FF9C9FA82C523F4A006BB902 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9FA72C523F4A006BB902 /* Bundle+.swift */; };
+		FF9C9FAB2C5242C9006BB902 /* BoxofficeMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9FAA2C5242C9006BB902 /* BoxofficeMovie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +58,13 @@
 		FF9C9F922C50C368006BB902 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FF9C9F942C50C387006BB902 /* HomeFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeature.swift; sourceTree = "<group>"; };
 		FF9C9F982C50CBE3006BB902 /* HomeMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMovieView.swift; sourceTree = "<group>"; };
+		FF9C9F9D2C52355E006BB902 /* DependencyValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyValues.swift; sourceTree = "<group>"; };
+		FF9C9F9F2C523618006BB902 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FF9C9FA12C523D99006BB902 /* RequestToken.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RequestToken.plist; sourceTree = "<group>"; };
+		FF9C9FA52C523E71006BB902 /* KobisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisManager.swift; sourceTree = "<group>"; };
+		FF9C9FA72C523F4A006BB902 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
+		FF9C9FAA2C5242C9006BB902 /* BoxofficeMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxofficeMovie.swift; sourceTree = "<group>"; };
+		FF9C9FAC2C524760006BB902 /* SWIFTUI-Movie-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SWIFTUI-Movie-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF9C9F9B2C523380006BB902 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,10 +116,15 @@
 		FF9C9F662C50C1AD006BB902 /* SWIFTUI_Movie */ = {
 			isa = PBXGroup;
 			children = (
+				FF9C9FAC2C524760006BB902 /* SWIFTUI-Movie-Info.plist */,
 				FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */,
 				FF9C9F692C50C1AD006BB902 /* ContentView.swift */,
+				FF9C9FA12C523D99006BB902 /* RequestToken.plist */,
 				FF9C9F6B2C50C1AF006BB902 /* Assets.xcassets */,
 				FF9C9F6D2C50C1AF006BB902 /* SWIFTUI_Movie.entitlements */,
+				FF9C9FA92C52429A006BB902 /* Model */,
+				FF9C9FA32C523DE7006BB902 /* Network */,
+				FF9C9F9C2C52353A006BB902 /* Dependency */,
 				FF9C9F962C50C38C006BB902 /* Home */,
 				FF9C9F6E2C50C1AF006BB902 /* Preview Content */,
 			);
@@ -146,6 +166,40 @@
 			name = Home;
 			sourceTree = "<group>";
 		};
+		FF9C9F9C2C52353A006BB902 /* Dependency */ = {
+			isa = PBXGroup;
+			children = (
+				FF9C9FA42C523E1C006BB902 /* Kobis */,
+				FF9C9F9D2C52355E006BB902 /* DependencyValues.swift */,
+				FF9C9FA72C523F4A006BB902 /* Bundle+.swift */,
+			);
+			path = Dependency;
+			sourceTree = "<group>";
+		};
+		FF9C9FA32C523DE7006BB902 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FF9C9F9F2C523618006BB902 /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FF9C9FA42C523E1C006BB902 /* Kobis */ = {
+			isa = PBXGroup;
+			children = (
+				FF9C9FA52C523E71006BB902 /* KobisManager.swift */,
+			);
+			path = Kobis;
+			sourceTree = "<group>";
+		};
+		FF9C9FA92C52429A006BB902 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FF9C9FAA2C5242C9006BB902 /* BoxofficeMovie.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -162,6 +216,9 @@
 			dependencies = (
 			);
 			name = SWIFTUI_Movie;
+			packageProductDependencies = (
+				FF9C9F9A2C523380006BB902 /* ComposableArchitecture */,
+			);
 			productName = SWIFTUI_Movie;
 			productReference = FF9C9F642C50C1AD006BB902 /* SWIFTUI_Movie.app */;
 			productType = "com.apple.product-type.application";
@@ -255,6 +312,7 @@
 			files = (
 				FF9C9F702C50C1AF006BB902 /* Preview Assets.xcassets in Resources */,
 				FF9C9F6C2C50C1AF006BB902 /* Assets.xcassets in Resources */,
+				FF9C9FA22C523D99006BB902 /* RequestToken.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,9 +339,14 @@
 			files = (
 				FF9C9F932C50C368006BB902 /* HomeView.swift in Sources */,
 				FF9C9F992C50CBE3006BB902 /* HomeMovieView.swift in Sources */,
+				FF9C9F9E2C52355E006BB902 /* DependencyValues.swift in Sources */,
 				FF9C9F952C50C387006BB902 /* HomeFeature.swift in Sources */,
+				FF9C9FAB2C5242C9006BB902 /* BoxofficeMovie.swift in Sources */,
 				FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */,
+				FF9C9FA62C523E71006BB902 /* KobisManager.swift in Sources */,
+				FF9C9FA82C523F4A006BB902 /* Bundle+.swift in Sources */,
 				FF9C9F682C50C1AD006BB902 /* SWIFTUI_MovieApp.swift in Sources */,
+				FF9C9FA02C523618006BB902 /* NetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +510,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SWIFTUI-Movie-Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -485,6 +549,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SWIFTUI-Movie-Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -651,6 +716,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FF9C9F9A2C523380006BB902 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF9C9F972C50C3E8006BB902 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FF9C9F5C2C50C1AD006BB902 /* Project object */;
 }
