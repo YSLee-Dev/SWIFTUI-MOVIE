@@ -8,7 +8,10 @@
 import Foundation
 
 struct NetworkManager {
-    let urlSession = URLSession.shared
+    private init() {}
+    private let urlSession = URLSession.shared
+    
+    static let shared = NetworkManager()
     
     func reqeustData<T: Decodable>(decodingType: T.Type, url: URL?) async throws -> T {
         guard let url = url else {throw URLError.init(.badURL)}
