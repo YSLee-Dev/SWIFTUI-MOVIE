@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-struct KobisManagerKey: DependencyKey {
+enum KobisManagerKey: DependencyKey {
     static var liveValue: KobisManagerProtocol = KobisManager.shaerd
-   
+    static var previewValue: any KobisManagerProtocol = KobisPreviewManager()
 }
