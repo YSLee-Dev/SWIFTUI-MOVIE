@@ -14,31 +14,34 @@ struct KobisManager: KobisManagerProtocol {
     private let token = Bundle.main.tokenLoad(.kobis)
     
     enum ReqeustType {
-        case boxOffice, detail
+        case yesterdayBoxOffice, weekBoxOffice, detail
     }
     
     func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [DailyBoxOfficeList] {
-        var urlComponents = self.urlComponentsCreate(type: .boxOffice)
+        var urlComponents = self.urlComponentsCreate(type: boxOfficeType == .week ? .weekBoxOffice : .yesterdayBoxOffice)
         urlComponents?.queryItems =  [
             URLQueryItem(name: "key", value: self.token),
-            URLQueryItem(name: "targetDt", value: self.todayDate())
+            URLQueryItem(name: "targetDt", value: self.createDate(type: boxOfficeType == .week ? .weekBoxOffice : .yesterdayBoxOffice))
         ]
-        
-        return try await NetworkManager.shared.reqeustData(decodingType: BoxofficeMovie.self, url: urlComponents?.url).boxOfficeResult.dailyBoxOfficeList
+       let data =  try await NetworkManager.shared.reqeustData(decodingType: BoxofficeMovie.self, url: urlComponents?.url).boxOfficeResult
+        return (boxOfficeType == .week ? data.weeklyBoxOfficeList : data.dailyBoxOfficeList) ?? []
     }
     
     private func urlComponentsCreate(type: ReqeustType) -> URLComponents? {
         let urlString = switch type {
-        case .boxOffice: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
-        case .detail: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json"
+        case .yesterdayBoxOffice: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
+        case .weekBoxOffice: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json"
+        case .detail: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
         }
         return URLComponents(string: urlString)
     }
     
-    private func todayDate() -> String {
+    private func createDate(type: ReqeustType) -> String {
         let year = Calendar.current.component(.year, from: .now)
         let month = Calendar.current.component(.month, from: .now)
-        let day = Calendar.current.component(.day, from: Calendar.current.date(byAdding: DateComponents(day: -1), to: .now)!)
+        let day = Calendar.current.component(
+            .day, from: Calendar.current.date(byAdding: DateComponents(day: type == .weekBoxOffice ? -7 : -1), to: .now)!
+        )
         return "\(year)\(month < 10 ? "0" : "")\(month)\(day)"
     }
 }
