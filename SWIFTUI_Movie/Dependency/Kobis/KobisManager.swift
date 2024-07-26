@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct KobisManager {
+struct KobisManager: KobisManagerProtocol {
     private init() {}
     static let shaerd = KobisManager() // 싱글톤
     
@@ -17,15 +17,14 @@ struct KobisManager {
         case boxOffice, detail
     }
     
-    enum BoxOfficeType { case today, week }
-    func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> BoxofficeMovie {
+    func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [DailyBoxOfficeList] {
         var urlComponents = self.urlComponentsCreate(type: .boxOffice)
         urlComponents?.queryItems =  [
             URLQueryItem(name: "key", value: self.token),
             URLQueryItem(name: "targetDt", value: self.todayDate())
         ]
         
-       return try await NetworkManager.shared.reqeustData(decodingType: BoxofficeMovie.self, url: urlComponents?.url)
+        return try await NetworkManager.shared.reqeustData(decodingType: BoxofficeMovie.self, url: urlComponents?.url).boxOfficeResult.dailyBoxOfficeList
     }
     
     private func urlComponentsCreate(type: ReqeustType) -> URLComponents? {
@@ -41,5 +40,11 @@ struct KobisManager {
         let month = Calendar.current.component(.month, from: .now)
         let day = Calendar.current.component(.day, from: Calendar.current.date(byAdding: DateComponents(day: -1), to: .now)!)
         return "\(year)\(month < 10 ? "0" : "")\(month)\(day)"
+    }
+}
+
+struct KobisPreviewManager: KobisManagerProtocol {
+    func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [DailyBoxOfficeList] {
+        
     }
 }
