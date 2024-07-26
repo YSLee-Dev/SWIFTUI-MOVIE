@@ -17,7 +17,7 @@ struct KobisManager: KobisManagerProtocol {
         case yesterdayBoxOffice, weekBoxOffice, detail
     }
     
-    func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [DailyBoxOfficeList] {
+    func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [BoxOfficeList] {
         var urlComponents = self.urlComponentsCreate(type: boxOfficeType == .week ? .weekBoxOffice : .yesterdayBoxOffice)
         urlComponents?.queryItems =  [
             URLQueryItem(name: "key", value: self.token),
@@ -47,14 +47,14 @@ struct KobisManager: KobisManagerProtocol {
 }
 
 struct KobisPreviewManager: KobisManagerProtocol {
-    func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [DailyBoxOfficeList] {
+    func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [BoxOfficeList] {
         return [
-            DailyBoxOfficeList(title: "범죄도시", openDate: "2024년 01월 01일", rank: "1"),
-            DailyBoxOfficeList(title: "극한직업", openDate: "2024년 02월 11일", rank: "1"),
-            DailyBoxOfficeList(title: "짱구는 못말려 극장판", openDate: "2024년 03월 21일", rank: "1"),
-            DailyBoxOfficeList(title: "알라딘", openDate: "2024년 04월 02일", rank: "1"),
-            DailyBoxOfficeList(title: "7번방의 꿈", openDate: "2024년 05월 12일", rank: "1"),
-            DailyBoxOfficeList(title: "스파이더맨", openDate: "2024년 06월 13일", rank: "1")
+            BoxOfficeList(title: "범죄도시", openDate: "2024년 01월 01일", rank: "1"),
+            BoxOfficeList(title: "극한직업", openDate: "2024년 02월 11일", rank: "1"),
+            BoxOfficeList(title: "짱구는 못말려 극장판", openDate: "2024년 03월 21일", rank: "1"),
+            BoxOfficeList(title: "알라딘", openDate: "2024년 04월 02일", rank: "1"),
+            BoxOfficeList(title: "7번방의 꿈", openDate: "2024년 05월 12일", rank: "1"),
+            BoxOfficeList(title: "스파이더맨", openDate: "2024년 06월 13일", rank: "1")
         ]
     }
 }

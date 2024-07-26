@@ -16,8 +16,8 @@ struct BoxofficeMovie: Decodable, Equatable, Hashable {
 }
 
 struct BoxOfficeResult: Decodable, Equatable, Hashable {
-    let dailyBoxOfficeList: [DailyBoxOfficeList]?
-    let weeklyBoxOfficeList: [DailyBoxOfficeList]?
+    let dailyBoxOfficeList: [BoxOfficeList]?
+    let weeklyBoxOfficeList: [BoxOfficeList]?
  
     enum CodingKeys: String, CodingKey {
         case dailyBoxOfficeList = "dailyBoxOfficeList"
@@ -25,7 +25,7 @@ struct BoxOfficeResult: Decodable, Equatable, Hashable {
     }
 }
 
-struct DailyBoxOfficeList: Decodable, Equatable, Hashable {
+struct BoxOfficeList: Decodable, Equatable, Hashable {
     let title: String
     let openDate: String
     let rank: String
