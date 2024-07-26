@@ -7,14 +7,6 @@
 
 import SwiftUI
 
-// 임시 데이터 struct
-struct Temp: Hashable {
-    let title: String
-    let rank: Int
-    let date: String
-    let image: URL?
-}
-
 struct HomeView: View {
     var body: some View {
         
@@ -59,7 +51,7 @@ struct HomeView: View {
                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
                 
                 VStack(alignment: .leading) {
-                    Text("금일 박스 오피스")
+                    Text("전일 박스 오피스")
                         .font(.title2)
                         .bold()
                         .padding(.horizontal, 20)
