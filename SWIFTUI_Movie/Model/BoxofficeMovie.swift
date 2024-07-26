@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BoxofficeMovie: Decodable {
+struct BoxofficeMovie: Decodable, Equatable {
     let boxOfficeResult: BoxOfficeResult
  
     enum CodingKeys: String, CodingKey {
@@ -15,7 +15,7 @@ struct BoxofficeMovie: Decodable {
     }
 }
 
-struct BoxOfficeResult: Decodable {
+struct BoxOfficeResult: Decodable, Equatable {
     let dailyBoxOfficeList: [DailyBoxOfficeList]
  
     enum CodingKeys: String, CodingKey {
@@ -23,7 +23,7 @@ struct BoxOfficeResult: Decodable {
     }
 }
 
-struct DailyBoxOfficeList: Decodable {
+struct DailyBoxOfficeList: Decodable, Equatable {
     let title: String
     let openDate: String
     let rank: String

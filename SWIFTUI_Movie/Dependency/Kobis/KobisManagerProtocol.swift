@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BoxOfficeType { case today, week }
+enum BoxOfficeType { case yesterday, week }
 
 protocol KobisManagerProtocol {
     func  boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [DailyBoxOfficeList]

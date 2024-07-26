@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF2DFC432C536D61005804DB /* KobisManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFC422C536D61005804DB /* KobisManagerProtocol.swift */; };
+		FF2DFC452C536DB7005804DB /* KobisManagerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFC442C536DB7005804DB /* KobisManagerKey.swift */; };
 		FF9C9F682C50C1AD006BB902 /* SWIFTUI_MovieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */; };
 		FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F692C50C1AD006BB902 /* ContentView.swift */; };
 		FF9C9F6C2C50C1AF006BB902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF9C9F6B2C50C1AF006BB902 /* Assets.xcassets */; };
@@ -24,6 +26,7 @@
 		FF9C9FA62C523E71006BB902 /* KobisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9FA52C523E71006BB902 /* KobisManager.swift */; };
 		FF9C9FA82C523F4A006BB902 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9FA72C523F4A006BB902 /* Bundle+.swift */; };
 		FF9C9FAB2C5242C9006BB902 /* BoxofficeMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9FAA2C5242C9006BB902 /* BoxofficeMovie.swift */; };
+		FF9C9FAE2C524EF5006BB902 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FF9C9FAD2C524EF5006BB902 /* ComposableArchitecture */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF2DFC422C536D61005804DB /* KobisManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisManagerProtocol.swift; sourceTree = "<group>"; };
+		FF2DFC442C536DB7005804DB /* KobisManagerKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisManagerKey.swift; sourceTree = "<group>"; };
 		FF9C9F642C50C1AD006BB902 /* SWIFTUI_Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWIFTUI_Movie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWIFTUI_MovieApp.swift; sourceTree = "<group>"; };
 		FF9C9F692C50C1AD006BB902 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF9C9FAE2C524EF5006BB902 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +194,8 @@
 			isa = PBXGroup;
 			children = (
 				FF9C9FA52C523E71006BB902 /* KobisManager.swift */,
+				FF2DFC422C536D61005804DB /* KobisManagerProtocol.swift */,
+				FF2DFC442C536DB7005804DB /* KobisManagerKey.swift */,
 			);
 			path = Kobis;
 			sourceTree = "<group>";
@@ -237,6 +245,9 @@
 				FF9C9F772C50C1AF006BB902 /* PBXTargetDependency */,
 			);
 			name = SWIFTUI_MovieTests;
+			packageProductDependencies = (
+				FF9C9FAD2C524EF5006BB902 /* ComposableArchitecture */,
+			);
 			productName = SWIFTUI_MovieTests;
 			productReference = FF9C9F752C50C1AF006BB902 /* SWIFTUI_MovieTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -344,6 +355,8 @@
 				FF9C9FAB2C5242C9006BB902 /* BoxofficeMovie.swift in Sources */,
 				FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */,
 				FF9C9FA62C523E71006BB902 /* KobisManager.swift in Sources */,
+				FF2DFC432C536D61005804DB /* KobisManagerProtocol.swift in Sources */,
+				FF2DFC452C536DB7005804DB /* KobisManagerKey.swift in Sources */,
 				FF9C9FA82C523F4A006BB902 /* Bundle+.swift in Sources */,
 				FF9C9F682C50C1AD006BB902 /* SWIFTUI_MovieApp.swift in Sources */,
 				FF9C9FA02C523618006BB902 /* NetworkManager.swift in Sources */,
@@ -521,7 +534,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.3;
@@ -560,7 +573,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.3;
@@ -719,6 +732,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		FF9C9F9A2C523380006BB902 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FF9C9F972C50C3E8006BB902 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		FF9C9FAD2C524EF5006BB902 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FF9C9F972C50C3E8006BB902 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
