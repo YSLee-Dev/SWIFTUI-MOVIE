@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeMovieView: View {
-    let rank: Int
+    let rank: String
     let title: String
     let urlURL: URL?
     let date: String
@@ -60,7 +60,7 @@ struct HomeMovieView: View {
 
 #Preview {
     HomeMovieView(
-        rank: 1,
+        rank: "1",
         title: "범죄도시",
         urlURL: URL(string: ""),
         date: "2024년 01월 01일"

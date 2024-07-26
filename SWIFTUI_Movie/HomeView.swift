@@ -6,24 +6,20 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct HomeView: View {
+    @State var store: StoreOf<HomeFeature>
+    
     var body: some View {
-        
-        let tempData: [Temp] = [
-            .init(title: "범죄도시", rank: 1, date: "2024년 01월 01일", image: nil),
-            .init(title: "극한직업", rank: 2, date: "2024년 02월 11일", image: nil),
-            .init(title: "짱구는 못말려 극장판", rank: 3, date: "2024년 03월 21일", image: nil),
-            .init(title: "알라딘", rank: 4, date: "2024년 04월 02일", image: nil),
-            .init(title: "7번방의 꿈", rank: 5, date: "2024년 05월 12일", image: nil),
-            .init(title: "스파이더맨", rank: 6, date: "2024년 06월 13일", image: nil)
-        ]
-        
         VStack(alignment: .leading) {
             Text("홈")
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
+                .onAppear {
+                    store.send(.viewInitialized)
+                }
             
             ScrollView {
                 Button(action: {
@@ -58,8 +54,8 @@ struct HomeView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack(alignment: .center) {
-                            ForEach(tempData, id: \.self) {
-                                HomeMovieView(rank: $0.rank, title: $0.title, urlURL: $0.image, date: $0.date)
+                            ForEach(self.store.yesterdayMoiveList, id: \.self) {
+                                HomeMovieView(rank: $0.rank, title: $0.title, urlURL: nil, date: $0.openDate)
                             }
                         }
                     }
@@ -69,7 +65,7 @@ struct HomeView: View {
                             .fill(Color.gray.opacity(0.1))
                     }
                 }
-                .scrollTargetBehavior(ScrollViewPageing(totalCount: tempData.count))
+                .scrollTargetBehavior(ScrollViewPageing(totalCount: self.store.yesterdayMoiveList.count))
                 .padding(.bottom, 20)
                 
                 VStack(alignment: .leading) {
@@ -80,8 +76,8 @@ struct HomeView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack(alignment: .center) {
-                            ForEach(tempData, id: \.self) {
-                                HomeMovieView(rank: $0.rank, title: $0.title, urlURL: $0.image, date: $0.date)
+                            ForEach(self.store.weekMoiveList, id: \.self) {
+                                HomeMovieView(rank: $0.rank, title: $0.title, urlURL: nil, date: $0.openDate)
                             }
                         }
                     }
@@ -90,7 +86,7 @@ struct HomeView: View {
                         RoundedRectangle(cornerRadius: 0)
                             .fill(Color.gray.opacity(0.1))
                     }
-                    .scrollTargetBehavior(ScrollViewPageing(totalCount: tempData.count))
+                    .scrollTargetBehavior(ScrollViewPageing(totalCount: self.store.weekMoiveList.count))
                     
                     Spacer()
                 }
@@ -113,5 +109,7 @@ struct ScrollViewPageing: ScrollTargetBehavior {
 }
 
 #Preview {
-    HomeView()
+    HomeView(
+        store: .init(initialState: .init(), reducer: {HomeFeature()})
+    )
 }

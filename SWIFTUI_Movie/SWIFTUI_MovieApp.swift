@@ -11,7 +11,7 @@ import SwiftUI
 struct SWIFTUI_MovieApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            HomeView(store: .init(initialState: .init(), reducer: {HomeFeature()}))
         }
     }
 }
