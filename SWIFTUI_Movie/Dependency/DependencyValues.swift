@@ -11,6 +11,11 @@ import ComposableArchitecture
 extension DependencyValues {
     var kobisManager: KobisManagerProtocol {
         get {self[KobisManagerKey.self]}
-        set{self[KobisManagerKey.self] = newValue}
+        set {self[KobisManagerKey.self] = newValue}
+    }
+    
+    var kmdbManager: KmdbManagerProtocol {
+        get {self[KmdbManagerKey.self]}
+        set {self[KmdbManagerKey.self] = newValue}
     }
 }
