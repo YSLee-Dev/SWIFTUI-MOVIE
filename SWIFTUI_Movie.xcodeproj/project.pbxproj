@@ -27,6 +27,8 @@
 		FF9C9FA82C523F4A006BB902 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9FA72C523F4A006BB902 /* Bundle+.swift */; };
 		FF9C9FAB2C5242C9006BB902 /* BoxofficeMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9FAA2C5242C9006BB902 /* BoxofficeMovie.swift */; };
 		FF9C9FAE2C524EF5006BB902 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FF9C9FAD2C524EF5006BB902 /* ComposableArchitecture */; };
+		FFA7A1462C57324A00D52009 /* KmdbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7A1452C57324A00D52009 /* KmdbManager.swift */; };
+		FFA7A1482C57353300D52009 /* KMDBMovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7A1472C57353300D52009 /* KMDBMovieDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 		FF9C9FA72C523F4A006BB902 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		FF9C9FAA2C5242C9006BB902 /* BoxofficeMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxofficeMovie.swift; sourceTree = "<group>"; };
 		FF9C9FAC2C524760006BB902 /* SWIFTUI-Movie-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SWIFTUI-Movie-Info.plist"; sourceTree = SOURCE_ROOT; };
+		FFA7A1452C57324A00D52009 /* KmdbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmdbManager.swift; sourceTree = "<group>"; };
+		FFA7A1472C57353300D52009 /* KMDBMovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMDBMovieDetail.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,7 @@
 		FF9C9F9C2C52353A006BB902 /* Dependency */ = {
 			isa = PBXGroup;
 			children = (
+				FFA7A1442C57321000D52009 /* Kmdb */,
 				FF9C9FA42C523E1C006BB902 /* Kobis */,
 				FF9C9F9D2C52355E006BB902 /* DependencyValues.swift */,
 				FF9C9FA72C523F4A006BB902 /* Bundle+.swift */,
@@ -204,8 +209,17 @@
 			isa = PBXGroup;
 			children = (
 				FF9C9FAA2C5242C9006BB902 /* BoxofficeMovie.swift */,
+				FFA7A1472C57353300D52009 /* KMDBMovieDetail.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		FFA7A1442C57321000D52009 /* Kmdb */ = {
+			isa = PBXGroup;
+			children = (
+				FFA7A1452C57324A00D52009 /* KmdbManager.swift */,
+			);
+			path = Kmdb;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,6 +374,8 @@
 				FF9C9FA82C523F4A006BB902 /* Bundle+.swift in Sources */,
 				FF9C9F682C50C1AD006BB902 /* SWIFTUI_MovieApp.swift in Sources */,
 				FF9C9FA02C523618006BB902 /* NetworkManager.swift in Sources */,
+				FFA7A1462C57324A00D52009 /* KmdbManager.swift in Sources */,
+				FFA7A1482C57353300D52009 /* KMDBMovieDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
