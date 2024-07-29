@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct KmdbManager {
+struct KmdbManager: KmdbManagerProtocol {
     private init() {}
     static let shaerd = KmdbManager() // 싱글톤
     
     private let token = Bundle.main.tokenLoad(.kmdb)
     
-    func moiveDetailInfoRequest(title: String, openDate: String) async throws -> [KMDBMovieDetailResult]  {
+    func moiveDetailInfoRequest(title: String, openDate: String) async throws -> KMDBMovieDetailResult?  {
         var urlComponents = URLComponents(string: "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp")
         urlComponents?.queryItems = [
             URLQueryItem(name: "collection", value: "kmdb_new2"),
@@ -23,6 +23,6 @@ struct KmdbManager {
             URLQueryItem(name: "releaseDts", value: openDate)
         ]
         
-        return try await NetworkManager.shared.reqeustData(decodingType: KMDBMovieDetail.self, url: urlComponents?.url).data.first?.result ?? []
+        return try await NetworkManager.shared.reqeustData(decodingType: KMDBMovieDetail.self, url: urlComponents?.url).data.first?.result.first ?? nil
     }
 }
