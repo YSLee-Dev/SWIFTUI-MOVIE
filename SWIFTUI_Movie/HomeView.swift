@@ -55,7 +55,7 @@ struct HomeView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack(alignment: .center) {
                             ForEach(self.store.yesterdayMoiveList, id: \.self) {
-                                HomeMovieView(rank: $0.rank, title: $0.title, urlURL: nil, date: $0.openDate)
+                                HomeMovieView(rank: $0.rank, title: $0.title, url: $0.url, date: $0.openDate)
                             }
                         }
                     }
@@ -77,7 +77,7 @@ struct HomeView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack(alignment: .center) {
                             ForEach(self.store.weekMoiveList, id: \.self) {
-                                HomeMovieView(rank: $0.rank, title: $0.title, urlURL: nil, date: $0.openDate)
+                                HomeMovieView(rank: $0.rank, title: $0.title, url: $0.url, date: $0.openDate)
                             }
                         }
                     }

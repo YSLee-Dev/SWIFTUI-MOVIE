@@ -29,6 +29,10 @@
 		FF9C9FAE2C524EF5006BB902 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FF9C9FAD2C524EF5006BB902 /* ComposableArchitecture */; };
 		FFA7A1462C57324A00D52009 /* KmdbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7A1452C57324A00D52009 /* KmdbManager.swift */; };
 		FFA7A1482C57353300D52009 /* KMDBMovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7A1472C57353300D52009 /* KMDBMovieDetail.swift */; };
+		FFA7A14A2C57590900D52009 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7A1492C57590900D52009 /* HomeModel.swift */; };
+		FFA7A14C2C5759D600D52009 /* KmdbManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7A14B2C5759D600D52009 /* KmdbManagerProtocol.swift */; };
+		FFA7A14E2C5759F100D52009 /* KmdbManagerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA7A14D2C5759F100D52009 /* KmdbManagerKey.swift */; };
+		FFA7A1512C5760A400D52009 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FFA7A1502C5760A400D52009 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +78,9 @@
 		FF9C9FAC2C524760006BB902 /* SWIFTUI-Movie-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SWIFTUI-Movie-Info.plist"; sourceTree = SOURCE_ROOT; };
 		FFA7A1452C57324A00D52009 /* KmdbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmdbManager.swift; sourceTree = "<group>"; };
 		FFA7A1472C57353300D52009 /* KMDBMovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMDBMovieDetail.swift; sourceTree = "<group>"; };
+		FFA7A1492C57590900D52009 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		FFA7A14B2C5759D600D52009 /* KmdbManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmdbManagerProtocol.swift; sourceTree = "<group>"; };
+		FFA7A14D2C5759F100D52009 /* KmdbManagerKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KmdbManagerKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFA7A1512C5760A400D52009 /* Kingfisher in Frameworks */,
 				FF9C9F9B2C523380006BB902 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,6 +218,7 @@
 			children = (
 				FF9C9FAA2C5242C9006BB902 /* BoxofficeMovie.swift */,
 				FFA7A1472C57353300D52009 /* KMDBMovieDetail.swift */,
+				FFA7A1492C57590900D52009 /* HomeModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -218,6 +227,8 @@
 			isa = PBXGroup;
 			children = (
 				FFA7A1452C57324A00D52009 /* KmdbManager.swift */,
+				FFA7A14B2C5759D600D52009 /* KmdbManagerProtocol.swift */,
+				FFA7A14D2C5759F100D52009 /* KmdbManagerKey.swift */,
 			);
 			path = Kmdb;
 			sourceTree = "<group>";
@@ -240,6 +251,7 @@
 			name = SWIFTUI_Movie;
 			packageProductDependencies = (
 				FF9C9F9A2C523380006BB902 /* ComposableArchitecture */,
+				FFA7A1502C5760A400D52009 /* Kingfisher */,
 			);
 			productName = SWIFTUI_Movie;
 			productReference = FF9C9F642C50C1AD006BB902 /* SWIFTUI_Movie.app */;
@@ -318,6 +330,7 @@
 			mainGroup = FF9C9F5B2C50C1AD006BB902;
 			packageReferences = (
 				FF9C9F972C50C3E8006BB902 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				FFA7A14F2C57609600D52009 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = FF9C9F652C50C1AD006BB902 /* Products */;
 			projectDirPath = "";
@@ -365,17 +378,20 @@
 				FF9C9F932C50C368006BB902 /* HomeView.swift in Sources */,
 				FF9C9F992C50CBE3006BB902 /* HomeMovieView.swift in Sources */,
 				FF9C9F9E2C52355E006BB902 /* DependencyValues.swift in Sources */,
+				FFA7A14E2C5759F100D52009 /* KmdbManagerKey.swift in Sources */,
 				FF9C9F952C50C387006BB902 /* HomeFeature.swift in Sources */,
 				FF9C9FAB2C5242C9006BB902 /* BoxofficeMovie.swift in Sources */,
 				FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */,
 				FF9C9FA62C523E71006BB902 /* KobisManager.swift in Sources */,
 				FF2DFC432C536D61005804DB /* KobisManagerProtocol.swift in Sources */,
+				FFA7A14A2C57590900D52009 /* HomeModel.swift in Sources */,
 				FF2DFC452C536DB7005804DB /* KobisManagerKey.swift in Sources */,
 				FF9C9FA82C523F4A006BB902 /* Bundle+.swift in Sources */,
 				FF9C9F682C50C1AD006BB902 /* SWIFTUI_MovieApp.swift in Sources */,
 				FF9C9FA02C523618006BB902 /* NetworkManager.swift in Sources */,
 				FFA7A1462C57324A00D52009 /* KmdbManager.swift in Sources */,
 				FFA7A1482C57353300D52009 /* KMDBMovieDetail.swift in Sources */,
+				FFA7A14C2C5759D600D52009 /* KmdbManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +762,14 @@
 				minimumVersion = 1.12.0;
 			};
 		};
+		FFA7A14F2C57609600D52009 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -758,6 +782,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = FF9C9F972C50C3E8006BB902 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		FFA7A1502C5760A400D52009 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFA7A14F2C57609600D52009 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -6,33 +6,25 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct HomeMovieView: View {
     let rank: String
     let title: String
-    let urlURL: URL?
+    let url: URL?
     let date: String
     
     var body: some View {
         VStack(alignment: .center) {
-            //            if self.urlURL == nil {
-            //                RoundedRectangle(cornerRadius: 15)
-            //                    .foregroundColor(.init(uiColor: .systemGray4))
-            //                    .frame(width: 100, height: 150)
-            //                    .overlay {
-            //                        Image(systemName: "questionmark.circle")
-            //                            .resizable()
-            //                            .foregroundColor(.white)
-            //                            .frame(width: 30, height: 30)
-            //                    }
-            //            } else {
-            //
-            //            }
-            RoundedRectangle(cornerRadius: 15) // 서버 통신 개발 전까지 임시
-                .foregroundColor(.init(uiColor: .systemGray4))
+         KFImage(url)
+                .placeholder {
+                    RoundedRectangle(cornerRadius: 15)
+                        .foregroundColor(.init(uiColor: .systemGray4))
+                        .frame(width: 100, height: 150)
+                        .padding(.bottom, 5)
+                }
                 .frame(width: 100, height: 150)
-                .padding(.bottom, 5)
-            
+       
             Text(self.title)
                 .font(.headline)
                 .lineLimit(1)
@@ -61,7 +53,7 @@ struct HomeMovieView: View {
     HomeMovieView(
         rank: "1",
         title: "범죄도시",
-        urlURL: URL(string: ""),
+        url: URL(string: ""),
         date: "2024년 01월 01일"
     )
 }
