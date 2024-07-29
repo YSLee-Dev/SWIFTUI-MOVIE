@@ -14,7 +14,7 @@ struct HomeMovieView: View {
     let date: String
     
     var body: some View {
-        HStack(alignment: .center) {
+        VStack(alignment: .center) {
             //            if self.urlURL == nil {
             //                RoundedRectangle(cornerRadius: 15)
             //                    .foregroundColor(.init(uiColor: .systemGray4))
@@ -31,18 +31,17 @@ struct HomeMovieView: View {
             RoundedRectangle(cornerRadius: 15) // 서버 통신 개발 전까지 임시
                 .foregroundColor(.init(uiColor: .systemGray4))
                 .frame(width: 100, height: 150)
-                .padding(.trailing, 10)
+                .padding(.bottom, 5)
             
-            VStack(alignment: .leading) {
-                Text(self.title)
-                    .font(.headline)
-                    .padding(.bottom, 5)
-                
-                Text("\(self.date)")
-                    .font(.callout)
-            }
+            Text(self.title)
+                .font(.headline)
+                .lineLimit(1)
+                .frame(maxWidth: 100)
+            
+            Text("\(self.date)")
+                .font(.callout)
         }
-        .padding(EdgeInsets(top: 10, leading: 40, bottom: 0, trailing: 10))
+        .padding(EdgeInsets(top: 10, leading: 30, bottom: 0, trailing: 30))
         .overlay {
             Text("\(self.rank)위")
                 .font(.title)

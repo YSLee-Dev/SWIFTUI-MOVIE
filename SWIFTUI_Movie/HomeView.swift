@@ -59,7 +59,7 @@ struct HomeView: View {
                             }
                         }
                     }
-                    .frame(height: 200)
+                    .frame(height: 250)
                     .background {
                         RoundedRectangle(cornerRadius: 0)
                             .fill(Color.gray.opacity(0.1))
@@ -81,7 +81,7 @@ struct HomeView: View {
                             }
                         }
                     }
-                    .frame(height: 200)
+                    .frame(height: 250)
                     .background {
                         RoundedRectangle(cornerRadius: 0)
                             .fill(Color.gray.opacity(0.1))
