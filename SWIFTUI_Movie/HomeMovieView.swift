@@ -26,6 +26,7 @@ struct HomeMovieView: View {
                 .cancelOnDisappear(true)
                 .resizable()
                 .frame(width: 100, height: 150)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
        
             Text(self.title)
                 .font(.headline)
@@ -37,16 +38,9 @@ struct HomeMovieView: View {
         }
         .padding(EdgeInsets(top: 10, leading: 30, bottom: 0, trailing: 30))
         .overlay {
-            Text("\(self.rank)위")
-                .font(.title)
-                .bold()
-                .background {
-                    Circle()
-                        .stroke(Color.yellow, lineWidth: 5.0)
-                        .fill(.white)
-                        .frame(width: 50, height: 50)
-                }
-                .position(CGPoint(x: 45, y: 15))
+            Text("\(self.rank)")
+                .font(.system(size: 50, weight: .black, design: .serif))
+                .position(CGPoint(x: 30, y: 15))
         }
     }
 }
