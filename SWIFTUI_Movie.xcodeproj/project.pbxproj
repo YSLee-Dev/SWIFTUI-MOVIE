@@ -138,12 +138,12 @@
 				FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */,
 				FF9C9F692C50C1AD006BB902 /* ContentView.swift */,
 				FF9C9FA12C523D99006BB902 /* RequestToken.plist */,
-				FF9C9F6B2C50C1AF006BB902 /* Assets.xcassets */,
 				FF9C9F6D2C50C1AF006BB902 /* SWIFTUI_Movie.entitlements */,
+				FF9C9F6B2C50C1AF006BB902 /* Assets.xcassets */,
+				FFA7A1522C587C1400D52009 /* Presentation */,
 				FF9C9FA92C52429A006BB902 /* Model */,
 				FF9C9FA32C523DE7006BB902 /* Network */,
 				FF9C9F9C2C52353A006BB902 /* Dependency */,
-				FF9C9F962C50C38C006BB902 /* Home */,
 				FF9C9F6E2C50C1AF006BB902 /* Preview Content */,
 			);
 			path = SWIFTUI_Movie;
@@ -182,6 +182,7 @@
 				FF9C9F982C50CBE3006BB902 /* HomeMovieView.swift */,
 			);
 			name = Home;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		FF9C9F9C2C52353A006BB902 /* Dependency */ = {
@@ -231,6 +232,14 @@
 				FFA7A14D2C5759F100D52009 /* KmdbManagerKey.swift */,
 			);
 			path = Kmdb;
+			sourceTree = "<group>";
+		};
+		FFA7A1522C587C1400D52009 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				FF9C9F962C50C38C006BB902 /* Home */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
