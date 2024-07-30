@@ -17,7 +17,7 @@ struct KmdbManager: KmdbManagerProtocol {
         var urlComponents = URLComponents(string: "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp")
         urlComponents?.queryItems = [
             URLQueryItem(name: "collection", value: "kmdb_new2"),
-            URLQueryItem(name: "detail", value: "N"),
+            URLQueryItem(name: "detail", value: "Y"),
             URLQueryItem(name: "ServiceKey", value: self.token),
             URLQueryItem(name: "title", value: title),
             URLQueryItem(name: "releaseDts", value: openDate)

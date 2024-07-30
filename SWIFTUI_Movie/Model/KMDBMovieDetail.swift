@@ -29,12 +29,17 @@ struct KMDBMovieDetailResult: Decodable, Equatable, Hashable {
     let stillURL: String?
     
     var thumbnailURL: String? {
-        posterURL == nil ? stillURL :  posterURL
+        let urlString = posterURL == nil ? stillURL :  posterURL
+        if let firstIndex = urlString?.firstIndex(of: "|"),  urlString != nil {
+            return String(urlString![urlString!.startIndex ..< firstIndex])
+        } else {
+            return urlString
+        }
     }
     
     enum CodingKeys: String, CodingKey {
         case title = "title"
-        case posterURL = "posterUrl"
-        case stillURL = "stillUrl"
+        case posterURL = "posters"
+        case stillURL = "stlls"
     }
 }

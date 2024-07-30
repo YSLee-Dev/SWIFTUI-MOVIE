@@ -23,6 +23,7 @@ struct HomeMovieView: View {
                         .frame(width: 100, height: 150)
                         .padding(.bottom, 5)
                 }
+                .resizable()
                 .frame(width: 100, height: 150)
        
             Text(self.title)
