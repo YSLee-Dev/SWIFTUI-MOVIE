@@ -60,16 +60,20 @@ struct HomeFeature: Reducer {
                 
             case .thumbnailURLRequest(let data, let type):
                 return .run { send in
-                    var homeModelList: [HomeModel] = []
-                    for movie in data {
-                        let thumbnailData = try? await self.kmdbManager.moiveDetailInfoRequest(title: movie.title, openDate: movie.openDate)
-                        homeModelList.append(HomeModel(title: movie.title, openDate: movie.openDate, rank: movie.rank, thumbnailURL: thumbnailData?.thumbnailURL))
-                    }
+                    var homeModelList: [HomeModel] = data.map {.init(title: $0.title, openDate: $0.openDate, rank: $0.rank)}
                     await send(.listUpdated(homeModelList, type))
+                    
+                    for index in 0 ..< data.count {
+                        var movie = homeModelList[index]
+                        let thumbnailData = try? await self.kmdbManager.moiveDetailInfoRequest(title: movie.title, openDate: movie.openDate)
+                        movie.thumbnailURL = thumbnailData?.thumbnailURL
+                        homeModelList[index] = movie
+                       
+                        await send(.listUpdated(homeModelList, type))
+                    }
                 }
                 
             case .listUpdated(let data, let type):
-                print(data)
                 if type == .week {
                     state.weekMoiveList = data
                 } else {

@@ -11,7 +11,7 @@ struct HomeModel: Equatable, Hashable {
     let title: String
     let openDate: String
     let rank: String
-    private var thumbnailURL: String?
+    var thumbnailURL: String?
     
     init(title: String, openDate: String, rank: String, thumbnailURL: String? = nil) {
         self.title = title
