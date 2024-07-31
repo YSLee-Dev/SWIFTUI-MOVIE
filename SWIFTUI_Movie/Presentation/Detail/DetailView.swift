@@ -10,17 +10,16 @@ import ComposableArchitecture
 import Kingfisher
 
 struct DetailView: View {
-    let temp: HomeModel
+    @State var store: StoreOf<DetailFeature>
     
     var body: some View {
         OffsetScrollView {
             VStack(spacing: 0) {
-                KFImage(temp.url)
+                KFImage(self.store.state.tappedData.url)
                     .placeholder {
                         RoundedRectangle(cornerRadius: 15)
                             .foregroundColor(.init(uiColor: .systemGray4))
                     }
-                    .cancelOnDisappear(true)
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.width * 1.5) + 20)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
@@ -30,18 +29,18 @@ struct DetailView: View {
                             Spacer()
                             VStack {
                                 Spacer()
-                                Text("\(self.temp.title)")
+                                Text("\(self.store.state.tappedData.title)")
                                     .font(.system(size: 30, weight: .bold))
                                     .foregroundColor(.white)
                                 
-                                Text("\(self.temp.openDate)")
+                                Text("\(self.store.state.tappedData.openDate)")
                                     .font(.system(size: 15, weight: .semibold))
                                     .foregroundColor(.white)
                                 Spacer()
                             }
                             .frame(width: UIScreen.main.bounds.width, height: 100)
                             .background {
-                                LinearGradient(gradient: Gradient(colors: [Color.gray.opacity(0.1), Color.gray]), startPoint: .top, endPoint: .bottom)
+                                LinearGradient(gradient: Gradient(colors: [Color.gray.opacity(0.0), Color.gray]), startPoint: .top, endPoint: .bottom)
                                     .clipShape(RoundedRectangle(cornerRadius: 15))
                             }
                         }
@@ -58,5 +57,5 @@ struct DetailView: View {
 
 
 #Preview {
-    DetailView(temp: .init(title: "범죄도시", openDate: "2024년 01월 01일", rank: "1", thumbnailURL: nil))
+    DetailView(store: .init(initialState: .init(movieID: "", tappedData:  .init(title: "범죄도시", openDate: "2024년 01월 01일", rank: "1", thumbnailURL: nil, movieID: "")), reducer: {DetailFeature()}))
 }

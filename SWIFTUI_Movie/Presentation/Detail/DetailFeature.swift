@@ -12,11 +12,12 @@ import ComposableArchitecture
 struct DetailFeature: Reducer {
     @ObservableState
     struct State: Equatable {
-        
+        let movieID: String
+        let tappedData: HomeModel
     }
     
     enum Action: Equatable {
-        
+        case viewInitialized
     }
     
     var body: some Reducer<State, Action> {
