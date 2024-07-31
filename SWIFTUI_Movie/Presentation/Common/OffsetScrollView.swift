@@ -8,21 +8,17 @@
 import SwiftUI
 
 struct OffsetScrollView<Content>: View where Content: View {
-    @State private  var offsetY: CGFloat = 0
-    private let contentsView:  (CGFloat) -> Content
+    private let contentsView:  () -> Content
     
-    init(@ViewBuilder  content: @escaping (CGFloat) -> Content) {
+    init(@ViewBuilder  content: @escaping () -> Content) {
         self.contentsView = content
     }
     
     var body: some View {
         ScrollView {
             scrollObservableView
-            contentsView(self.offsetY)
+            contentsView()
         }
-        .onPreferenceChange(ScrollOffsetKey.self, perform: { value in
-            self.offsetY = value
-        })
     }
     
     private var scrollObservableView: some View {
@@ -30,9 +26,6 @@ struct OffsetScrollView<Content>: View where Content: View {
             let offsetY = geo.frame(in: .global).origin.y
             Color.clear
                 .preference(key: ScrollOffsetKey.self, value: offsetY)
-                .onAppear {
-                    self.offsetY = offsetY
-                }
         }
         .frame(height: 0)
     }
