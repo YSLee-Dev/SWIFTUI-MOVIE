@@ -12,12 +12,14 @@ struct HomeModel: Equatable, Hashable {
     let openDate: String
     let rank: String
     var thumbnailURL: String?
+    let moiveID: String
     
-    init(title: String, openDate: String, rank: String, thumbnailURL: String? = nil) {
+    init(title: String, openDate: String, rank: String, thumbnailURL: String? = nil, movieID: String) {
         self.title = title
         self.openDate = openDate
         self.rank = rank
         self.thumbnailURL = thumbnailURL
+        self.moiveID = movieID
     }
     
     var url: URL? {
