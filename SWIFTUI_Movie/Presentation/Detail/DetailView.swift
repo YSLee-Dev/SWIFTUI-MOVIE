@@ -12,10 +12,15 @@ import Kingfisher
 struct DetailView: View {
     @State var store: StoreOf<DetailFeature>
     
+    init(store: StoreOf<DetailFeature>) {
+        self.store = store
+        self.store.send(.viewInitialized)
+    }
+    
     var body: some View {
         OffsetScrollView {
             VStack(spacing: 0) {
-                KFImage(self.store.state.tappedData.url)
+                KFImage(self.store.state.sendedThumnailURL)
                     .placeholder {
                         RoundedRectangle(cornerRadius: 15)
                             .foregroundColor(.init(uiColor: .systemGray4))
@@ -29,13 +34,17 @@ struct DetailView: View {
                             Spacer()
                             VStack {
                                 Spacer()
-                                Text("\(self.store.state.tappedData.title)")
-                                    .font(.system(size: 30, weight: .bold))
-                                    .foregroundColor(.white)
-                                
-                                Text("\(self.store.state.tappedData.openDate)")
-                                    .font(.system(size: 15, weight: .semibold))
-                                    .foregroundColor(.white)
+                             
+                                if let detailData = self.store.state.detailMovieInfo {
+                                    Text("\(detailData.title)")
+                                        .font(.system(size: 30, weight: .bold))
+                                        .foregroundColor(.white)
+                                    
+                                    Text("\(detailData.openDate)")
+                                        .font(.system(size: 15, weight: .semibold))
+                                        .foregroundColor(.white)
+                                }
+                              
                                 Spacer()
                             }
                             .frame(width: UIScreen.main.bounds.width, height: 100)
@@ -57,5 +66,12 @@ struct DetailView: View {
 
 
 #Preview {
-    DetailView(store: .init(initialState: .init(movieID: "", tappedData:  .init(title: "범죄도시", openDate: "2024년 01월 01일", rank: "1", thumbnailURL: nil, movieID: "")), reducer: {DetailFeature()}))
+    DetailView(
+        store: .init(
+            initialState:  .init(
+                sendedMovieID: "",
+                sendedThumnailURL: nil
+            )
+            , reducer: {DetailFeature()})
+    )
 }

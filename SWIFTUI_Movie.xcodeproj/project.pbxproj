@@ -10,6 +10,7 @@
 		FF2DFC432C536D61005804DB /* KobisManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFC422C536D61005804DB /* KobisManagerProtocol.swift */; };
 		FF2DFC452C536DB7005804DB /* KobisManagerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFC442C536DB7005804DB /* KobisManagerKey.swift */; };
 		FF723E0C2C5A144000F05A30 /* NavigationView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF723E0B2C5A144000F05A30 /* NavigationView+.swift */; };
+		FF723E0E2C5A1D3300F05A30 /* KobisMoiveDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF723E0D2C5A1D3300F05A30 /* KobisMoiveDetail.swift */; };
 		FF9C9F682C50C1AD006BB902 /* SWIFTUI_MovieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */; };
 		FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F692C50C1AD006BB902 /* ContentView.swift */; };
 		FF9C9F6C2C50C1AF006BB902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF9C9F6B2C50C1AF006BB902 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		FF2DFC422C536D61005804DB /* KobisManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisManagerProtocol.swift; sourceTree = "<group>"; };
 		FF2DFC442C536DB7005804DB /* KobisManagerKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisManagerKey.swift; sourceTree = "<group>"; };
 		FF723E0B2C5A144000F05A30 /* NavigationView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationView+.swift"; sourceTree = "<group>"; };
+		FF723E0D2C5A1D3300F05A30 /* KobisMoiveDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisMoiveDetail.swift; sourceTree = "<group>"; };
 		FF9C9F642C50C1AD006BB902 /* SWIFTUI_Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWIFTUI_Movie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWIFTUI_MovieApp.swift; sourceTree = "<group>"; };
 		FF9C9F692C50C1AD006BB902 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				FF9C9FAA2C5242C9006BB902 /* BoxofficeMovie.swift */,
 				FFA7A1472C57353300D52009 /* KMDBMovieDetail.swift */,
 				FFA7A1492C57590900D52009 /* HomeModel.swift */,
+				FF723E0D2C5A1D3300F05A30 /* KobisMoiveDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				FF9C9FA02C523618006BB902 /* NetworkManager.swift in Sources */,
 				FFA7A1462C57324A00D52009 /* KmdbManager.swift in Sources */,
 				FFA7A1482C57353300D52009 /* KMDBMovieDetail.swift in Sources */,
+				FF723E0E2C5A1D3300F05A30 /* KobisMoiveDetail.swift in Sources */,
 				FFA7A14C2C5759D600D52009 /* KmdbManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

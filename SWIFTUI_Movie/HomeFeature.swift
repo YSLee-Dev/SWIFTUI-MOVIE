@@ -85,7 +85,7 @@ struct HomeFeature: Reducer {
              
             case .movieTapped(let type, let index):
                 let tappedData = type == .week ? state.weekMoiveList[index] : state.yesterdayMoiveList[index]
-                state.path.append(.detailState(.init(movieID: "", tappedData: tappedData)))
+                state.path.append(.detailState(.init(sendedMovieID: tappedData.moiveID, sendedThumnailURL: tappedData.url)))
                 return .none
                 
             default: return .none
