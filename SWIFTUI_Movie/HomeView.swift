@@ -105,6 +105,7 @@ struct HomeView: View {
             case .detailState:
                 if let reduce = store.scope(state: \.detailState, action: \.detailAction) {
                     DetailView(store: reduce)
+                        .navigationBarBackButtonHidden()
                 }
             }
         }
