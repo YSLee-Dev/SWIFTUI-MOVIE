@@ -25,14 +25,16 @@ struct HomeFeature: Reducer {
     struct State: Equatable {
         var yesterdayMoiveList: [HomeModel] = []
         var weekMoiveList: [HomeModel] = []
+        var path = StackState<Path.State>()
     }
     
     enum Action: Equatable {
         case searchBarTapped
-        case movieTapped
+        case movieTapped(BoxOfficeType, Int)
         case viewInitialized
         case thumbnailURLRequest([BoxOfficeList], BoxOfficeType)
         case listUpdated([HomeModel], BoxOfficeType)
+        case path(StackAction<Path.State, Path.Action>)
     }
     
     var body: some Reducer<State, Action> {
@@ -60,7 +62,7 @@ struct HomeFeature: Reducer {
                 
             case .thumbnailURLRequest(let data, let type):
                 return .run { send in
-                    var homeModelList: [HomeModel] = data.map {.init(title: $0.title, openDate: $0.openDate, rank: $0.rank)}
+                    var homeModelList: [HomeModel] = data.map {.init(title: $0.title, openDate: $0.openDate, rank: $0.rank, movieID: $0.id)}
                     await send(.listUpdated(homeModelList, type))
                     
                     for index in 0 ..< data.count {
@@ -81,7 +83,35 @@ struct HomeFeature: Reducer {
                 }
                 return .none
              
+            case .movieTapped(let type, let index):
+                let tappedData = type == .week ? state.weekMoiveList[index] : state.yesterdayMoiveList[index]
+                state.path.append(.detailState(.init(movieID: "", tappedData: tappedData)))
+                return .none
+                
             default: return .none
+            }
+        }
+        .forEach(\.path, action: \.path) {
+            Path()
+        }
+    }
+}
+
+extension HomeFeature {
+    @Reducer
+    struct Path: Reducer {
+        @ObservableState
+        enum State: Equatable {
+            case detailState(DetailFeature.State)
+        }
+        
+        enum Action: Equatable {
+            case detailAction(DetailFeature.Action)
+        }
+        
+        var body: some Reducer<State, Action> {
+            Scope(state: \.detailState, action: \.detailAction) {
+               DetailFeature()
             }
         }
     }
