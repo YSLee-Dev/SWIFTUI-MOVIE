@@ -11,6 +11,11 @@ import ComposableArchitecture
 struct HomeView: View {
     @State var store: StoreOf<HomeFeature>
     
+    init(store: StoreOf<HomeFeature>) {
+        self.store = store
+        self.store.send(.viewInitialized)
+    }
+    
     var body: some View {
         NavigationStack(path: self.$store.scope(state: \.path, action: \.path), root: {
             VStack(alignment: .leading) {
@@ -18,9 +23,6 @@ struct HomeView: View {
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
-                    .onAppear {
-                        store.send(.viewInitialized)
-                    }
                 
                 ScrollView {
                     Button(action: {
