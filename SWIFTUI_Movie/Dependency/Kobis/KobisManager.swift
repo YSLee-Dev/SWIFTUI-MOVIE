@@ -27,6 +27,16 @@ struct KobisManager: KobisManagerProtocol {
         return (boxOfficeType == .week ? data.weeklyBoxOfficeList : data.dailyBoxOfficeList) ?? []
     }
     
+    func detailMovieInfoRequest(moiveID: String)  async throws -> KobisMoiveDetail {
+        var urlComponents = self.urlComponentsCreate(type: .detail)
+        urlComponents?.queryItems = [
+            URLQueryItem(name: "key", value: self.token),
+            URLQueryItem(name: "movieCd", value: moiveID)
+        ]
+        
+        return try await NetworkManager.shared.reqeustData(decodingType: KobisMoiveDetail.self, url: urlComponents?.url)
+    }
+    
     private func urlComponentsCreate(type: ReqeustType) -> URLComponents? {
         let urlString = switch type {
         case .yesterdayBoxOffice: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
@@ -47,6 +57,10 @@ struct KobisManager: KobisManagerProtocol {
 }
 
 struct KobisPreviewManager: KobisManagerProtocol {
+    func detailMovieInfoRequest(moiveID: String) async throws -> KobisMoiveDetail {
+        return .init(movieInfoResult: .init(moiveInfo: .init(title: "범죄도시", movieTotalMin: "120", openDate: "2024년 01월 01일", nations: [.init(name: "한국")], genres: [.init(name: "액션")], actors: [.init(name: "마동석", englishName: "MA", cast: "주인공")])))
+    }
+    
     func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [BoxOfficeList] {
         return [
             BoxOfficeList(id: "1", title: "범죄도시", openDate: "2024년 01월 01일", rank: "1"),

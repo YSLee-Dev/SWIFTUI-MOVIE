@@ -11,4 +11,5 @@ enum BoxOfficeType { case yesterday, week }
 
 protocol KobisManagerProtocol {
     func  boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [BoxOfficeList]
+    func detailMovieInfoRequest(moiveID: String)  async throws -> KobisMoiveDetail 
 }
