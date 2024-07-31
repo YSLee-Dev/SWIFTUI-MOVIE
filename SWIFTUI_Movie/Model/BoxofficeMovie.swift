@@ -26,11 +26,13 @@ struct BoxOfficeResult: Decodable, Equatable, Hashable {
 }
 
 struct BoxOfficeList: Decodable, Equatable, Hashable {
+    let id: String
     let title: String
     let openDate: String
     let rank: String
     
     enum CodingKeys: String, CodingKey {
+        case id = "movieCd"
         case title = "movieNm"
         case openDate = "openDt"
         case rank = "rank"

@@ -49,12 +49,12 @@ struct KobisManager: KobisManagerProtocol {
 struct KobisPreviewManager: KobisManagerProtocol {
     func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [BoxOfficeList] {
         return [
-            BoxOfficeList(title: "범죄도시", openDate: "2024년 01월 01일", rank: "1"),
-            BoxOfficeList(title: "극한직업", openDate: "2024년 02월 11일", rank: "1"),
-            BoxOfficeList(title: "짱구는 못말려 극장판", openDate: "2024년 03월 21일", rank: "1"),
-            BoxOfficeList(title: "알라딘", openDate: "2024년 04월 02일", rank: "1"),
-            BoxOfficeList(title: "7번방의 꿈", openDate: "2024년 05월 12일", rank: "1"),
-            BoxOfficeList(title: "스파이더맨", openDate: "2024년 06월 13일", rank: "1")
+            BoxOfficeList(id: "1", title: "범죄도시", openDate: "2024년 01월 01일", rank: "1"),
+            BoxOfficeList(id: "2", title: "극한직업", openDate: "2024년 02월 11일", rank: "1"),
+            BoxOfficeList(id: "3", title: "짱구는 못말려 극장판", openDate: "2024년 03월 21일", rank: "1"),
+            BoxOfficeList(id: "4", title: "알라딘", openDate: "2024년 04월 02일", rank: "1"),
+            BoxOfficeList(id: "5", title: "7번방의 꿈", openDate: "2024년 05월 12일", rank: "1"),
+            BoxOfficeList(id: "6", title: "스파이더맨", openDate: "2024년 06월 13일", rank: "1")
         ]
     }
 }
