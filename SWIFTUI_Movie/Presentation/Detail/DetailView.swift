@@ -22,7 +22,7 @@ struct DetailView: View {
     
     var body: some View {
         OffsetScrollView {
-            VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 0) {
                 KFImage(self.store.state.sendedThumnailURL)
                     .placeholder {
                         RoundedRectangle(cornerRadius: 15)
@@ -58,6 +58,34 @@ struct DetailView: View {
                         }
                         .padding(.bottom, 20)
                     }
+                VStack(alignment: .leading) {
+                    if let detailData = self.store.state.detailMovieInfo {
+                        Text("영화 정보")
+                            .font(.title2)
+                            .bold()
+                        
+                        VStack(alignment: .leading, spacing: 20)  {
+                            DetailInfoView(imageName: "calendar.circle.fill", title: detailData.openDate)
+                            
+                            DetailInfoView(imageName: "clock.circle.fill", title: "\(detailData.movieTotalMin)분")
+                            
+                            let companys = detailData.companys.filter {$0.type == "제작사"}
+                            if let firstCompanys = companys.first {
+                                DetailInfoView(imageName: "building.2.crop.circle.fill", title: "\(firstCompanys.name)\(companys.count >= 2 ? " 등" : "")")
+                            }
+                            
+                            DetailInfoView(imageName: "book.closed.circle.fill", title: detailData.genres.enumerated().reduce(""){ s1, s2 in
+                                "\(s1)" + "\(s2.element.name)\(s2.offset == detailData.genres.count - 1 ? "" : ", ")"
+                            })
+                        }
+                        .padding(20)
+                        .background {
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(Color.gray.opacity(0.1))
+                        }
+                    }
+                }
+                .padding(.horizontal, 20)
                 
                 Text("123")
                     .font(.system(size: 30, weight: .bold))
