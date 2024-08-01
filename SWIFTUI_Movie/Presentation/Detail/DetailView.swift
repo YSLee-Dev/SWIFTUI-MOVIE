@@ -78,6 +78,10 @@ struct DetailView: View {
                             DetailInfoView(imageName: "book.closed.circle.fill", title: detailData.genres.enumerated().reduce(""){ s1, s2 in
                                 "\(s1)" + "\(s2.element.name)\(s2.offset == detailData.genres.count - 1 ? "" : ", ")"
                             })
+                            
+                            if let firstNation = detailData.nations.first {
+                                DetailInfoView(imageName: "flag.circle.fill", title: "\(firstNation.name)\(detailData.nations.count >= 2 ? " 등" : "")")
+                            }
                         }
                         .padding(20)
                         .background {
