@@ -30,6 +30,7 @@ struct KobisMovieInfo: Decodable, Equatable, Hashable {
     let nations: [KobisMovieInfoNations]
     let genres: [KobisMovieInfoGenres]
     let actors: [KobisMovieInfoActors]
+    let companys: [KobisMovieInfoCompanys]
     
     enum CodingKeys: String, CodingKey {
         case title = "movieNm"
@@ -38,6 +39,7 @@ struct KobisMovieInfo: Decodable, Equatable, Hashable {
         case nations = "nations"
         case genres = "genres"
         case actors = "actors"
+        case companys = "companys"
     }
 }
 
@@ -66,5 +68,15 @@ struct KobisMovieInfoActors: Decodable, Equatable, Hashable {
         case name = "peopleNm"
         case englishName = "peopleNmEn"
         case cast = "cast"
+    }
+}
+
+struct KobisMovieInfoCompanys: Decodable, Equatable, Hashable {
+    let name: String
+    let type: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "companyNm"
+        case type = "companyPartNm"
     }
 }
