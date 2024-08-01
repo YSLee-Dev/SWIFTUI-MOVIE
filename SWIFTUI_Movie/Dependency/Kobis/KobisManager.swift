@@ -47,11 +47,10 @@ struct KobisManager: KobisManagerProtocol {
     }
     
     private func createDate(type: ReqeustType) -> String {
-        let year = Calendar.current.component(.year, from: .now)
-        let month = Calendar.current.component(.month, from: .now)
-        let day = Calendar.current.component(
-            .day, from: Calendar.current.date(byAdding: DateComponents(day: type == .weekBoxOffice ? -7 : -1), to: .now)!
-        )
+        let now = Calendar.current.date(byAdding: DateComponents(day: type == .weekBoxOffice ? -7 : -1), to: .now)!
+        let year = Calendar.current.component(.year, from: now)
+        let month = Calendar.current.component(.month, from: now)
+        let day = Calendar.current.component(.day, from: now)
         return "\(year)\(month < 10 ? "0" : "")\(month)\(day)"
     }
 }
