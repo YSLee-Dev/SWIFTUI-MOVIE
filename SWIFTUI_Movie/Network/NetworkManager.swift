@@ -9,11 +9,9 @@ import Foundation
 
 struct NetworkManager {
     private init() {}
-    private let urlSession = URLSession.shared
+    private static let urlSession = URLSession.shared
     
-    static let shared = NetworkManager()
-    
-    func reqeustData<T: Decodable>(decodingType: T.Type, url: URL?) async throws -> T {
+    static func reqeustData<T: Decodable>(decodingType: T.Type, url: URL?) async throws -> T {
         guard let url = url else {throw URLError.init(.badURL)}
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
