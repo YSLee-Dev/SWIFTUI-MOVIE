@@ -58,6 +58,7 @@ struct DetailView: View {
                         }
                         .padding(.bottom, 20)
                     }
+                
                 VStack(alignment: .leading) {
                     if let detailData = self.store.state.detailMovieInfo {
                         Text("영화 정보")
@@ -122,10 +123,13 @@ struct DetailView: View {
                     
                     Spacer()
                 }
-                .padding(.horizontal, 20)
+                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                .background {
+                    Color.white.opacity(self.posterStytleRatio)
+                        .ignoresSafeArea()
+                }
                 Spacer()
             }
-            .padding(.top, 10)
         }
         .onPreferenceChange(ScrollOffsetKey.self, perform: { offset in
             if !self.firstValueCheck {
