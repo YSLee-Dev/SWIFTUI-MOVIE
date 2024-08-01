@@ -23,6 +23,6 @@ struct KmdbManager: KmdbManagerProtocol {
             URLQueryItem(name: "releaseDts", value: openDate)
         ]
         
-        return try await NetworkManager.shared.reqeustData(decodingType: KMDBMovieDetail.self, url: urlComponents?.url).data.first?.result.first ?? nil
+        return try await NetworkManager.reqeustData(decodingType: KMDBMovieDetail.self, url: urlComponents?.url).data.first?.result.first ?? nil
     }
 }

@@ -23,7 +23,7 @@ struct KobisManager: KobisManagerProtocol {
             URLQueryItem(name: "key", value: self.token),
             URLQueryItem(name: "targetDt", value: self.createDate(type: boxOfficeType == .week ? .weekBoxOffice : .yesterdayBoxOffice))
         ]
-       let data =  try await NetworkManager.shared.reqeustData(decodingType: BoxofficeMovie.self, url: urlComponents?.url).boxOfficeResult
+       let data =  try await NetworkManager.reqeustData(decodingType: BoxofficeMovie.self, url: urlComponents?.url).boxOfficeResult
         return (boxOfficeType == .week ? data.weeklyBoxOfficeList : data.dailyBoxOfficeList) ?? []
     }
     
@@ -34,7 +34,7 @@ struct KobisManager: KobisManagerProtocol {
             URLQueryItem(name: "movieCd", value: moiveID)
         ]
         
-        return try await NetworkManager.shared.reqeustData(decodingType: KobisMoiveDetail.self, url: urlComponents?.url)
+        return try await NetworkManager.reqeustData(decodingType: KobisMoiveDetail.self, url: urlComponents?.url)
     }
     
     private func urlComponentsCreate(type: ReqeustType) -> URLComponents? {
