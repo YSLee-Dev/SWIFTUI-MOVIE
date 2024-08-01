@@ -100,15 +100,15 @@ struct DetailView: View {
                     Button(action: {
                         
                     }) {
-                        Image(systemName: "chevron.backward.circle")
+                        Image(systemName: "chevron.backward")
                             .resizable()
-                            .foregroundColor(
-                                .init(hue: 136, saturation: 0, brightness: self.posterStytleRatio)
-                            )
-                            .frame(width: 30, height: 30)
+                            .foregroundColor(.black)
+                            .frame(width: 10, height: 17)
                             .background {
-                                Color.init(hue: 0, saturation: 0, brightness:  1 - self.posterStytleRatio)
-                                    .clipShape(Circle())
+                                Circle()
+                                    .fill(Color.white.opacity(1 - self.posterStytleRatio))
+                                    .frame(width: 30, height: 30)
+                                    .offset(x: 2)
                             }
                     }
                     
@@ -116,9 +116,9 @@ struct DetailView: View {
                     
                     if let detailData = self.store.state.detailMovieInfo {
                         Text(detailData.title)
-                            .font(.system(size: 20, weight: .bold))
+                            .font(.system(size: 18, weight: .bold))
                             .foregroundStyle(.black.opacity(self.posterStytleRatio))
-                            .padding(.trailing, 30)
+                            .padding(.trailing, 10)
                     }
                     
                     Spacer()
