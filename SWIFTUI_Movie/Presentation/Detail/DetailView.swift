@@ -21,103 +21,98 @@ struct DetailView: View {
     }
     
     var body: some View {
-        OffsetScrollView {
-            VStack(alignment: .leading, spacing: 0) {
-                KFImage(self.store.state.sendedThumnailURL)
-                    .placeholder {
-                        RoundedRectangle(cornerRadius: 15)
-                            .foregroundColor(.init(uiColor: .systemGray4))
-                    }
-                    .resizable()
-                    .frame(width: self.posterWidth, height: (self.posterWidth * 1.5) + 20)
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
-                    .offset(y: -20)
-                    .overlay {
-                        VStack {
-                            Spacer()
+        NavigationScrollView(
+            imageIconBackgroundColor: .init(get: {Color.white.opacity(1 - self.posterStytleRatio)}, set: {_ in}),
+            titleColor: .init(get: {.black.opacity(self.posterStytleRatio)}, set: { _ in}),
+            bgColor: .init(get: {Color.white.opacity(self.posterStytleRatio)}, set: {_ in}),
+            title: self.store.state.detailMovieInfo?.title ?? "",
+            isIgnoresTopSafeArea: true,
+            backBtnTap: {
+                self.store.send(.backBtnTapped)
+            }) {
+                VStack(alignment: .leading, spacing: 0) {
+                    KFImage(self.store.state.sendedThumnailURL)
+                        .placeholder {
+                            RoundedRectangle(cornerRadius: 15)
+                                .foregroundColor(.init(uiColor: .systemGray4))
+                        }
+                        .resizable()
+                        .frame(width: self.posterWidth, height: (self.posterWidth * 1.5) + 20)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .offset(y: -20)
+                        .overlay {
                             VStack {
                                 Spacer()
-                             
-                                if let detailData = self.store.state.detailMovieInfo {
-                                    Text("\(detailData.title)")
-                                        .font(.system(size: 30, weight: .bold))
-                                        .foregroundColor(.white)
-                                    
-                                    Text("\(detailData.openDate)")
-                                        .font(.system(size: 15, weight: .semibold))
-                                        .foregroundColor(.white)
+                                VStack {
+                                    Spacer()
+                                 
+                                    if let detailData = self.store.state.detailMovieInfo {
+                                        Text("\(detailData.title)")
+                                            .font(.system(size: 30, weight: .bold))
+                                            .foregroundColor(.white)
+                                        
+                                        Text("\(detailData.openDate)")
+                                            .font(.system(size: 15, weight: .semibold))
+                                            .foregroundColor(.white)
+                                    }
+                                  
+                                    Spacer()
                                 }
-                              
-                                Spacer()
+                                .frame(width: self.posterWidth, height: 125)
+                                .background {
+                                    LinearGradient(gradient: Gradient(colors: [Color.clear, Color.gray]), startPoint: .top, endPoint: .bottom)
+                                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                                }
                             }
-                            .frame(width: self.posterWidth, height: 125)
-                            .background {
-                                LinearGradient(gradient: Gradient(colors: [Color.clear, Color.gray]), startPoint: .top, endPoint: .bottom)
-                                    .clipShape(RoundedRectangle(cornerRadius: 15))
-                            }
+                            .padding(.bottom, 20)
                         }
-                        .padding(.bottom, 20)
-                    }
-                
-                if let detailData = self.store.state.detailMovieInfo {
-                    DetailInfoView(title: "영화정보") {
-                        DetailInfoCell(imageName: "calendar.circle.fill", title: detailData.openDate)
-                        
-                        DetailInfoCell(imageName: "clock.circle.fill", title: "\(detailData.movieTotalMin)분")
-                        
-                        DetailInfoCell(imageName: "book.closed.circle.fill", title: detailData.genres.enumerated().reduce(""){ s1, s2 in
-                            "\(s1)" + "\(s2.element.name)\(s2.offset == detailData.genres.count - 1 ? "" : ", ")"
-                        })
-                    }
                     
-                    DetailInfoView(title: "제작정보") {
-                        if let firstNation = detailData.nations.first {
-                            DetailInfoCell(imageName: "flag.circle.fill", title: "\(firstNation.name)\(detailData.nations.count >= 2 ? " 등" : "")")
+                    if let detailData = self.store.state.detailMovieInfo {
+                        DetailInfoView(title: "영화정보") {
+                            DetailInfoCell(imageName: "calendar.circle.fill", title: detailData.openDate)
+                            
+                            DetailInfoCell(imageName: "clock.circle.fill", title: "\(detailData.movieTotalMin)분")
+                            
+                            DetailInfoCell(imageName: "book.closed.circle.fill", title: detailData.genres.enumerated().reduce(""){ s1, s2 in
+                                "\(s1)" + "\(s2.element.name)\(s2.offset == detailData.genres.count - 1 ? "" : ", ")"
+                            })
                         }
                         
-                        if let firstDirector = detailData.directors.first {
-                            DetailInfoCell(imageName: "pencil.circle.fill", title: "\(firstDirector.name)\(detailData.directors.count >= 2 ? " 등" : "")")
-                        }
-                        
-                        
-                        let companys = detailData.companys.filter {$0.type == "제작사"}
-                        if let firstCompanys = companys.first {
-                            DetailInfoCell(imageName: "building.2.crop.circle.fill", title: "\(firstCompanys.name)\(companys.count >= 2 ? " 등" : "")")
-                        }
-                    }
-                    
-                    DetailInfoView(title: "등장인물") {
-                        let actorList = detailData.actors.count <= 5 ? detailData.actors : Array(detailData.actors[0 ... 4])
-                        ForEach(actorList, id: \.self) {
-                            DetailInfoCell(imageName: "person.circle.fill", title: "\($0.name)")
-                        }
-                        
-                        if detailData.actors.count > 5 {
-                            Button(action: {
-                                
-                            }) {
-                                Text("더보기")
+                        DetailInfoView(title: "제작정보") {
+                            if let firstNation = detailData.nations.first {
+                                DetailInfoCell(imageName: "flag.circle.fill", title: "\(firstNation.name)\(detailData.nations.count >= 2 ? " 등" : "")")
                             }
-                            .foregroundColor(.gray)
+                            
+                            if let firstDirector = detailData.directors.first {
+                                DetailInfoCell(imageName: "pencil.circle.fill", title: "\(firstDirector.name)\(detailData.directors.count >= 2 ? " 등" : "")")
+                            }
+                            
+                            
+                            let companys = detailData.companys.filter {$0.type == "제작사"}
+                            if let firstCompanys = companys.first {
+                                DetailInfoCell(imageName: "building.2.crop.circle.fill", title: "\(firstCompanys.name)\(companys.count >= 2 ? " 등" : "")")
+                            }
+                        }
+                        
+                        DetailInfoView(title: "등장인물") {
+                            let actorList = detailData.actors.count <= 5 ? detailData.actors : Array(detailData.actors[0 ... 4])
+                            ForEach(actorList, id: \.self) {
+                                let englishName = $0.englishName.isEmpty ? "" : "(\($0.englishName))"
+                                DetailInfoCell(imageName: "person.circle.fill", title: "\($0.name) \(englishName)", subTitle: "\($0.cast)")
+                            }
+                            
+                            if detailData.actors.count > 5 {
+                                Button(action: {
+                                    
+                                }) {
+                                    Text("더보기")
+                                }
+                                .foregroundColor(.gray)
+                            }
                         }
                     }
                 }
             }
-        }
-        .ignoresSafeArea(.all)
-        .overlay {
-            VStack {
-                NavigationBar(
-                    imageIconBackgroundColor: .init(get: {Color.white.opacity(1 - self.posterStytleRatio)}, set: {_ in}),
-                    titleColor: .init(get: {.black.opacity(self.posterStytleRatio)}, set: { _ in}),
-                    bgColor: .init(get: {Color.white.opacity(self.posterStytleRatio)}, set: {_ in}),
-                    title: self.store.state.detailMovieInfo?.title ?? ""
-                ) {
-                        self.store.send(.backBtnTapped)
-                    }
-                Spacer()
-            }
-        }
         .onPreferenceChange(ScrollOffsetKey.self, perform: { offset in
             if !self.firstValueCheck {
                 self.firstValueCheck = true
