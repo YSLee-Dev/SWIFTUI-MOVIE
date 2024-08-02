@@ -59,88 +59,49 @@ struct DetailView: View {
                         .padding(.bottom, 20)
                     }
                 
-                VStack(alignment: .leading) {
-                    if let detailData = self.store.state.detailMovieInfo {
-                        Text("영화정보")
-                            .font(.title2)
-                            .bold()
+                if let detailData = self.store.state.detailMovieInfo {
+                    DetailInfoView(title: "영화정보") {
+                        DetailInfoCell(imageName: "calendar.circle.fill", title: detailData.openDate)
                         
-                        VStack(alignment: .leading, spacing: 20)  {
-                            DetailInfoView(imageName: "calendar.circle.fill", title: detailData.openDate)
-                            
-                            DetailInfoView(imageName: "clock.circle.fill", title: "\(detailData.movieTotalMin)분")
-                            
-                            DetailInfoView(imageName: "book.closed.circle.fill", title: detailData.genres.enumerated().reduce(""){ s1, s2 in
-                                "\(s1)" + "\(s2.element.name)\(s2.offset == detailData.genres.count - 1 ? "" : ", ")"
-                            })
+                        DetailInfoCell(imageName: "clock.circle.fill", title: "\(detailData.movieTotalMin)분")
+                        
+                        DetailInfoCell(imageName: "book.closed.circle.fill", title: detailData.genres.enumerated().reduce(""){ s1, s2 in
+                            "\(s1)" + "\(s2.element.name)\(s2.offset == detailData.genres.count - 1 ? "" : ", ")"
+                        })
+                    }
+                    
+                    DetailInfoView(title: "제작정보") {
+                        if let firstNation = detailData.nations.first {
+                            DetailInfoCell(imageName: "flag.circle.fill", title: "\(firstNation.name)\(detailData.nations.count >= 2 ? " 등" : "")")
                         }
-                        .padding(20)
-                        .background {
-                            RoundedRectangle(cornerRadius: 15)
-                                .fill(Color.gray.opacity(0.1))
+                        
+                        if let firstDirector = detailData.directors.first {
+                            DetailInfoCell(imageName: "pencil.circle.fill", title: "\(firstDirector.name)\(detailData.directors.count >= 2 ? " 등" : "")")
+                        }
+                        
+                        
+                        let companys = detailData.companys.filter {$0.type == "제작사"}
+                        if let firstCompanys = companys.first {
+                            DetailInfoCell(imageName: "building.2.crop.circle.fill", title: "\(firstCompanys.name)\(companys.count >= 2 ? " 등" : "")")
+                        }
+                    }
+                    
+                    DetailInfoView(title: "등장인물") {
+                        let actorList = detailData.actors.count <= 5 ? detailData.actors : Array(detailData.actors[0 ... 4])
+                        ForEach(actorList, id: \.self) {
+                            DetailInfoCell(imageName: "person.circle.fill", title: "\($0.name)")
+                        }
+                        
+                        if detailData.actors.count > 5 {
+                            Button(action: {
+                                
+                            }) {
+                                Text("더보기")
+                            }
+                            .foregroundColor(.gray)
                         }
                     }
                 }
-                .padding(20)
-                
-                VStack(alignment: .leading) {
-                    if let detailData = self.store.state.detailMovieInfo {
-                        Text("제작정보")
-                            .font(.title2)
-                            .bold()
-                        
-                        VStack(alignment: .leading, spacing: 20)  {
-                            if let firstNation = detailData.nations.first {
-                                DetailInfoView(imageName: "flag.circle.fill", title: "\(firstNation.name)\(detailData.nations.count >= 2 ? " 등" : "")")
-                            }
-                            
-                            if let firstDirector = detailData.directors.first {
-                                DetailInfoView(imageName: "pencil.circle.fill", title: "\(firstDirector.name)\(detailData.directors.count >= 2 ? " 등" : "")")
-                            }
-                            
-                            let companys = detailData.companys.filter {$0.type == "제작사"}
-                            if let firstCompanys = companys.first {
-                                DetailInfoView(imageName: "building.2.crop.circle.fill", title: "\(firstCompanys.name)\(companys.count >= 2 ? " 등" : "")")
-                            }
-                        }
-                        .padding(20)
-                        .background {
-                            RoundedRectangle(cornerRadius: 15)
-                                .fill(Color.gray.opacity(0.1))
-                        }
-                    }
-                }
-                .padding(20)
-                
-                VStack(alignment: .leading) {
-                    if let detailData = self.store.state.detailMovieInfo {
-                        Text("등장인물")
-                            .font(.title2)
-                            .bold()
-                        
-                        VStack(alignment: .leading, spacing: 20)  {
-                            let actorList = detailData.actors.count <= 5 ? detailData.actors : Array(detailData.actors[0 ... 4])
-                            ForEach(actorList, id: \.self) {
-                                DetailInfoView(imageName: "person.circle.fill", title: "\($0.name)")
-                            }
-                        
-                            if detailData.actors.count > 5 {
-                                Button(action: {
-                                    
-                                }) {
-                                    Text("더보기")
-                                }
-                                .foregroundColor(.gray)
-                            }
-                        }
-                        .padding(20)
-                        .background {
-                            RoundedRectangle(cornerRadius: 15)
-                                .fill(Color.gray.opacity(0.1))
-                        }
-                    }
-                }
-                .padding(20)
             }
         }
         .ignoresSafeArea(.all)

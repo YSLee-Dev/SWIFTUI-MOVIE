@@ -7,25 +7,31 @@
 
 import SwiftUI
 
-struct DetailInfoView: View {
-    let imageName: String
+struct DetailInfoView<Contents>: View where Contents: View{
     let title: String
+    @ViewBuilder var contents: Contents
     
     var body: some View {
-        HStack(spacing: 10) {
-            Image(systemName: self.imageName)
-                .resizable()
-                .frame(width: 40, height: 40)
-                .foregroundColor(.gray)
-            
+        VStack(alignment: .leading) {
             Text(self.title)
-                .font(.system(size: 15, weight: .semibold))
+                .font(.title2)
+                .bold()
             
-            Spacer()
+            VStack(alignment: .leading, spacing: 20)  {
+                self.contents
+            }
+            .padding(20)
+            .background {
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(Color.gray.opacity(0.1))
+            }
         }
+        .padding(20)
     }
 }
 
 #Preview {
-    DetailInfoView(imageName: "calendar.circle.fill", title: "2024년 01월 01일")
+    DetailInfoView(title: "DetailInfoView") {
+        Text("123")
+    }
 }
