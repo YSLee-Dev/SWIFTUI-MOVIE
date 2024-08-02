@@ -51,7 +51,7 @@ struct KobisManager: KobisManagerProtocol {
         let year = Calendar.current.component(.year, from: now)
         let month = Calendar.current.component(.month, from: now)
         let day = Calendar.current.component(.day, from: now)
-        return "\(year)\(month < 10 ? "0" : "")\(month)\(day)"
+        return "\(year)\(month < 10 ? "0" : "")\(month)\(day < 10 ? "0" : "")\(day)"
     }
 }
 
