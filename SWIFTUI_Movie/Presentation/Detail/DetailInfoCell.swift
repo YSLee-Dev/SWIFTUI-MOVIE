@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailInfoCell: View {
     let imageName: String
     let title: String
+    var subTitle: String? = nil
     
     var body: some View {
         HStack(spacing: 10) {
@@ -22,10 +23,15 @@ struct DetailInfoCell: View {
                 .font(.system(size: 15, weight: .semibold))
             
             Spacer()
+            
+            if let subTitle = self.subTitle {
+                Text(subTitle)
+                    .font(.system(size: 15, weight: .semibold))
+            }
         }
     }
 }
 
 #Preview {
-    DetailInfoCell(imageName: "calendar.circle.fill", title: "2024년 01월 01일")
+    DetailInfoCell(imageName: "calendar.circle.fill", title: "2024년 01월 01일", subTitle: "월요일")
 }
