@@ -21,7 +21,7 @@ struct DetailActorsView: View {
             title: "등장인물 상세보기",
             isIgnoresTopSafeArea: true,
             backBtnTap: {
-                
+                self.store.send(.backBtnTapped)
             }) {
                 VStack(alignment: .leading) {
                     HStack(alignment: .center) {
@@ -30,6 +30,9 @@ struct DetailActorsView: View {
                             .foregroundColor(.black)
                             .frame(width: 12, height: 22)
                             .padding(.trailing, 10)
+                            .onTapGesture {
+                                self.store.send(.backBtnTapped)
+                            }
                         
                         Text("등장인물 상세보기")
                             .font(.title)
