@@ -57,7 +57,7 @@ struct KobisManager: KobisManagerProtocol {
 
 struct KobisPreviewManager: KobisManagerProtocol {
     func detailMovieInfoRequest(moiveID: String) async throws -> KobisMoiveDetail {
-        return .init(movieInfoResult: .init(moiveInfo: .init(title: "범죄도시", movieTotalMin: "120", openDate: "2024년 01월 01일", nations: [.init(name: "한국")], genres: [.init(name: "액션")], actors: [.init(name: "마동석", englishName: "MA", cast: "주인공")], companys: [.init(name: "대한영화", type: "제작사")])))
+        return .init(movieInfoResult: .init(moiveInfo: .init(title: "범죄도시", movieTotalMin: "120", openDate: "2024년 01월 01일", nations: [.init(name: "한국")], genres: [.init(name: "액션")], actors: [.init(name: "마동석", englishName: "MA", cast: "주인공")], companys: [.init(name: "대한영화", type: "제작사")], directors: [.init(name: "봉준호")])))
     }
     
     func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [BoxOfficeList] {
