@@ -90,11 +90,36 @@ struct DetailView: View {
                         }
                     }
                 }
-                .padding(.horizontal, 20)
+                .padding(20)
                 
-                Text("123")
-                    .font(.system(size: 30, weight: .bold))
-                    .frame(height: 1000)
+                VStack(alignment: .leading) {
+                    Text("등장인물")
+                        .font(.title2)
+                        .bold()
+                    if let detailData = self.store.state.detailMovieInfo {
+                        VStack(alignment: .leading, spacing: 20)  {
+                            let actorList = detailData.actors.count <= 5 ? detailData.actors : Array(detailData.actors[0 ... 4])
+                            ForEach(actorList, id: \.self) {
+                                DetailInfoView(imageName: "person.circle.fill", title: "\($0.name)")
+                            }
+                        
+                            if detailData.actors.count > 5 {
+                                Button(action: {
+                                    
+                                }) {
+                                    Text("더보기")
+                                }
+                                .foregroundColor(.gray)
+                            }
+                        }
+                        .padding(20)
+                        .background {
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(Color.gray.opacity(0.1))
+                        }
+                    }
+                }
+                .padding(.horizontal, 20)
             }
         }
         .ignoresSafeArea(.all)
