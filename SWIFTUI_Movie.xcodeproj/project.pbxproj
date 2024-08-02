@@ -12,6 +12,12 @@
 		FF723E0C2C5A144000F05A30 /* NavigationView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF723E0B2C5A144000F05A30 /* NavigationView+.swift */; };
 		FF723E0E2C5A1D3300F05A30 /* KobisMoiveDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF723E0D2C5A1D3300F05A30 /* KobisMoiveDetail.swift */; };
 		FF7278992C5B571B00A22D47 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7278982C5B571B00A22D47 /* DetailInfoView.swift */; };
+		FF72789B2C5C767B00A22D47 /* DetailInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF72789A2C5C767B00A22D47 /* DetailInfoCell.swift */; };
+		FF72789E2C5C9F5600A22D47 /* DetailActorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF72789D2C5C9F5600A22D47 /* DetailActorsView.swift */; };
+		FF7278A02C5C9F8000A22D47 /* DetailActorsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF72789F2C5C9F8000A22D47 /* DetailActorsFeature.swift */; };
+		FF7278A22C5CA28400A22D47 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7278A12C5CA28400A22D47 /* NavigationBar.swift */; };
+		FF7278A42C5CAE7A00A22D47 /* NavigationScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7278A32C5CAE7A00A22D47 /* NavigationScrollView.swift */; };
+		FF7278A82C5CBC3E00A22D47 /* ViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7278A72C5CBC3E00A22D47 /* ViewStyle.swift */; };
 		FF9C9F682C50C1AD006BB902 /* SWIFTUI_MovieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */; };
 		FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F692C50C1AD006BB902 /* ContentView.swift */; };
 		FF9C9F6C2C50C1AF006BB902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF9C9F6B2C50C1AF006BB902 /* Assets.xcassets */; };
@@ -63,6 +69,12 @@
 		FF723E0B2C5A144000F05A30 /* NavigationView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationView+.swift"; sourceTree = "<group>"; };
 		FF723E0D2C5A1D3300F05A30 /* KobisMoiveDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisMoiveDetail.swift; sourceTree = "<group>"; };
 		FF7278982C5B571B00A22D47 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
+		FF72789A2C5C767B00A22D47 /* DetailInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoCell.swift; sourceTree = "<group>"; };
+		FF72789D2C5C9F5600A22D47 /* DetailActorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailActorsView.swift; sourceTree = "<group>"; };
+		FF72789F2C5C9F8000A22D47 /* DetailActorsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailActorsFeature.swift; sourceTree = "<group>"; };
+		FF7278A12C5CA28400A22D47 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		FF7278A32C5CAE7A00A22D47 /* NavigationScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationScrollView.swift; sourceTree = "<group>"; };
+		FF7278A72C5CBC3E00A22D47 /* ViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStyle.swift; sourceTree = "<group>"; };
 		FF9C9F642C50C1AD006BB902 /* SWIFTUI_Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWIFTUI_Movie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWIFTUI_MovieApp.swift; sourceTree = "<group>"; };
 		FF9C9F692C50C1AD006BB902 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,6 +133,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FF72789C2C5C9F1900A22D47 /* DetailActors */ = {
+			isa = PBXGroup;
+			children = (
+				FF72789D2C5C9F5600A22D47 /* DetailActorsView.swift */,
+				FF72789F2C5C9F8000A22D47 /* DetailActorsFeature.swift */,
+			);
+			path = DetailActors;
+			sourceTree = "<group>";
+		};
 		FF9C9F5B2C50C1AD006BB902 = {
 			isa = PBXGroup;
 			children = (
@@ -258,9 +279,11 @@
 		FFA7A1532C58822C00D52009 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				FF72789C2C5C9F1900A22D47 /* DetailActors */,
 				FFA7A1542C58823300D52009 /* DetailView.swift */,
 				FFA7A1562C5882A600D52009 /* DetailFeature.swift */,
 				FF7278982C5B571B00A22D47 /* DetailInfoView.swift */,
+				FF72789A2C5C767B00A22D47 /* DetailInfoCell.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -270,6 +293,9 @@
 			children = (
 				FFA7A15F2C59C89E00D52009 /* OffsetScrollView.swift */,
 				FF723E0B2C5A144000F05A30 /* NavigationView+.swift */,
+				FF7278A12C5CA28400A22D47 /* NavigationBar.swift */,
+				FF7278A32C5CAE7A00A22D47 /* NavigationScrollView.swift */,
+				FF7278A72C5CBC3E00A22D47 /* ViewStyle.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -416,8 +442,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF9C9F932C50C368006BB902 /* HomeView.swift in Sources */,
+				FF7278A02C5C9F8000A22D47 /* DetailActorsFeature.swift in Sources */,
 				FFA7A1602C59C89F00D52009 /* OffsetScrollView.swift in Sources */,
 				FFA7A1552C58823300D52009 /* DetailView.swift in Sources */,
+				FF72789E2C5C9F5600A22D47 /* DetailActorsView.swift in Sources */,
 				FF9C9F992C50CBE3006BB902 /* HomeMovieView.swift in Sources */,
 				FF9C9F9E2C52355E006BB902 /* DependencyValues.swift in Sources */,
 				FFA7A14E2C5759F100D52009 /* KmdbManagerKey.swift in Sources */,
@@ -425,6 +453,7 @@
 				FF9C9F952C50C387006BB902 /* HomeFeature.swift in Sources */,
 				FF723E0C2C5A144000F05A30 /* NavigationView+.swift in Sources */,
 				FF9C9FAB2C5242C9006BB902 /* BoxofficeMovie.swift in Sources */,
+				FF7278A82C5CBC3E00A22D47 /* ViewStyle.swift in Sources */,
 				FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */,
 				FF9C9FA62C523E71006BB902 /* KobisManager.swift in Sources */,
 				FF2DFC432C536D61005804DB /* KobisManagerProtocol.swift in Sources */,
@@ -432,11 +461,14 @@
 				FF2DFC452C536DB7005804DB /* KobisManagerKey.swift in Sources */,
 				FF9C9FA82C523F4A006BB902 /* Bundle+.swift in Sources */,
 				FF9C9F682C50C1AD006BB902 /* SWIFTUI_MovieApp.swift in Sources */,
+				FF7278A42C5CAE7A00A22D47 /* NavigationScrollView.swift in Sources */,
 				FF7278992C5B571B00A22D47 /* DetailInfoView.swift in Sources */,
 				FF9C9FA02C523618006BB902 /* NetworkManager.swift in Sources */,
 				FFA7A1462C57324A00D52009 /* KmdbManager.swift in Sources */,
 				FFA7A1482C57353300D52009 /* KMDBMovieDetail.swift in Sources */,
+				FF7278A22C5CA28400A22D47 /* NavigationBar.swift in Sources */,
 				FF723E0E2C5A1D3300F05A30 /* KobisMoiveDetail.swift in Sources */,
+				FF72789B2C5C767B00A22D47 /* DetailInfoCell.swift in Sources */,
 				FFA7A14C2C5759D600D52009 /* KmdbManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
