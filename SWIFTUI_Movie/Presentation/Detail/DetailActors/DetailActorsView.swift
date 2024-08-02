@@ -42,7 +42,7 @@ struct DetailActorsView: View {
                     
                     DetailInfoView(title: self.store.moiveTitle) {
                         ForEach(self.store.actorList, id:  \.self) {
-                            DetailInfoCell(imageName: "person.circle.fill", title: "\($0.name) (\( $0.englishName))", subTitle: "\($0.cast)")
+                            DetailInfoCell(imageName: "person.circle.fill", title: "\($0.totalName)", subTitle: "\($0.cast)")
                         }
                     }
                 }

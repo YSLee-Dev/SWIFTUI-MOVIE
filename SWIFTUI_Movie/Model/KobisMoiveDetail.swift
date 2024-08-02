@@ -66,6 +66,10 @@ struct KobisMovieInfoActors: Decodable, Equatable, Hashable {
     let englishName: String
     let cast: String
     
+    var totalName: String {
+        return englishName.isEmpty ? "\(name)" : "\(name) (\(englishName))"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case name = "peopleNm"
         case englishName = "peopleNmEn"

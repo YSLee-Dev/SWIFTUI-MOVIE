@@ -98,8 +98,7 @@ struct DetailView: View {
                         DetailInfoView(title: "등장인물") {
                             let actorList = detailData.actors.count <= 5 ? detailData.actors : Array(detailData.actors[0 ... 4])
                             ForEach(actorList, id: \.self) {
-                                let englishName = $0.englishName.isEmpty ? "" : "(\($0.englishName))"
-                                DetailInfoCell(imageName: "person.circle.fill", title: "\($0.name) \(englishName)", subTitle: "\($0.cast)")
+                                DetailInfoCell(imageName: "person.circle.fill", title: "\($0.totalName)", subTitle: "\($0.cast)")
                             }
                             
                             if detailData.actors.count > 5 {
