@@ -109,7 +109,7 @@ struct DetailView: View {
             VStack {
                 HStack {
                     Button(action: {
-                        
+                        self.store.send(.backBtnTapped)
                     }) {
                         Image(systemName: "chevron.backward")
                             .resizable()

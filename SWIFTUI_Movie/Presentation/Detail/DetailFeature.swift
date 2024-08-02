@@ -12,6 +12,7 @@ import ComposableArchitecture
 struct DetailFeature: Reducer {
     
     @Dependency (\.kobisManager) var kobisManager
+    @Dependency (\.dismiss) var dismiss
     
     @ObservableState
     struct State: Equatable {
@@ -23,6 +24,7 @@ struct DetailFeature: Reducer {
     enum Action: Equatable {
         case viewInitialized
         case detailInfoUpdate(KobisMovieInfo?)
+        case backBtnTapped
     }
     
     var body: some Reducer<State, Action> {
@@ -31,13 +33,18 @@ struct DetailFeature: Reducer {
             case .viewInitialized:
                 let id = state.sendedMovieID
                 return .run { send in
-                    let data = try? await kobisManager.detailMovieInfoRequest(moiveID: id).movieInfoResult.moiveInfo
+                    let data = try? await self.kobisManager.detailMovieInfoRequest(moiveID: id).movieInfoResult.moiveInfo
                     await  send(.detailInfoUpdate(data))
                 }
                 
             case .detailInfoUpdate(let data):
                 state.detailMovieInfo = data
                 return .none
+                
+            case .backBtnTapped:
+                return .run { _ in
+                    await self.dismiss()
+                }
             }
         }
     }
