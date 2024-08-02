@@ -104,7 +104,7 @@ struct DetailView: View {
                             
                             if detailData.actors.count > 5 {
                                 Button(action: {
-                                    
+                                    self.store.send(.actorsMoreBtnTapped(detailData))
                                 }) {
                                     Text("더보기")
                                 }

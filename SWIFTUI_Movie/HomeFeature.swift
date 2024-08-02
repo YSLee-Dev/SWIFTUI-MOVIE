@@ -8,14 +8,6 @@
 import Foundation
 import ComposableArchitecture
 
-// 임시 데이터 struct
-struct Temp: Hashable {
-    let title: String
-    let rank: Int
-    let date: String
-    let image: URL?
-}
-
 @Reducer
 struct HomeFeature: Reducer {
     @Dependency(\.kobisManager) var kobisManager
@@ -88,6 +80,10 @@ struct HomeFeature: Reducer {
                 state.path.append(.detailState(.init(sendedMovieID: tappedData.moiveID, sendedThumnailURL: tappedData.url)))
                 return .none
                 
+            case .path(.element(id: _, action: .detailAction(.actorsMoreBtnTapped(let info)))):
+                state.path.append(.detailActorsState(.init(moiveTitle: info.title, actorList: info.actors)))
+                return .none
+            
             default: return .none
             }
         }
@@ -103,15 +99,21 @@ extension HomeFeature {
         @ObservableState
         enum State: Equatable {
             case detailState(DetailFeature.State)
+            case detailActorsState(DetailActorsFeature.State)
         }
         
         enum Action: Equatable {
             case detailAction(DetailFeature.Action)
+            case detailActorsAction(DetailActorsFeature.Action)
         }
         
         var body: some Reducer<State, Action> {
             Scope(state: \.detailState, action: \.detailAction) {
                DetailFeature()
+            }
+            
+            Scope(state: \.detailActorsState, action: \.detailActorsAction) {
+                DetailActorsFeature()
             }
         }
     }

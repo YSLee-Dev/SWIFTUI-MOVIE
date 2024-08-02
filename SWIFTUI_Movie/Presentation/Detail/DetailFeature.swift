@@ -25,6 +25,7 @@ struct DetailFeature: Reducer {
         case viewInitialized
         case detailInfoUpdate(KobisMovieInfo?)
         case backBtnTapped
+        case actorsMoreBtnTapped(KobisMovieInfo)
     }
     
     var body: some Reducer<State, Action> {
@@ -45,6 +46,8 @@ struct DetailFeature: Reducer {
                 return .run { _ in
                     await self.dismiss()
                 }
+                
+            default: return .none
             }
         }
     }
