@@ -107,38 +107,14 @@ struct DetailView: View {
         .ignoresSafeArea(.all)
         .overlay {
             VStack {
-                HStack {
-                    Button(action: {
+                NavigationBar(
+                    imageIconBackgroundColor: .init(get: {Color.white.opacity(1 - self.posterStytleRatio)}, set: {_ in}),
+                    titleColor: .init(get: {.black.opacity(self.posterStytleRatio)}, set: { _ in}),
+                    bgColor: .init(get: {Color.white.opacity(self.posterStytleRatio)}, set: {_ in}),
+                    title: self.store.state.detailMovieInfo?.title ?? ""
+                ) {
                         self.store.send(.backBtnTapped)
-                    }) {
-                        Image(systemName: "chevron.backward")
-                            .resizable()
-                            .foregroundColor(.black)
-                            .frame(width: 10, height: 17)
-                            .background {
-                                Circle()
-                                    .fill(Color.white.opacity(1 - self.posterStytleRatio))
-                                    .frame(width: 30, height: 30)
-                                    .offset(x: 2)
-                            }
                     }
-                    
-                    Spacer()
-                    
-                    if let detailData = self.store.state.detailMovieInfo {
-                        Text(detailData.title)
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundStyle(.black.opacity(self.posterStytleRatio))
-                            .padding(.trailing, 10)
-                    }
-                    
-                    Spacer()
-                }
-                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
-                .background {
-                    Color.white.opacity(self.posterStytleRatio)
-                        .ignoresSafeArea()
-                }
                 Spacer()
             }
         }
