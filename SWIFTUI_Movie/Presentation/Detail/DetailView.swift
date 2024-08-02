@@ -22,6 +22,7 @@ struct DetailView: View {
     
     var body: some View {
         NavigationScrollView(
+            imageColor: .constant(.black),
             imageIconBackgroundColor: .init(get: {Color.white.opacity(1 - self.posterStytleRatio)}, set: {_ in}),
             titleColor: .init(get: {.black.opacity(self.posterStytleRatio)}, set: { _ in}),
             bgColor: .init(get: {Color.white.opacity(self.posterStytleRatio)}, set: {_ in}),

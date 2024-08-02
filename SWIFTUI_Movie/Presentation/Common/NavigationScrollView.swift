@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NavigationScrollView<Contents>: View where Contents: View {
+    @Binding var imageColor: Color
     @Binding var imageIconBackgroundColor: Color
     @Binding var titleColor: Color
     @Binding var bgColor: Color
@@ -24,6 +25,7 @@ struct NavigationScrollView<Contents>: View where Contents: View {
         .overlay {
             VStack {
                 NavigationBar(
+                    imageColor: self.$imageColor,
                     imageIconBackgroundColor: $imageIconBackgroundColor,
                     titleColor: $titleColor,
                     bgColor: $bgColor,

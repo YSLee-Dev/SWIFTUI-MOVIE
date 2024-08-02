@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NavigationBar: View {
+    @Binding var imageColor: Color
     @Binding var imageIconBackgroundColor: Color
     @Binding var titleColor: Color
     @Binding var bgColor: Color
@@ -21,7 +22,7 @@ struct NavigationBar: View {
             }) {
                 Image(systemName: "chevron.backward")
                     .resizable()
-                    .foregroundColor(.black)
+                    .foregroundColor(self.imageColor)
                     .frame(width: 10, height: 17)
                     .background {
                         Circle()
@@ -49,5 +50,5 @@ struct NavigationBar: View {
 }
 
 #Preview {
-    NavigationBar(imageIconBackgroundColor: .constant(.white), titleColor: .constant(.black), bgColor: .constant(.white),title: "극한직업") { }
+    NavigationBar(imageColor: .constant(.black), imageIconBackgroundColor: .constant(.white), titleColor: .constant(.black), bgColor: .constant(.white),title: "극한직업") { }
 }
