@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		340754162C5FB42E006D9006 /* RequestToken.plist in Resources */ = {isa = PBXBuildFile; fileRef = 340754152C5FB42E006D9006 /* RequestToken.plist */; };
+		340754182C5FB9DE006D9006 /* SearchActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340754172C5FB9DE006D9006 /* SearchActor.swift */; };
 		FF2DFC432C536D61005804DB /* KobisManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFC422C536D61005804DB /* KobisManagerProtocol.swift */; };
 		FF2DFC452C536DB7005804DB /* KobisManagerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFC442C536DB7005804DB /* KobisManagerKey.swift */; };
 		FF723E0C2C5A144000F05A30 /* NavigationView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF723E0B2C5A144000F05A30 /* NavigationView+.swift */; };
@@ -30,7 +32,6 @@
 		FF9C9F992C50CBE3006BB902 /* HomeMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F982C50CBE3006BB902 /* HomeMovieView.swift */; };
 		FF9C9F9E2C52355E006BB902 /* DependencyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F9D2C52355E006BB902 /* DependencyValues.swift */; };
 		FF9C9FA02C523618006BB902 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F9F2C523618006BB902 /* NetworkManager.swift */; };
-		FF9C9FA22C523D99006BB902 /* RequestToken.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF9C9FA12C523D99006BB902 /* RequestToken.plist */; };
 		FF9C9FA62C523E71006BB902 /* KobisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9FA52C523E71006BB902 /* KobisManager.swift */; };
 		FF9C9FA82C523F4A006BB902 /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9FA72C523F4A006BB902 /* Bundle+.swift */; };
 		FF9C9FAB2C5242C9006BB902 /* BoxofficeMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9FAA2C5242C9006BB902 /* BoxofficeMovie.swift */; };
@@ -64,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		340754152C5FB42E006D9006 /* RequestToken.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RequestToken.plist; sourceTree = "<group>"; };
+		340754172C5FB9DE006D9006 /* SearchActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActor.swift; sourceTree = "<group>"; };
 		FF2DFC422C536D61005804DB /* KobisManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisManagerProtocol.swift; sourceTree = "<group>"; };
 		FF2DFC442C536DB7005804DB /* KobisManagerKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisManagerKey.swift; sourceTree = "<group>"; };
 		FF723E0B2C5A144000F05A30 /* NavigationView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationView+.swift"; sourceTree = "<group>"; };
@@ -91,7 +94,6 @@
 		FF9C9F982C50CBE3006BB902 /* HomeMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMovieView.swift; sourceTree = "<group>"; };
 		FF9C9F9D2C52355E006BB902 /* DependencyValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyValues.swift; sourceTree = "<group>"; };
 		FF9C9F9F2C523618006BB902 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		FF9C9FA12C523D99006BB902 /* RequestToken.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RequestToken.plist; sourceTree = "<group>"; };
 		FF9C9FA52C523E71006BB902 /* KobisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisManager.swift; sourceTree = "<group>"; };
 		FF9C9FA72C523F4A006BB902 /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		FF9C9FAA2C5242C9006BB902 /* BoxofficeMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxofficeMovie.swift; sourceTree = "<group>"; };
@@ -166,9 +168,9 @@
 			isa = PBXGroup;
 			children = (
 				FF9C9FAC2C524760006BB902 /* SWIFTUI-Movie-Info.plist */,
+				340754152C5FB42E006D9006 /* RequestToken.plist */,
 				FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */,
 				FF9C9F692C50C1AD006BB902 /* ContentView.swift */,
-				FF9C9FA12C523D99006BB902 /* RequestToken.plist */,
 				FF9C9F6D2C50C1AF006BB902 /* SWIFTUI_Movie.entitlements */,
 				FF9C9F6B2C50C1AF006BB902 /* Assets.xcassets */,
 				FFA7A1522C587C1400D52009 /* Presentation */,
@@ -252,6 +254,7 @@
 				FFA7A1472C57353300D52009 /* KMDBMovieDetail.swift */,
 				FFA7A1492C57590900D52009 /* HomeModel.swift */,
 				FF723E0D2C5A1D3300F05A30 /* KobisMoiveDetail.swift */,
+				340754172C5FB9DE006D9006 /* SearchActor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -414,9 +417,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				340754162C5FB42E006D9006 /* RequestToken.plist in Resources */,
 				FF9C9F702C50C1AF006BB902 /* Preview Assets.xcassets in Resources */,
 				FF9C9F6C2C50C1AF006BB902 /* Assets.xcassets in Resources */,
-				FF9C9FA22C523D99006BB902 /* RequestToken.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +471,7 @@
 				FFA7A1482C57353300D52009 /* KMDBMovieDetail.swift in Sources */,
 				FF7278A22C5CA28400A22D47 /* NavigationBar.swift in Sources */,
 				FF723E0E2C5A1D3300F05A30 /* KobisMoiveDetail.swift in Sources */,
+				340754182C5FB9DE006D9006 /* SearchActor.swift in Sources */,
 				FF72789B2C5C767B00A22D47 /* DetailInfoCell.swift in Sources */,
 				FFA7A14C2C5759D600D52009 /* KmdbManagerProtocol.swift in Sources */,
 			);

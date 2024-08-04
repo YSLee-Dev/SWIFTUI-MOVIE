@@ -14,7 +14,7 @@ struct KobisManager: KobisManagerProtocol {
     private let token = Bundle.main.tokenLoad(.kobis)
     
     enum ReqeustType {
-        case yesterdayBoxOffice, weekBoxOffice, detail
+        case yesterdayBoxOffice, weekBoxOffice, detail, actorSearch
     }
     
     func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [BoxOfficeList] {
@@ -37,11 +37,24 @@ struct KobisManager: KobisManagerProtocol {
         return try await NetworkManager.reqeustData(decodingType: KobisMoiveDetail.self, url: urlComponents?.url)
     }
     
+    func actorListSearchRequest(actorName: String, movieName: String, requestPage: Int = 1) async throws -> [SearchActorDetail] {
+        var urlComponents = self.urlComponentsCreate(type: .actorSearch)
+        urlComponents?.queryItems = [
+            URLQueryItem(name: "key", value: self.token),
+            URLQueryItem(name: "peopleNm", value: actorName),
+            URLQueryItem(name: "filmoNames", value: movieName),
+            URLQueryItem(name: "itemPerPage", value: "\(requestPage)")
+        ]
+        
+        return try await NetworkManager.reqeustData(decodingType: SearchActor.self, url: urlComponents?.url).actorList.actorDetailList
+    }
+    
     private func urlComponentsCreate(type: ReqeustType) -> URLComponents? {
         let urlString = switch type {
         case .yesterdayBoxOffice: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
         case .weekBoxOffice: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json"
         case .detail: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
+        case .actorSearch: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleList.json"
         }
         return URLComponents(string: urlString)
     }
@@ -68,6 +81,15 @@ struct KobisPreviewManager: KobisManagerProtocol {
             BoxOfficeList(id: "4", title: "알라딘", openDate: "2024년 04월 02일", rank: "1"),
             BoxOfficeList(id: "5", title: "7번방의 꿈", openDate: "2024년 05월 12일", rank: "1"),
             BoxOfficeList(id: "6", title: "스파이더맨", openDate: "2024년 06월 13일", rank: "1")
+        ]
+    }
+    
+    func actorListSearchRequest(actorName: String, movieName: String, requestPage: Int) async throws -> [SearchActorDetail] {
+        return [
+            .init(name: "마동석", id: "1", filmoList: "범죄도시1|범죄도시2"),
+            .init(name: "조정석", id: "2", filmoList: "엑시트|마약왕|시간이탈자"),
+            .init(name: "라미란", id: "3", filmoList: "시민덕희|정직한후보"),
+            .init(name: "이정재", id: "4", filmoList: "헌트|인천상륙작전|신과함께|암살")
         ]
     }
 }
