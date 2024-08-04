@@ -273,13 +273,13 @@
 			isa = PBXGroup;
 			children = (
 				FFA7A15E2C59C89000D52009 /* Common */,
-				FFA7A1532C58822C00D52009 /* Detail */,
+				FFA7A1532C58822C00D52009 /* MovieDetail */,
 				FF9C9F962C50C38C006BB902 /* Home */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		FFA7A1532C58822C00D52009 /* Detail */ = {
+		FFA7A1532C58822C00D52009 /* MovieDetail */ = {
 			isa = PBXGroup;
 			children = (
 				FF72789C2C5C9F1900A22D47 /* DetailActors */,
@@ -288,7 +288,7 @@
 				FF7278982C5B571B00A22D47 /* DetailInfoView.swift */,
 				FF72789A2C5C767B00A22D47 /* DetailInfoCell.swift */,
 			);
-			path = Detail;
+			path = MovieDetail;
 			sourceTree = "<group>";
 		};
 		FFA7A15E2C59C89000D52009 /* Common */ = {
