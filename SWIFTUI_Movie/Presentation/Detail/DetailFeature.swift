@@ -26,6 +26,7 @@ struct DetailFeature: Reducer {
         case detailInfoUpdate(KobisMovieInfo?)
         case backBtnTapped
         case actorsMoreBtnTapped(KobisMovieInfo)
+        case actorTapped(Int)
     }
     
     var body: some Reducer<State, Action> {
@@ -45,6 +46,16 @@ struct DetailFeature: Reducer {
             case .backBtnTapped:
                 return .run { _ in
                     await self.dismiss()
+                }
+                
+            case .actorTapped(let index):
+                guard let detailInfo = state.detailMovieInfo else {return .none}
+                let tappedActor = detailInfo.actors[index]
+                
+                
+                return .run {send in
+                    let data = await try? self.kobisManager.actorListSearchRequest(actorName: tappedActor.name, movieName: detailInfo.title, requestPage: 1)
+                    print(data)
                 }
                 
             default: return .none

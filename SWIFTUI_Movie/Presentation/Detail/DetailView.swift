@@ -97,8 +97,11 @@ struct DetailView: View {
                         
                         DetailInfoView(title: "등장인물") {
                             let actorList = detailData.actors.count <= 5 ? detailData.actors : Array(detailData.actors[0 ... 4])
-                            ForEach(actorList, id: \.self) {
-                                DetailInfoCell(imageName: "person.circle.fill", title: "\($0.totalName)", subTitle: "\($0.cast)")
+                            ForEach(Array(zip(actorList.indices, actorList)), id: \.0.self) { index, data in
+                                DetailInfoCell(imageName: "person.circle.fill", title: "\(data.totalName)", subTitle: "\(data.cast)")
+                                    .onTapGesture {
+                                        self.store.send(.actorTapped(index))
+                                    }
                             }
                             
                             if detailData.actors.count > 5 {
