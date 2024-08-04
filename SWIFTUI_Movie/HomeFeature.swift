@@ -83,6 +83,10 @@ struct HomeFeature: Reducer {
             case .path(.element(id: _, action: .detailAction(.actorsMoreBtnTapped(let info)))):
                 state.path.append(.detailActorsState(.init(moiveTitle: info.title, actorList: info.actors)))
                 return .none
+                
+            case .path(.element(id: _, action: .detailAction(.actorDetailInfoRequestSuccess(let actorID)))):
+                state.path.append(.actorDetailState(.init(actorID: actorID)))
+                return .none
             
             default: return .none
             }
@@ -100,11 +104,13 @@ extension HomeFeature {
         enum State: Equatable {
             case detailState(DetailFeature.State)
             case detailActorsState(DetailActorsFeature.State)
+            case actorDetailState(ActorDetailFeature.State)
         }
         
         enum Action: Equatable {
             case detailAction(DetailFeature.Action)
             case detailActorsAction(DetailActorsFeature.Action)
+            case actorDetailAction(ActorDetailFeature.Action)
         }
         
         var body: some Reducer<State, Action> {
@@ -114,6 +120,10 @@ extension HomeFeature {
             
             Scope(state: \.detailActorsState, action: \.detailActorsAction) {
                 DetailActorsFeature()
+            }
+            
+            Scope(state: \.actorDetailState, action: \.actorDetailAction) {
+                ActorDetailFeature()
             }
         }
     }

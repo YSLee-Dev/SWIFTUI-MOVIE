@@ -27,6 +27,7 @@ struct DetailFeature: Reducer {
         case backBtnTapped
         case actorsMoreBtnTapped(KobisMovieInfo)
         case actorTapped(Int)
+        case actorDetailInfoRequestSuccess(String)
     }
     
     var body: some Reducer<State, Action> {
@@ -52,11 +53,19 @@ struct DetailFeature: Reducer {
                 guard let detailInfo = state.detailMovieInfo else {return .none}
                 let tappedActor = detailInfo.actors[index]
                 
-                
-                return .run {send in
-                    let data = await try? self.kobisManager.actorListSearchRequest(actorName: tappedActor.name, movieName: detailInfo.title, requestPage: 1)
-                    print(data)
-                }
+                return .run(operation: { send in
+                    let actorData = try await self.kobisManager.actorListSearchRequest(actorName: tappedActor.name, movieName: detailInfo.title, requestPage: 1)
+                    // 이름 일치여부 + 영화 일치여부
+                    let filtered = actorData.filter {$0.name == tappedActor.name && $0.filmoList.contains(detailInfo.title)}
+                    
+                    if let first = filtered.first {
+                        await send(.actorDetailInfoRequestSuccess(first.id))
+                    }
+                    
+                }, catch: { error, send in
+                    // TODO: Alert
+                    print("ERROR", error)
+                })
                 
             default: return .none
             }

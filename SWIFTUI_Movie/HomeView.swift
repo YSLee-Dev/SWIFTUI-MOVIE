@@ -114,6 +114,11 @@ struct HomeView: View {
                     DetailActorsView(store: reduce)
                         .navigationBarBackButtonHidden()
                 }
+            case .actorDetailState(_):
+                if let reduce = store.scope(state: \.actorDetailState, action: \.actorDetailAction) {
+                    ActorDetailView(store: reduce)
+                        .navigationBarBackButtonHidden()
+                }
             }
         }
     }

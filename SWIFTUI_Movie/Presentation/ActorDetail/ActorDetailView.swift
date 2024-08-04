@@ -12,7 +12,7 @@ struct ActorDetailView: View {
     @State var store: StoreOf<ActorDetailFeature>
     
     var body: some View {
-        Text("1")
+        Text("\(self.store.state.actorID)")
     }
 }
 
