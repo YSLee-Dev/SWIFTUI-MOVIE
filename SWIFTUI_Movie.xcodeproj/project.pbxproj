@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		340754162C5FB42E006D9006 /* RequestToken.plist in Resources */ = {isa = PBXBuildFile; fileRef = 340754152C5FB42E006D9006 /* RequestToken.plist */; };
 		340754182C5FB9DE006D9006 /* SearchActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340754172C5FB9DE006D9006 /* SearchActor.swift */; };
+		3407541C2C5FC14A006D9006 /* ActorDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3407541B2C5FC14A006D9006 /* ActorDetailView.swift */; };
+		3407541E2C5FC159006D9006 /* ActorDetailFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3407541D2C5FC159006D9006 /* ActorDetailFeature.swift */; };
 		FF2DFC432C536D61005804DB /* KobisManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFC422C536D61005804DB /* KobisManagerProtocol.swift */; };
 		FF2DFC452C536DB7005804DB /* KobisManagerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFC442C536DB7005804DB /* KobisManagerKey.swift */; };
 		FF723E0C2C5A144000F05A30 /* NavigationView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF723E0B2C5A144000F05A30 /* NavigationView+.swift */; };
@@ -67,6 +69,8 @@
 /* Begin PBXFileReference section */
 		340754152C5FB42E006D9006 /* RequestToken.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = RequestToken.plist; sourceTree = "<group>"; };
 		340754172C5FB9DE006D9006 /* SearchActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActor.swift; sourceTree = "<group>"; };
+		3407541B2C5FC14A006D9006 /* ActorDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailView.swift; sourceTree = "<group>"; };
+		3407541D2C5FC159006D9006 /* ActorDetailFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailFeature.swift; sourceTree = "<group>"; };
 		FF2DFC422C536D61005804DB /* KobisManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisManagerProtocol.swift; sourceTree = "<group>"; };
 		FF2DFC442C536DB7005804DB /* KobisManagerKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisManagerKey.swift; sourceTree = "<group>"; };
 		FF723E0B2C5A144000F05A30 /* NavigationView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationView+.swift"; sourceTree = "<group>"; };
@@ -135,6 +139,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3407541A2C5FC139006D9006 /* ActorDetail */ = {
+			isa = PBXGroup;
+			children = (
+				3407541B2C5FC14A006D9006 /* ActorDetailView.swift */,
+				3407541D2C5FC159006D9006 /* ActorDetailFeature.swift */,
+			);
+			path = ActorDetail;
+			sourceTree = "<group>";
+		};
 		FF72789C2C5C9F1900A22D47 /* DetailActors */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +285,7 @@
 		FFA7A1522C587C1400D52009 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				3407541A2C5FC139006D9006 /* ActorDetail */,
 				FFA7A15E2C59C89000D52009 /* Common */,
 				FFA7A1532C58822C00D52009 /* MovieDetail */,
 				FF9C9F962C50C38C006BB902 /* Home */,
@@ -455,6 +469,7 @@
 				FFA7A1572C5882A600D52009 /* DetailFeature.swift in Sources */,
 				FF9C9F952C50C387006BB902 /* HomeFeature.swift in Sources */,
 				FF723E0C2C5A144000F05A30 /* NavigationView+.swift in Sources */,
+				3407541E2C5FC159006D9006 /* ActorDetailFeature.swift in Sources */,
 				FF9C9FAB2C5242C9006BB902 /* BoxofficeMovie.swift in Sources */,
 				FF7278A82C5CBC3E00A22D47 /* ViewStyle.swift in Sources */,
 				FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */,
@@ -469,6 +484,7 @@
 				FF9C9FA02C523618006BB902 /* NetworkManager.swift in Sources */,
 				FFA7A1462C57324A00D52009 /* KmdbManager.swift in Sources */,
 				FFA7A1482C57353300D52009 /* KMDBMovieDetail.swift in Sources */,
+				3407541C2C5FC14A006D9006 /* ActorDetailView.swift in Sources */,
 				FF7278A22C5CA28400A22D47 /* NavigationBar.swift in Sources */,
 				FF723E0E2C5A1D3300F05A30 /* KobisMoiveDetail.swift in Sources */,
 				340754182C5FB9DE006D9006 /* SearchActor.swift in Sources */,
