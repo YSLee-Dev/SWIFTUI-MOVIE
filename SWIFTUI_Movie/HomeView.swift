@@ -101,7 +101,7 @@ struct HomeView: View {
                     }
                 }
             }
-            .padding(EdgeInsets(top: 30, leading: 0, bottom: 30, trailing: 0))
+            .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
         }) { store in
             switch store.state {
             case .detailState:
