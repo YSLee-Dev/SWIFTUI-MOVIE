@@ -288,8 +288,8 @@
 		FFA7A1522C587C1400D52009 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				3407541A2C5FC139006D9006 /* ActorDetail */,
 				FFA7A15E2C59C89000D52009 /* Common */,
+				3407541A2C5FC139006D9006 /* ActorDetail */,
 				FFA7A1532C58822C00D52009 /* MovieDetail */,
 				FF9C9F962C50C38C006BB902 /* Home */,
 			);

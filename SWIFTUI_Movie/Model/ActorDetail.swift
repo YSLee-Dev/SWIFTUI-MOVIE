@@ -30,6 +30,10 @@ struct ActorDetailInfo: Decodable, Equatable, Hashable {
     let role: String
     let filmos: [ActorDetailInfoFilmos]
     
+    var totalName: String {
+        return englishName.isEmpty ? "\(name)" : "\(name) (\(englishName))"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case name = "peopleNm"
         case englishName = "peopleNmEn"
