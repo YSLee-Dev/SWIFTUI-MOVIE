@@ -10,14 +10,14 @@ import ComposableArchitecture
 
 @Reducer
 struct DetailFeature: Reducer {
-    
+    @Dependency (\.kmdbManager) var kmdbManager
     @Dependency (\.kobisManager) var kobisManager
     @Dependency (\.dismiss) var dismiss
     
     @ObservableState
     struct State: Equatable {
         let sendedMovieID: String
-        let sendedThumnailURL: URL?
+        var thumnailURL: URL?
         var detailMovieInfo: KobisMovieInfo?
     }
     
@@ -28,6 +28,7 @@ struct DetailFeature: Reducer {
         case actorsMoreBtnTapped(KobisMovieInfo)
         case actorTapped(Int)
         case actorDetailInfoRequestSuccess(String)
+        case thumnailImageUpdate(URL?)
     }
     
     var body: some Reducer<State, Action> {
@@ -43,7 +44,15 @@ struct DetailFeature: Reducer {
                 
             case .detailInfoUpdate(let data):
                 state.detailMovieInfo = data
-                return .none
+                
+                if state.thumnailURL == nil && data != nil {
+                    return .run { send in
+                        let thumnailData = try? await self.kmdbManager.moiveDetailInfoRequest(title: data!.title, openDate: data!.openDate)
+                        await  send(.thumnailImageUpdate(URL(string: thumnailData?.thumbnailURL ?? "")))
+                    }
+                } else {
+                    return .none
+                }
                 
             case .backBtnTapped:
                 return .run { _ in
@@ -67,6 +76,10 @@ struct DetailFeature: Reducer {
                     // TODO: Alert
                     print("ERROR", error)
                 })
+                
+            case .thumnailImageUpdate(let url):
+                state.thumnailURL = url
+                return .none
                 
             default: return .none
             }

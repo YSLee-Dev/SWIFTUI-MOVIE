@@ -33,7 +33,7 @@ struct DetailView: View {
                 self.store.send(.backBtnTapped)
             }) {
                 VStack(alignment: .leading, spacing: 0) {
-                    KFImage(self.store.state.sendedThumnailURL)
+                    KFImage(self.store.state.thumnailURL)
                         .placeholder {
                             RoundedRectangle(cornerRadius: 15)
                                 .foregroundColor(.init(uiColor: .systemGray4))
@@ -142,7 +142,7 @@ struct DetailView: View {
         store: .init(
             initialState:  .init(
                 sendedMovieID: "",
-                sendedThumnailURL: nil
+                thumnailURL: nil
             )
             , reducer: {DetailFeature()})
     )
