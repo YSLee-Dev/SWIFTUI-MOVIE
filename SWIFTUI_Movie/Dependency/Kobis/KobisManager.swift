@@ -14,7 +14,7 @@ struct KobisManager: KobisManagerProtocol {
     private let token = Bundle.main.tokenLoad(.kobis)
     
     enum ReqeustType {
-        case yesterdayBoxOffice, weekBoxOffice, detail, actorSearch
+        case yesterdayBoxOffice, weekBoxOffice, detail, actorSearch, actorDetail
     }
     
     func boxOfficeListRequest(boxOfficeType: BoxOfficeType) async throws -> [BoxOfficeList] {
@@ -49,12 +49,23 @@ struct KobisManager: KobisManagerProtocol {
         return try await NetworkManager.reqeustData(decodingType: SearchActor.self, url: urlComponents?.url).actorList.actorDetailList
     }
     
+    func actorDetailReqeust(actorID: String) async throws -> ActorDetailInfo {
+        var urlComponents = self.urlComponentsCreate(type: .actorDetail)
+        urlComponents?.queryItems = [
+            URLQueryItem(name: "key", value: self.token),
+            URLQueryItem(name: "peopleCd", value: actorID)
+        ]
+        
+        return try await NetworkManager.reqeustData(decodingType: ActorDetail.self, url: urlComponents?.url).result.actorInfo
+    }
+    
     private func urlComponentsCreate(type: ReqeustType) -> URLComponents? {
         let urlString = switch type {
         case .yesterdayBoxOffice: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
         case .weekBoxOffice: "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json"
         case .detail: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json"
         case .actorSearch: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleList.json"
+        case .actorDetail: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleInfo.json"
         }
         return URLComponents(string: urlString)
     }
@@ -92,4 +103,12 @@ struct KobisPreviewManager: KobisManagerProtocol {
             .init(name: "이정재", id: "4", filmoList: "헌트|인천상륙작전|신과함께|암살")
         ]
     }
+    
+    func actorDetailReqeust(actorID: String) async throws -> ActorDetailInfo {
+        return .init(name: "마동석", englishName: "MA", sex: "남자", role: "주연", filmos: [
+            .init(movieID: "1", movieTitle: "범죄도시1", role: "주연"),
+            .init(movieID: "2", movieTitle: "범죄도시2", role: "주연")
+        ])
+    }
+    
 }

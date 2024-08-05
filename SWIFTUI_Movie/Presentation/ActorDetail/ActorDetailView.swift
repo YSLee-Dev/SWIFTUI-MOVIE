@@ -11,6 +11,11 @@ import ComposableArchitecture
 struct ActorDetailView: View {
     @State var store: StoreOf<ActorDetailFeature>
     
+    init(store: StoreOf<ActorDetailFeature>) {
+        self.store = store
+        self.store.send(.viewInitialized)
+    }
+    
     var body: some View {
         Text("\(self.store.state.actorID)")
     }
