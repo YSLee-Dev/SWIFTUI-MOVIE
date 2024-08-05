@@ -28,6 +28,7 @@ struct DetailView: View {
             bgColor: .init(get: {Color.white.opacity(self.posterStytleRatio)}, set: {_ in}),
             title: self.store.state.detailMovieInfo?.title ?? "",
             isIgnoresTopSafeArea: true,
+            isLargeNavigationBarShow: false,
             backBtnTap: {
                 self.store.send(.backBtnTapped)
             }) {

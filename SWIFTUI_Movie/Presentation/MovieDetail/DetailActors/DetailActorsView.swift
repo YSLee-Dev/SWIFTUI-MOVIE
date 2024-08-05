@@ -24,22 +24,6 @@ struct DetailActorsView: View {
                 self.store.send(.backBtnTapped)
             }) {
                 LazyVStack(alignment: .leading) {
-                    HStack(alignment: .center) {
-                        Image(systemName: "chevron.backward")
-                            .resizable()
-                            .foregroundColor(.black)
-                            .frame(width: 12, height: 22)
-                            .padding(.trailing, 10)
-                            .onTapGesture {
-                                self.store.send(.backBtnTapped)
-                            }
-                        
-                        Text("등장인물 상세보기")
-                            .font(.title)
-                            .fontWeight(.bold)
-                    }
-                    .padding(EdgeInsets(top: ViewStyle.topSafeArea + 30, leading: 20, bottom: 30, trailing: 20))
-                    
                     DetailInfoView(title: self.store.moiveTitle) {
                         ForEach(self.store.actorList, id:  \.self) {
                             DetailInfoCell(imageName: "person.circle.fill", title: "\($0.totalName)", subTitle: "\($0.cast)")

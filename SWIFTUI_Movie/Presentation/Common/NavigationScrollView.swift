@@ -14,12 +14,21 @@ struct NavigationScrollView<Contents>: View where Contents: View {
     @Binding var bgColor: Color
     let title: String
     var isIgnoresTopSafeArea: Bool = false
+    var isLargeNavigationBarShow: Bool = true
     var backBtnTap: () -> ()
     @ViewBuilder var contents: Contents
     
     var body: some View {
         OffsetScrollView {
-            self.contents
+            VStack {
+                if isLargeNavigationBarShow {
+                    LargeNavigationBar(title: title) {
+                        self.backBtnTap()
+                    }
+                    .padding(EdgeInsets(top: ViewStyle.topSafeArea + 30, leading: 20, bottom: 30, trailing: 20))
+                }
+                self.contents
+            }
         }
         .ignoresSafeArea(edges: isIgnoresTopSafeArea ? .all : .bottom)
         .overlay {

@@ -29,24 +29,6 @@ struct ActorDetailView: View {
              self.store.send(.backBtnTapped)
          }) {
              VStack(alignment: .leading) {
-                 HStack(alignment: .center) {
-                     Image(systemName: "chevron.backward")
-                         .resizable()
-                         .foregroundColor(.black)
-                         .frame(width: 12, height: 22)
-                         .padding(.trailing, 10)
-                         .onTapGesture {
-                             self.store.send(.backBtnTapped)
-                         }
-                     
-                     Text("\(self.store.actorDetailInfo?.name ?? "")")
-                         .font(.title)
-                         .fontWeight(.bold)
-                     
-                     Spacer()
-                 }
-                 .padding(EdgeInsets(top: ViewStyle.topSafeArea + 30, leading: 20, bottom: 30, trailing: 20))
-                 
                  if let info = self.store.actorDetailInfo {
                      HStack(alignment: .center, spacing: 20) {
                          Image(systemName:  "person.circle.fill")
