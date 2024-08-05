@@ -21,6 +21,7 @@ struct DetailActorsFeature: Reducer {
     
     enum Action: Equatable {
         case backBtnTapped
+        case actorTapped(Int)
     }
     
     var body: some Reducer<State, Action> {
@@ -30,6 +31,8 @@ struct DetailActorsFeature: Reducer {
                 return .run { _ in
                     await self.dismiss()
                 }
+                
+            default: return .none
             }
         }
     }

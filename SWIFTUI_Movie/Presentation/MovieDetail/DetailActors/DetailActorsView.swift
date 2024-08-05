@@ -25,8 +25,11 @@ struct DetailActorsView: View {
             }) {
                 LazyVStack(alignment: .leading) {
                     DetailInfoView(title: self.store.moiveTitle) {
-                        ForEach(self.store.actorList, id:  \.self) {
-                            DetailInfoCell(imageName: "person.circle.fill", title: "\($0.totalName)", subTitle: "\($0.cast)")
+                        ForEach(Array(zip(self.store.actorList.indices, self.store.actorList)), id: \.0.self) { index, data in
+                            DetailInfoCell(imageName: "person.circle.fill", title: "\(data.totalName)", subTitle: "\(data.cast)")
+                                .onTapGesture {
+                                    self.store.send(.actorTapped(index))
+                                }
                         }
                     }
                 }
