@@ -47,8 +47,8 @@ struct ActorDetailView: View {
                      .padding(.horizontal, 20)
                      
                      DetailInfoView(title: "주요작품") {
-                         ForEach(info.filmos, id:  \.self) {
-                             DetailInfoCell(imageName: "popcorn.circle.fill", title: "\($0.movieTitle)", subTitle: "\($0.role)")
+                         ForEach(Array(zip(info.filmos.indices, info.filmos)), id:  \.0) { index, data in
+                             DetailInfoCell(imageName: "popcorn.circle.fill", title: "\(data.movieTitle)", subTitle: "\(data.role)")
                          }
                      }
                  }
