@@ -26,6 +26,7 @@ struct ActorDetailFeature: Reducer {
         case actorDetailRequestSuccess(ActorDetailInfo)
         case backBtnTapped
         case filmoListRequestSuccess([ActorDetailFilmoModel])
+        case movieTapped(String)
     }
     
     var body: some Reducer<State, Action> {
@@ -56,7 +57,7 @@ struct ActorDetailFeature: Reducer {
                     await send(.filmoListRequestSuccess( filmoModels))
                     
                     for index in 0 ..< data.filmos.count {
-                        var movie = data.filmos[index]
+                        let movie = data.filmos[index]
                         let thumbnailData = try? await self.kmdbManager.moiveDetailInfoRequest(title: movie.movieTitle, openDate: "")
                         filmoModels[index].thumbnailURL = thumbnailData?.thumbnailURL
                         
@@ -66,6 +67,8 @@ struct ActorDetailFeature: Reducer {
             case .filmoListRequestSuccess(let filmos):
                 state.filmoList = filmos
                 return .none
+                
+            default: return .none
             }
         }
     }

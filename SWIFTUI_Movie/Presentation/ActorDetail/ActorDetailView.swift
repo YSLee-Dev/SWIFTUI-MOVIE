@@ -49,6 +49,9 @@ struct ActorDetailView: View {
                      DetailInfoView(title: "주요작품") {
                          ForEach(Array(zip(self.store.filmoList.indices, self.store.filmoList)), id:  \.0) { index, data in
                              DetailInfoCell(imageName: "popcorn.circle.fill", imageURL: data.url, title: "\(data.movieTitle)", subTitle: "\(data.role)")
+                                 .onTapGesture(perform: {
+                                     self.store.send(.movieTapped(data.movieID))
+                                 })
                          }
                      }
                  }
