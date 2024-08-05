@@ -17,7 +17,7 @@ struct DetailInfoView<Contents>: View where Contents: View{
                 .font(.title2)
                 .bold()
             
-            VStack(alignment: .leading, spacing: 20)  {
+            LazyVStack(alignment: .leading, spacing: 20)  {
                 self.contents
             }
             .padding(20)
