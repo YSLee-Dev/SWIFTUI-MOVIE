@@ -302,8 +302,6 @@
 				FF72789C2C5C9F1900A22D47 /* DetailActors */,
 				FFA7A1542C58823300D52009 /* DetailView.swift */,
 				FFA7A1562C5882A600D52009 /* DetailFeature.swift */,
-				FF7278982C5B571B00A22D47 /* DetailInfoView.swift */,
-				FF72789A2C5C767B00A22D47 /* DetailInfoCell.swift */,
 			);
 			path = MovieDetail;
 			sourceTree = "<group>";
@@ -316,6 +314,8 @@
 				FF7278A12C5CA28400A22D47 /* NavigationBar.swift */,
 				FF7278A32C5CAE7A00A22D47 /* NavigationScrollView.swift */,
 				FF7278A72C5CBC3E00A22D47 /* ViewStyle.swift */,
+				FF7278982C5B571B00A22D47 /* DetailInfoView.swift */,
+				FF72789A2C5C767B00A22D47 /* DetailInfoCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
