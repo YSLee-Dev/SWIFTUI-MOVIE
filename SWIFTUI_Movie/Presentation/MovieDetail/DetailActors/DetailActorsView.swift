@@ -23,7 +23,7 @@ struct DetailActorsView: View {
             backBtnTap: {
                 self.store.send(.backBtnTapped)
             }) {
-                VStack(alignment: .leading) {
+                LazyVStack(alignment: .leading) {
                     HStack(alignment: .center) {
                         Image(systemName: "chevron.backward")
                             .resizable()

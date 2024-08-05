@@ -34,6 +34,7 @@ struct DetailFeature: Reducer {
         Reduce { state, action in
             switch action {
             case .viewInitialized:
+                if state.detailMovieInfo != nil {return .none}
                 let id = state.sendedMovieID
                 return .run { send in
                     let data = try? await self.kobisManager.detailMovieInfoRequest(moiveID: id).movieInfoResult.moiveInfo
