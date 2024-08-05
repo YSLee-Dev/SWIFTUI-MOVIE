@@ -6,18 +6,33 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct DetailInfoCell: View {
     let imageName: String
+    var imageURL: URL? = nil
     let title: String
     var subTitle: String? = nil
     
     var body: some View {
         HStack(spacing: 10) {
-            Image(systemName: self.imageName)
-                .resizable()
-                .frame(width: 40, height: 40)
-                .foregroundColor(.gray)
+            if imageURL != nil {
+                KFImage(self.imageURL)
+                       .placeholder {
+                           RoundedRectangle(cornerRadius: 15)
+                               .foregroundColor(.gray)
+                               .frame(width: 40, height: 40)
+                       }
+                       .cancelOnDisappear(true)
+                       .resizable()
+                       .frame(width: 40, height: 40)
+                       .clipShape(RoundedRectangle(cornerRadius: 20))
+            } else {
+                Image(systemName: self.imageName)
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.gray)
+            }
             
             Text(self.title)
                 .font(.system(size: 15, weight: .semibold))
