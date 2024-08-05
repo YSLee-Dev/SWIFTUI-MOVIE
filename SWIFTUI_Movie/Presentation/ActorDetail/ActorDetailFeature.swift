@@ -33,6 +33,7 @@ struct ActorDetailFeature: Reducer {
         Reduce { state, action in
             switch action {
             case .viewInitialized:
+                if state.actorDetailInfo != nil {return .none}
                 let actorID = state.actorID
                 return .run(operation: { send in
                     let data = try  await self.kobisManager.actorDetailReqeust(actorID: actorID)
