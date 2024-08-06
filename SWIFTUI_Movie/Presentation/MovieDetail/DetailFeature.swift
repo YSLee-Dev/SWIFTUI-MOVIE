@@ -23,7 +23,6 @@ struct DetailFeature: Reducer {
         @Presents var alertState: AlertState<Action.Alert>?
     }
     
-    
     enum Action: Equatable {
         case viewInitialized
         case detailInfoUpdate(KobisMovieInfo?)

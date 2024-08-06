@@ -17,11 +17,13 @@ struct DetailActorsFeature: Reducer {
     struct State:  Equatable {
         let moiveTitle: String
         let actorList: [KobisMovieInfoActors]
+        var actorInfoLoading: Int?
     }
     
     enum Action: Equatable {
         case backBtnTapped
         case actorTapped(Int)
+        case actorDetailInfoRequestEND
     }
     
     var body: some Reducer<State, Action> {
@@ -31,6 +33,14 @@ struct DetailActorsFeature: Reducer {
                 return .run { _ in
                     await self.dismiss()
                 }
+                
+            case .actorTapped(let index):
+                state.actorInfoLoading = index
+                return .none
+                
+            case .actorDetailInfoRequestEND:
+                state.actorInfoLoading = nil
+                return .none
                 
             default: return .none
             }

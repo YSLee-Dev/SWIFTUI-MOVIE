@@ -86,6 +86,12 @@ struct HomeFeature: Reducer {
                 
             case .path(.element(id: _, action: .detailAction(.actorDetailInfoRequestSuccess(let actorID)))):
                 state.path.append(.actorDetailState(.init(actorID: actorID)))
+                return .send(.path(.element(id: state.path.ids[state.path.ids.count - 2], action: .detailActorsAction(.actorDetailInfoRequestEND)))) // 만약 등장인물 상세보기가 열려있었다면
+                
+            case .path(.element(id: let pathID, action: .detailAction(.actorDetailInfoRequestFailed(_)))):
+                if state.path.ids.last != pathID {
+                    state.path.removeLast()
+                }
                 return .none
                 
             case .path(.element(id: _, action: .detailActorsAction(.actorTapped(let index)))):
