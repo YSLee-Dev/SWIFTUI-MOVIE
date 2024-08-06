@@ -19,6 +19,7 @@ struct DetailFeature: Reducer {
         let sendedMovieID: String
         var thumnailURL: URL?
         var detailMovieInfo: KobisMovieInfo?
+        var actorInfoLoading: Int?
     }
     
     enum Action: Equatable {
@@ -61,6 +62,7 @@ struct DetailFeature: Reducer {
                 
             case .actorTapped(let index):
                 guard let detailInfo = state.detailMovieInfo else {return .none}
+                state.actorInfoLoading = index
                 let tappedActor = detailInfo.actors[index]
                 
                 return .run(operation: { send in
@@ -79,6 +81,10 @@ struct DetailFeature: Reducer {
                 
             case .thumnailImageUpdate(let url):
                 state.thumnailURL = url
+                return .none
+                
+            case .actorDetailInfoRequestSuccess:
+                state.actorInfoLoading = nil
                 return .none
                 
             default: return .none

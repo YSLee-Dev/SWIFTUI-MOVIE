@@ -47,7 +47,7 @@ struct DetailView: View {
                                 Spacer()
                                 VStack {
                                     Spacer()
-                                 
+                                    
                                     if let detailData = self.store.state.detailMovieInfo {
                                         Text("\(detailData.title)")
                                             .font(.system(size: 30, weight: .bold))
@@ -57,7 +57,7 @@ struct DetailView: View {
                                             .font(.system(size: 15, weight: .semibold))
                                             .foregroundColor(.white)
                                     }
-                                  
+                                    
                                     Spacer()
                                 }
                                 .frame(width: self.posterWidth, height: 125)
@@ -99,10 +99,15 @@ struct DetailView: View {
                         DetailInfoView(title: "등장인물") {
                             let actorList = detailData.actors.count <= 5 ? detailData.actors : Array(detailData.actors[0 ... 4])
                             ForEach(Array(zip(actorList.indices, actorList)), id: \.0.self) { index, data in
-                                DetailInfoCell(imageName: "person.circle.fill", title: "\(data.totalName)", subTitle: "\(data.cast)")
-                                    .onTapGesture {
-                                        self.store.send(.actorTapped(index))
-                                    }
+                                DetailInfoCell(imageName: "person.circle.fill", title: "\(data.totalName)", subTitle: "\(data.cast)") {
+                                    if self.store.state.actorInfoLoading != index { return nil }
+                                    return  AnyView(
+                                        ProgressView()
+                                    )
+                                }
+                                .onTapGesture {
+                                    self.store.send(.actorTapped(index))
+                                }
                             }
                             
                             if detailData.actors.count > 5 {
@@ -117,22 +122,22 @@ struct DetailView: View {
                     }
                 }
             }
-        .onPreferenceChange(ScrollOffsetKey.self, perform: { offset in
-            if !self.firstValueCheck {
-                self.firstValueCheck = true
-                return
-            }
-            
-            let checkOffset = -offset / ((self.posterWidth * 1.5) - 120)
-            if  checkOffset >= 0.8 && checkOffset <= 1.05 {
-                let value = (-offset - ((self.posterWidth * 1.5) - 120) * 0.8) / 100
-                self.posterStytleRatio = value < 0.1 ? 0 : value
-            } else if checkOffset < 0.7, self.posterStytleRatio != 0 {
-                self.posterStytleRatio = 0
-            } else if checkOffset > 1.05, self.posterStytleRatio != 1 {
-                self.posterStytleRatio = 1
-            }
-        })
+            .onPreferenceChange(ScrollOffsetKey.self, perform: { offset in
+                if !self.firstValueCheck {
+                    self.firstValueCheck = true
+                    return
+                }
+                
+                let checkOffset = -offset / ((self.posterWidth * 1.5) - 120)
+                if  checkOffset >= 0.8 && checkOffset <= 1.05 {
+                    let value = (-offset - ((self.posterWidth * 1.5) - 120) * 0.8) / 100
+                    self.posterStytleRatio = value < 0.1 ? 0 : value
+                } else if checkOffset < 0.7, self.posterStytleRatio != 0 {
+                    self.posterStytleRatio = 0
+                } else if checkOffset > 1.05, self.posterStytleRatio != 1 {
+                    self.posterStytleRatio = 1
+                }
+            })
     }
 }
 
