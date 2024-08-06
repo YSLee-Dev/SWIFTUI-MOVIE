@@ -122,6 +122,7 @@ struct DetailView: View {
                     }
                 }
             }
+            .alert(self.$store.scope(state: \.alertState, action: \.alertAction))
             .onPreferenceChange(ScrollOffsetKey.self, perform: { offset in
                 if !self.firstValueCheck {
                     self.firstValueCheck = true

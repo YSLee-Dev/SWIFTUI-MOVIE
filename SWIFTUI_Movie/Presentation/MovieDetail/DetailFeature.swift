@@ -20,7 +20,9 @@ struct DetailFeature: Reducer {
         var thumnailURL: URL?
         var detailMovieInfo: KobisMovieInfo?
         var actorInfoLoading: Int?
+        @Presents var alertState: AlertState<Action.Alert>?
     }
+    
     
     enum Action: Equatable {
         case viewInitialized
@@ -29,7 +31,14 @@ struct DetailFeature: Reducer {
         case actorsMoreBtnTapped(KobisMovieInfo)
         case actorTapped(Int)
         case actorDetailInfoRequestSuccess(String)
+        case actorDetailInfoRequestFailed(AlertModel)
         case thumnailImageUpdate(URL?)
+        case alertAction(PresentationAction<Alert>)
+        
+        @CasePathable
+        enum Alert: Equatable {
+            case cancelBtnTap
+        }
     }
     
     var body: some Reducer<State, Action> {
@@ -75,7 +84,8 @@ struct DetailFeature: Reducer {
                     }
                     
                 }, catch: { error, send in
-                    // TODO: Alert
+                    let alertModel = ErrorHandler.getAlertModel(error: error)
+                    await send(.actorDetailInfoRequestFailed(alertModel))
                     print("ERROR", error)
                 })
                 
@@ -87,8 +97,27 @@ struct DetailFeature: Reducer {
                 state.actorInfoLoading = nil
                 return .none
                 
+            case .actorDetailInfoRequestFailed(let alertModel):
+                state.actorInfoLoading = nil
+                state.alertState = AlertState {
+                    TextState(alertModel.title)
+                } actions: {
+                    ButtonState(role: .cancel){
+                        TextState("확인")
+                    }
+                } message: {
+                    TextState(alertModel.msg)
+                }
+                
+                return .none
+                
+            case .alertAction(.dismiss), .alertAction(.presented(.cancelBtnTap)):
+                state.alertState = nil
+                return .none
+                
             default: return .none
             }
         }
+        .ifLet(\.alertState, action: \.alertAction)
     }
 }
