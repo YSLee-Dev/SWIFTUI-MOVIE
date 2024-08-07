@@ -31,16 +31,15 @@ struct NavigationBar: View {
                             .offset(x: 2)
                     }
             }
-            
-            Spacer()
+            .padding(.trailing, 10)
             
             Text(self.title)
                 .font(.system(size: 18, weight: .bold))
                 .foregroundStyle(self.titleColor)
-                .padding(.trailing, 10)
             
             Spacer()
         }
+        .frame(height: 30)
         .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
         .background {
             self.bgColor
