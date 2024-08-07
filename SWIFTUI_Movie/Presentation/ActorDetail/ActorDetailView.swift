@@ -69,12 +69,8 @@ struct ActorDetailView: View {
             .onPreferenceChange(ScrollOffsetKey.self, perform: { value in
                 if  -(value) > 20 && self.titleChageRatio != 1 {
                     self.titleChageRatio = (-value - 20) / 40
-                } else if -(value) >= 60 && self.titleChageRatio != 0 {
-                    self.titleChageRatio = 0
-                } else if self.titleChageRatio != 0  {
-                    self.titleChageRatio = 0
-                } else if -(value) <= 20 && self.titleChageRatio != 0 {
-                    self.titleChageRatio = 1
+                } else if -(value) <= 40 && self.titleChageRatio != 0 {
+                    self.titleChageRatio = max(0,  (-value - 20) / 60)
                 }
             })
     }
