@@ -54,18 +54,17 @@ struct ActorDetailView: View {
                     }
                     .padding(.horizontal, 20)
                     
-                    if let info = self.store.actorDetailInfo {
-                        DetailInfoView(title: "주요작품") {
-                            ForEach(Array(zip(self.store.filmoList.indices, self.store.filmoList)), id:  \.0) { index, data in
-                                DetailInfoCell(imageName: "popcorn.circle.fill", imageURL: data.url, title: "\(data.movieTitle)", subTitle: "\(data.role)")
-                                    .onTapGesture(perform: {
-                                        self.store.send(.movieTapped(data.movieID))
-                                    })
-                            }
+                    DetailInfoView(title: "주요작품") {
+                        ForEach(Array(zip(self.store.filmoList.indices, self.store.filmoList)), id:  \.0) { index, data in
+                            DetailInfoCell(imageName: "popcorn.circle.fill", imageURL: data.url, title: "\(data.movieTitle)", subTitle: "\(data.role)")
+                                .onTapGesture(perform: {
+                                    self.store.send(.movieTapped(data.movieID))
+                                })
                         }
                     }
                 }
             }
+            .alert(self.$store.scope(state: \.alertState, action: \.alertAction))
             .onPreferenceChange(ScrollOffsetKey.self, perform: { value in
                 if  -(value) > 20 && self.titleChageRatio != 1 {
                     self.titleChageRatio = (-value - 20) / 40

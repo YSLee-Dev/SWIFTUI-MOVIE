@@ -19,6 +19,7 @@ struct ActorDetailFeature: Reducer {
         let actorID: String
         var actorDetailInfo: ActorDetailInfo?
         var filmoList: [ActorDetailFilmoModel] = []
+        @Presents var alertState: AlertState<Action.Alert>?
     }
     
     enum Action: Equatable {
@@ -26,20 +27,28 @@ struct ActorDetailFeature: Reducer {
         case actorDetailRequestSuccess(ActorDetailInfo)
         case backBtnTapped
         case filmoListRequestSuccess([ActorDetailFilmoModel])
+        case filmoListRequestFailed(AlertModel)
         case movieTapped(String)
+        case alertAction(PresentationAction<Alert>)
+        
+        enum Alert: Equatable {
+            case retryBtnTapped
+            case cancelBtnTapped
+        }
     }
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .viewInitialized:
-                if state.actorDetailInfo != nil {return .none}
+                if state.actorDetailInfo != nil  {return .none}
                 let actorID = state.actorID
                 return .run(operation: { send in
                     let data = try  await self.kobisManager.actorDetailReqeust(actorID: actorID)
                     await send(.actorDetailRequestSuccess(data))
                 },catch: { error, send in
-                    // TODO: 데이터가 로드되지 않았을 때 오류처리
+                    let alertModel = ErrorHandler.getAlertModel(error: error)
+                    await send(.filmoListRequestFailed(alertModel))
                 })
                 
             case .backBtnTapped:
@@ -69,8 +78,32 @@ struct ActorDetailFeature: Reducer {
                 state.filmoList = filmos
                 return .none
                 
+            case .filmoListRequestFailed(let model):
+                state.alertState = AlertState {
+                    TextState(model.title)
+                } actions: {
+                    ButtonState(action: .retryBtnTapped) {
+                        TextState("재시도")
+                    }
+                    ButtonState(role: .cancel, action: .cancelBtnTapped) {
+                        TextState("취소")
+                    }
+                }
+                return .none
+            
+            case .alertAction(.presented(.retryBtnTapped)):
+                state.alertState = nil
+                return .send(.viewInitialized)
+                
+            case .alertAction(.presented(.cancelBtnTapped)):
+                state.alertState = nil
+                return .run { _ in
+                   await self.dismiss()
+                }
+                
             default: return .none
             }
         }
+        .ifLet(\.alertState, action: \.alertAction)
     }
 }
