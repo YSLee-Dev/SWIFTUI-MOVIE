@@ -25,47 +25,58 @@ struct ActorDetailView: View {
             bgColor: .constant(.white.opacity(self.titleChageRatio)),
             title: "\(self.store.actorDetailInfo?.name ?? "")",
             isIgnoresTopSafeArea: true,
-         backBtnTap: {
-             self.store.send(.backBtnTapped)
-         }) {
-             VStack(alignment: .leading) {
-                 if let info = self.store.actorDetailInfo {
-                     HStack(alignment: .center, spacing: 20) {
-                         Image(systemName:  "person.circle.fill")
-                             .resizable()
-                             .frame(width: 100, height: 100)
-                             .foregroundColor(.gray)
-                         
-                         VStack(alignment: .leading, spacing: 5) {
-                             Text(info.totalName)
-                                 .font(.title2)
-                                 .bold()
-                             Text(info.sex)
-                             Text(info.role)
-                         }
-                     }
-                     .padding(.horizontal, 20)
-                     
-                     DetailInfoView(title: "주요작품") {
-                         ForEach(Array(zip(self.store.filmoList.indices, self.store.filmoList)), id:  \.0) { index, data in
-                             DetailInfoCell(imageName: "popcorn.circle.fill", imageURL: data.url, title: "\(data.movieTitle)", subTitle: "\(data.role)")
-                                 .onTapGesture(perform: {
-                                     self.store.send(.movieTapped(data.movieID))
-                                 })
-                         }
-                     }
-                 }
-             }
-        }
-         .onPreferenceChange(ScrollOffsetKey.self, perform: { value in
-             if  -(value) > 20 && self.titleChageRatio != 1 {
-                 self.titleChageRatio = (-value - 20) / 40
-             } else if -(value) >= 60 && self.titleChageRatio != 0 {
-                 self.titleChageRatio = 0
-             } else if self.titleChageRatio != 0  {
-                 self.titleChageRatio = 0
-             }
-         })
+            backBtnTap: {
+                self.store.send(.backBtnTapped)
+            }) {
+                VStack(alignment: .leading) {
+                    HStack(alignment: .center, spacing: 20) {
+                        Image(systemName:  "person.circle.fill")
+                            .resizable()
+                            .frame(width: 100, height: 100)
+                            .foregroundColor(.gray)
+                        
+                        
+                        VStack(alignment: .leading, spacing: 5) {
+                            if let info = self.store.actorDetailInfo {
+                                Text(info.totalName)
+                                    .font(.title2)
+                                    .bold()
+                                Text(info.sex)
+                                Text(info.role)
+                            } else {
+                                Text("정보를 가져오는 중")
+                                    .font(.title2)
+                                    .bold()
+                                ProgressView()
+                            }
+                        }
+                        Spacer()
+                    }
+                    .padding(.horizontal, 20)
+                    
+                    if let info = self.store.actorDetailInfo {
+                        DetailInfoView(title: "주요작품") {
+                            ForEach(Array(zip(self.store.filmoList.indices, self.store.filmoList)), id:  \.0) { index, data in
+                                DetailInfoCell(imageName: "popcorn.circle.fill", imageURL: data.url, title: "\(data.movieTitle)", subTitle: "\(data.role)")
+                                    .onTapGesture(perform: {
+                                        self.store.send(.movieTapped(data.movieID))
+                                    })
+                            }
+                        }
+                    }
+                }
+            }
+            .onPreferenceChange(ScrollOffsetKey.self, perform: { value in
+                if  -(value) > 20 && self.titleChageRatio != 1 {
+                    self.titleChageRatio = (-value - 20) / 40
+                } else if -(value) >= 60 && self.titleChageRatio != 0 {
+                    self.titleChageRatio = 0
+                } else if self.titleChageRatio != 0  {
+                    self.titleChageRatio = 0
+                } else if -(value) <= 20 && self.titleChageRatio != 0 {
+                    self.titleChageRatio = 1
+                }
+            })
     }
 }
 
