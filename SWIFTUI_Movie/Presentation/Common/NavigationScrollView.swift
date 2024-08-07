@@ -25,7 +25,8 @@ struct NavigationScrollView<Contents>: View where Contents: View {
                     LargeNavigationBar(title: title) {
                         self.backBtnTap()
                     }
-                    .padding(EdgeInsets(top: ViewStyle.topSafeArea + 30, leading: 20, bottom: 30, trailing: 20))
+                    .frame(height: 60)
+                    .padding(EdgeInsets(top: ViewStyle.topSafeArea + 15, leading: 20, bottom: 15, trailing: 20))
                 }
                 self.contents
             }
