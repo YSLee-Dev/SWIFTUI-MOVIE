@@ -17,7 +17,8 @@ struct DetailActorsView: View {
             imageColor: .constant(.black.opacity(self.titleChageRatio)),
             imageIconBackgroundColor: .constant(.clear),
             titleColor: .constant(.black.opacity(self.titleChageRatio)),
-            bgColor: .constant(.white.opacity(self.titleChageRatio)),
+            bgColor: .constant(.white.opacity(self.titleChageRatio)), 
+            titleOffset: .constant(1),
             title: "등장인물 상세보기",
             isIgnoresTopSafeArea: true,
             backBtnTap: {

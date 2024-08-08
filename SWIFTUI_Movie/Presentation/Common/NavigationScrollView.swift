@@ -12,6 +12,7 @@ struct NavigationScrollView<Contents>: View where Contents: View {
     @Binding var imageIconBackgroundColor: Color
     @Binding var titleColor: Color
     @Binding var bgColor: Color
+    @Binding var titleOffset: CGFloat
     let title: String
     var isIgnoresTopSafeArea: Bool = false
     var isLargeNavigationBarShow: Bool = true
@@ -39,6 +40,7 @@ struct NavigationScrollView<Contents>: View where Contents: View {
                     imageIconBackgroundColor: $imageIconBackgroundColor,
                     titleColor: $titleColor,
                     bgColor: $bgColor,
+                    titleOffset: $titleOffset,
                     title: self.title
                 ) {
                     self.backBtnTap()

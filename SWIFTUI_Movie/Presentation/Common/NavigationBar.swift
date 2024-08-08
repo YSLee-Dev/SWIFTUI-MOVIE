@@ -12,6 +12,8 @@ struct NavigationBar: View {
     @Binding var imageIconBackgroundColor: Color
     @Binding var titleColor: Color
     @Binding var bgColor: Color
+    @Binding var titleOffset: CGFloat
+    
     let title: String
     var backBtnTap: () -> ()
     
@@ -41,6 +43,7 @@ struct NavigationBar: View {
         }
         .frame(height: 30)
         .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+        .offset(x: 0, y: 30 - (self.titleOffset * 30))
         .background {
             self.bgColor
                 .ignoresSafeArea()
@@ -49,5 +52,5 @@ struct NavigationBar: View {
 }
 
 #Preview {
-    NavigationBar(imageColor: .constant(.black), imageIconBackgroundColor: .constant(.white), titleColor: .constant(.black), bgColor: .constant(.white),title: "극한직업") { }
+    NavigationBar(imageColor: .constant(.black), imageIconBackgroundColor: .constant(.white), titleColor: .constant(.black), bgColor: .constant(.white), titleOffset: .constant(1),title: "극한직업") { }
 }

@@ -22,7 +22,8 @@ struct ActorDetailView: View {
             imageColor: .constant(.black.opacity(self.titleChageRatio)),
             imageIconBackgroundColor: .constant(.clear),
             titleColor: .constant(.black.opacity(self.titleChageRatio)),
-            bgColor: .constant(.white.opacity(self.titleChageRatio)),
+            bgColor: .constant(.white.opacity(self.titleChageRatio)), 
+            titleOffset: .constant(self.titleChageRatio),
             title: "\(self.store.actorDetailInfo?.name ?? "")",
             isIgnoresTopSafeArea: true,
             backBtnTap: {
