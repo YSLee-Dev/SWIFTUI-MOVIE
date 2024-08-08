@@ -67,10 +67,16 @@ struct ActorDetailView: View {
             }
             .alert(self.$store.scope(state: \.alertState, action: \.alertAction))
             .onPreferenceChange(ScrollOffsetKey.self, perform: { value in
-                if  -(value) > 20 && self.titleChageRatio != 1 {
+                if  -(value) > 20 && self.titleChageRatio < 1 {
                     self.titleChageRatio = (-value - 20) / 40
-                } else if -(value) <= 40 && self.titleChageRatio != 0 {
-                    self.titleChageRatio = max(0,  (-value - 20) / 60)
+                } else if -(value) <= 60 && self.titleChageRatio >= 1 {
+                    self.titleChageRatio = max(0,  (-value - 20) / 40)
+                } else {
+                    if -(value) > 20 {
+                        self.titleChageRatio = 1
+                    } else {
+                        self.titleChageRatio = 0
+                    }
                 }
             })
     }

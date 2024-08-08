@@ -26,7 +26,7 @@ struct DetailView: View {
             imageIconBackgroundColor: .init(get: {Color.white.opacity(1 - self.posterStytleRatio)}, set: {_ in}),
             titleColor: .init(get: {.black.opacity(self.posterStytleRatio)}, set: { _ in}),
             bgColor: .init(get: {Color.white.opacity(self.posterStytleRatio)}, set: {_ in}),
-            titleOffset: .constant(1),
+            titleOffset: .constant(self.posterStytleRatio),
             title: self.store.state.detailMovieInfo?.title ?? "",
             isIgnoresTopSafeArea: true,
             isLargeNavigationBarShow: false,
@@ -133,11 +133,15 @@ struct DetailView: View {
                 let checkOffset = -offset / ((self.posterWidth * 1.5) - 120)
                 if  checkOffset >= 0.8 && checkOffset <= 1.05 {
                     let value = (-offset - ((self.posterWidth * 1.5) - 120) * 0.8) / 100
-                    self.posterStytleRatio = value < 0.1 ? 0 : value
-                } else if checkOffset < 0.7, self.posterStytleRatio != 0 {
+                    self.posterStytleRatio = value >= 1 ? 1 : (value < 0.1 ? 0 : value)
+                } else if checkOffset > 0.81 {
+                    if -(offset) > 20 {
+                        self.posterStytleRatio = 1
+                    } else {
+                        self.posterStytleRatio = 0
+                    }
+                } else if posterStytleRatio >= 0.1 && checkOffset <= 0.8 {
                     self.posterStytleRatio = 0
-                } else if checkOffset > 1.05, self.posterStytleRatio != 1 {
-                    self.posterStytleRatio = 1
                 }
             })
     }

@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct DetailActorsView: View {
     @State var store: StoreOf<DetailActorsFeature>
-    @State private var titleChageRatio: CGFloat = 1
+    @State private var titleChageRatio: CGFloat = 0
     
     var body: some View {
         NavigationScrollView(
@@ -18,7 +18,7 @@ struct DetailActorsView: View {
             imageIconBackgroundColor: .constant(.clear),
             titleColor: .constant(.black.opacity(self.titleChageRatio)),
             bgColor: .constant(.white.opacity(self.titleChageRatio)), 
-            titleOffset: .constant(1),
+            titleOffset: .constant(self.titleChageRatio),
             title: "등장인물 상세보기",
             isIgnoresTopSafeArea: true,
             backBtnTap: {
@@ -41,15 +41,21 @@ struct DetailActorsView: View {
                 }
             }
             .onPreferenceChange(ScrollOffsetKey.self, perform: { value in
-                if  -(value) > 20 && self.titleChageRatio != 1 {
+                if  -(value) > 20 && self.titleChageRatio < 1 {
                     self.titleChageRatio = (-value - 20) / 40
-                } else if -(value) <= 40 && self.titleChageRatio != 0 {
-                    self.titleChageRatio = max(0,  (-value - 20) / 60)
+                } else if -(value) <= 60 && self.titleChageRatio >= 1 {
+                    self.titleChageRatio = max(0,  (-value - 20) / 40)
+                } else {
+                    if -(value) > 20 {
+                        self.titleChageRatio = 1
+                    } else {
+                        self.titleChageRatio = 0
+                    }
                 }
             })
     }
 }
 
 #Preview {
-    DetailActorsView(store: .init(initialState: .init(moiveTitle: "극한직업", actorList: [KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연")]) , reducer: {DetailActorsFeature()}))
+    DetailActorsView(store: .init(initialState: .init(moiveTitle: "극한직업", actorList: [KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연"), KobisMovieInfoActors(name: "마동석", englishName: "English", cast: "주연")]) , reducer: {DetailActorsFeature()}))
 }
