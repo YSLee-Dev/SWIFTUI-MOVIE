@@ -14,4 +14,5 @@ protocol KobisManagerProtocol {
     func detailMovieInfoRequest(moiveID: String)  async throws -> KobisMoiveDetail 
     func actorListSearchRequest(actorName: String, movieName: String, requestPage: Int) async throws -> [SearchActorDetail]
     func actorDetailReqeust(actorID: String) async throws -> ActorDetailInfo
+    func movieSearchRequest(query: String, movieSearchType: MovieSearchType)  async  throws -> [MovieSearchDetail] 
 }
