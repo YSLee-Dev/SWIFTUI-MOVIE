@@ -26,7 +26,7 @@ struct HomeView: View {
                 
                 ScrollView {
                     Button(action: {
-                        
+                        self.store.send(.searchBarTapped)
                     }) {
                         RoundedRectangle(cornerRadius: 15)
                             .fill(Color.gray.opacity(0.1))
@@ -105,18 +105,23 @@ struct HomeView: View {
         }) { store in
             switch store.state {
             case .detailState:
-                if let reduce = store.scope(state: \.detailState, action: \.detailAction) {
-                    DetailView(store: reduce)
+                if let store = store.scope(state: \.detailState, action: \.detailAction) {
+                    DetailView(store: store)
                         .navigationBarBackButtonHidden()
                 }
             case .detailActorsState(_):
-                if let reduce = store.scope(state: \.detailActorsState, action: \.detailActorsAction) {
-                    DetailActorsView(store: reduce)
+                if let store = store.scope(state: \.detailActorsState, action: \.detailActorsAction) {
+                    DetailActorsView(store: store)
                         .navigationBarBackButtonHidden()
                 }
             case .actorDetailState(_):
-                if let reduce = store.scope(state: \.actorDetailState, action: \.actorDetailAction) {
-                    ActorDetailView(store: reduce)
+                if let store = store.scope(state: \.actorDetailState, action: \.actorDetailAction) {
+                    ActorDetailView(store: store)
+                        .navigationBarBackButtonHidden()
+                }
+            case .searchState(_):
+                if let store = store.scope(state: \.searchState, action: \.searchAction) {
+                    SearchView(store: store)
                         .navigationBarBackButtonHidden()
                 }
             }

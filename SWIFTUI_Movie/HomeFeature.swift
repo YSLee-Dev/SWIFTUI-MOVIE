@@ -101,7 +101,15 @@ struct HomeFeature: Reducer {
             case .path(.element(id: _, action: .actorDetailAction(.movieTapped(let id)))):
                 state.path.append(.detailState(.init(sendedMovieID: id)))
                 return .none
-            
+                
+            case .searchBarTapped:
+                state.path.append(.searchState(.init()))
+                return .none
+                
+            case .path(.element(id: _, action: .searchAction(.movieTapped(let id)))):
+                state.path.append(.detailState(.init(sendedMovieID: id)))
+                return .none
+                
             default: return .none
             }
         }
@@ -119,12 +127,14 @@ extension HomeFeature {
             case detailState(DetailFeature.State)
             case detailActorsState(DetailActorsFeature.State)
             case actorDetailState(ActorDetailFeature.State)
+            case searchState(SearchFeature.State)
         }
         
         enum Action: Equatable {
             case detailAction(DetailFeature.Action)
             case detailActorsAction(DetailActorsFeature.Action)
             case actorDetailAction(ActorDetailFeature.Action)
+            case searchAction(SearchFeature.Action)
         }
         
         var body: some Reducer<State, Action> {
@@ -138,6 +148,10 @@ extension HomeFeature {
             
             Scope(state: \.actorDetailState, action: \.actorDetailAction) {
                 ActorDetailFeature()
+            }
+            
+            Scope(state: \.searchState, action: \.searchAction) {
+                SearchFeature()
             }
         }
     }
