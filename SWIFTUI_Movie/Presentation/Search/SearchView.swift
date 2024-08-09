@@ -54,8 +54,18 @@ struct SearchView: View {
                                 Text(data.movieName)
                                     .font(.system(size: 18, weight: .bold))
                                 
-                                Text("\(data.openDate) | \(data.nation)")
-                                    .font(.system(size: 14))
+                                if let firstDirectors = data.directors.first {
+                                    Text("\(firstDirectors.name) \(data.directors.count >= 2 ? "등" : "")  |  \(data.nation)")
+                                        .font(.system(size: 14))
+                                }
+                                
+                                if !data.openDate.isEmpty {
+                                    Text("\(data.openDate)\(data.directors.isEmpty ? " | \(data.nation)" : "")")
+                                        .font(.system(size: 14))
+                                } else if data.openDate.isEmpty && data.directors.isEmpty {
+                                    Text(data.nation)
+                                        .font(.system(size: 14))
+                                }
                             }
                         }
                         .frame(height: 90)
