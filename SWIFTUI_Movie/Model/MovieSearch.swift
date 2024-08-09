@@ -40,11 +40,21 @@ struct MovieSearchDetail: Equatable, Decodable, Hashable {
     let movieName: String
     let openDate: String
     let nation: String
+    let directors: [MovieSearchDirectors]
     
     enum CodingKeys: String, CodingKey {
         case movieID = "movieCd"
         case movieName = "movieNm"
         case openDate = "openDt"
         case nation = "nationAlt"
+        case directors = "directors"
+    }
+}
+
+struct MovieSearchDirectors: Decodable, Equatable, Hashable {
+    let name: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "peopleNm"
     }
 }
