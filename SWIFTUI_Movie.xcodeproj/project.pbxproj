@@ -27,6 +27,8 @@
 		FF87BE562C60BDB300773C17 /* ActorDetailFilmoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF87BE552C60BDB300773C17 /* ActorDetailFilmoModel.swift */; };
 		FF87BE5A2C61B6A000773C17 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF87BE592C61B6A000773C17 /* ErrorHandler.swift */; };
 		FF87BE5E2C61BE2200773C17 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF87BE5D2C61BE2200773C17 /* AlertModel.swift */; };
+		FF87BE612C65A14C00773C17 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF87BE602C65A14C00773C17 /* SearchView.swift */; };
+		FF87BE632C65A15500773C17 /* SearchFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF87BE622C65A15500773C17 /* SearchFeature.swift */; };
 		FF9C9F682C50C1AD006BB902 /* SWIFTUI_MovieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */; };
 		FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F692C50C1AD006BB902 /* ContentView.swift */; };
 		FF9C9F6C2C50C1AF006BB902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF9C9F6B2C50C1AF006BB902 /* Assets.xcassets */; };
@@ -92,6 +94,8 @@
 		FF87BE552C60BDB300773C17 /* ActorDetailFilmoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailFilmoModel.swift; sourceTree = "<group>"; };
 		FF87BE592C61B6A000773C17 /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		FF87BE5D2C61BE2200773C17 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
+		FF87BE602C65A14C00773C17 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		FF87BE622C65A15500773C17 /* SearchFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFeature.swift; sourceTree = "<group>"; };
 		FF9C9F642C50C1AD006BB902 /* SWIFTUI_Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWIFTUI_Movie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWIFTUI_MovieApp.swift; sourceTree = "<group>"; };
 		FF9C9F692C50C1AD006BB902 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -165,6 +169,15 @@
 				FF72789F2C5C9F8000A22D47 /* DetailActorsFeature.swift */,
 			);
 			path = DetailActors;
+			sourceTree = "<group>";
+		};
+		FF87BE5F2C659FD300773C17 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				FF87BE602C65A14C00773C17 /* SearchView.swift */,
+				FF87BE622C65A15500773C17 /* SearchFeature.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		FF9C9F5B2C50C1AD006BB902 = {
@@ -300,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				FFA7A15E2C59C89000D52009 /* Common */,
+				FF87BE5F2C659FD300773C17 /* Search */,
 				3407541A2C5FC139006D9006 /* ActorDetail */,
 				FFA7A1532C58822C00D52009 /* MovieDetail */,
 				FF9C9F962C50C38C006BB902 /* Home */,
@@ -487,12 +501,14 @@
 				FFA7A14E2C5759F100D52009 /* KmdbManagerKey.swift in Sources */,
 				FFA7A1572C5882A600D52009 /* DetailFeature.swift in Sources */,
 				FF9C9F952C50C387006BB902 /* HomeFeature.swift in Sources */,
+				FF87BE632C65A15500773C17 /* SearchFeature.swift in Sources */,
 				FF723E0C2C5A144000F05A30 /* NavigationView+.swift in Sources */,
 				3407541E2C5FC159006D9006 /* ActorDetailFeature.swift in Sources */,
 				FF9C9FAB2C5242C9006BB902 /* BoxofficeMovie.swift in Sources */,
 				FF7278A82C5CBC3E00A22D47 /* ViewStyle.swift in Sources */,
 				FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */,
 				FF9C9FA62C523E71006BB902 /* KobisManager.swift in Sources */,
+				FF87BE612C65A14C00773C17 /* SearchView.swift in Sources */,
 				FF2DFC432C536D61005804DB /* KobisManagerProtocol.swift in Sources */,
 				FFA7A14A2C57590900D52009 /* HomeModel.swift in Sources */,
 				FF2DFC452C536DB7005804DB /* KobisManagerKey.swift in Sources */,
