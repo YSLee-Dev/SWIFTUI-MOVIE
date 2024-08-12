@@ -54,8 +54,13 @@ struct SearchView: View {
                 } else {
                     LazyVStack(alignment: .leading) {
                         if self.store.searchResult.isEmpty && !self.store.nowSearching && !self.store.searchQuery.isEmpty {
-                            Text("검색된 영화가 없어요.")
-                                .font(.title3)
+                            HStack {
+                                Spacer()
+                                Text("검색된 영화가 없어요.")
+                                    .font(.title3)
+                                    .foregroundColor(.gray)
+                                Spacer()
+                            }
                             
                         } else {
                             ForEach(Array(zip(self.store.searchResult.indices, self.store.searchResult)), id: \.0) { index, data in
