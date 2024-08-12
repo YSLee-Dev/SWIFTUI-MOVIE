@@ -59,14 +59,14 @@ struct SearchView: View {
                             
                         } else {
                             ForEach(Array(zip(self.store.searchResult.indices, self.store.searchResult)), id: \.0) { index, data in
-                                HStack(alignment: .center) {
+                                LazyHStack(alignment: .center) {
                                     // 임시 포스터
                                     RoundedRectangle(cornerRadius: 15)
                                         .foregroundColor(.init(uiColor: .systemGray4))
                                         .frame(width: 50, height: 75)
                                         .padding(.trailing, 10)
                                     
-                                    VStack(alignment: .leading, spacing: 5) {
+                                    LazyVStack(alignment: .leading, spacing: 5) {
                                         Text(data.movieName)
                                             .font(.system(size: 18, weight: .bold))
                                         
@@ -82,6 +82,11 @@ struct SearchView: View {
                                             Text(data.nation)
                                                 .font(.system(size: 14))
                                         }
+                                    }
+                                }
+                                .onAppear {
+                                    if index % 10 == 9 && self.store.nowPage < ((index + 1) / 10) + 1 {
+                                        self.store.send(.morePageLoadingRequest)
                                     }
                                 }
                                 .padding(.horizontal, 20)

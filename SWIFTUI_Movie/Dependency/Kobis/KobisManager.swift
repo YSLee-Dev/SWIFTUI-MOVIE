@@ -59,14 +59,15 @@ struct KobisManager: KobisManagerProtocol {
         return try await NetworkManager.reqeustData(decodingType: ActorDetail.self, url: urlComponents?.url).result.actorInfo
     }
     
-    func movieSearchRequest(query: String, movieSearchType: MovieSearchType)  async  throws -> [MovieSearchDetail] {
+    func movieSearchRequest(query: String, movieSearchType: MovieSearchType, requestPage: Int)  async  throws -> MovieSearch {
         var urlComponents = self.urlComponentsCreate(type: .movieSearch)
         urlComponents?.queryItems = [
             URLQueryItem(name: "key", value: self.token),
-            URLQueryItem(name: "\(movieSearchType == .directorName ? "directorNm" : "movieNm")", value: query)
+            URLQueryItem(name: "\(movieSearchType == .directorName ? "directorNm" : "movieNm")", value: query),
+            URLQueryItem(name: "curPage", value: "\(requestPage)")
         ]
-            
-            return try await NetworkManager.reqeustData(decodingType: MovieSearch.self, url: urlComponents?.url).result.movieDetailList
+        
+        return try await NetworkManager.reqeustData(decodingType: MovieSearch.self, url: urlComponents?.url)
     }
     
     private func urlComponentsCreate(type: ReqeustType) -> URLComponents? {
@@ -122,14 +123,18 @@ struct KobisPreviewManager: KobisManagerProtocol {
         ])
     }
     
-    func movieSearchRequest(query: String, movieSearchType: MovieSearchType)  async  throws -> [MovieSearchDetail] {
-        return [
+    func movieSearchRequest(query: String, movieSearchType: MovieSearchType, requestPage: Int)  async  throws -> MovieSearch {
+        return .init(result: .init(movieDetailList: [
             MovieSearchDetail(movieID: "1", movieName: "범죄도시", openDate: "2024년 01월 01일", nation: "한국", directors: [.init(name: "봉준호"), .init(name: "마동석")]),
             MovieSearchDetail(movieID: "2", movieName: "극한직업", openDate: "2024년 02월 11일", nation: "한국", directors: [.init(name: "봉준호")]),
             MovieSearchDetail(movieID: "3", movieName: "짱구는 못말려 극장판", openDate: "2024년 03월 21일", nation: "일본", directors: [.init(name: "봉준호")]),
             MovieSearchDetail(movieID: "4", movieName: "알라딘", openDate: "2024년 04월 02일", nation: "미국", directors: [.init(name: "봉준호")]),
             MovieSearchDetail(movieID: "5", movieName: "7번방의 꿈", openDate: "2024년 05월 12일", nation: "미국", directors: [.init(name: "봉준호")]),
-            MovieSearchDetail(movieID: "6", movieName: "스파이더맨", openDate: "2024년 06월 13일", nation: "미국", directors: [.init(name: "봉준호")])
-        ]
+            MovieSearchDetail(movieID: "6", movieName: "스파이더맨", openDate: "2024년 06월 13일", nation: "미국", directors: [.init(name: "봉준호")]),
+            MovieSearchDetail(movieID: "7", movieName: "스파이더맨", openDate: "2024년 06월 13일", nation: "미국", directors: [.init(name: "봉준호")]),
+            MovieSearchDetail(movieID: "8", movieName: "스파이더맨", openDate: "2024년 06월 13일", nation: "미국", directors: [.init(name: "봉준호")]),
+            MovieSearchDetail(movieID: "9", movieName: "스파이더맨", openDate: "2024년 06월 13일", nation: "미국", directors: [.init(name: "봉준호")]),
+            MovieSearchDetail(movieID: "10", movieName: "스파이더맨", openDate: "2024년 06월 13일", nation: "미국", directors: [.init(name: "봉준호")])
+        ], totalCount: 10))
     }
 }

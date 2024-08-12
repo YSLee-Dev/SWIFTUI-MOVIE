@@ -29,9 +29,11 @@ struct MovieSearch: Equatable, Decodable, Hashable {
 
 struct MovieSearchResult: Equatable, Decodable, Hashable {
     let movieDetailList: [MovieSearchDetail]
+    var totalCount: Int
     
     enum CodingKeys: String, CodingKey {
         case movieDetailList = "movieList"
+        case totalCount = "totCnt"
     }
 }
 

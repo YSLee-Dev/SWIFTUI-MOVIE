@@ -19,14 +19,18 @@ struct SearchFeature: Reducer {
         var searchResult: [MovieSearchDetail] = []
         var searchType: MovieSearchType = .movieName
         var nowSearching: Bool = false
+        var nowPage: Int = 0
+        var totalCount: Int = 0
     }
     
     enum Action:  BindableAction, Equatable {
         case binding(BindingAction<State>)
-        case movieSearchSuccess([MovieSearchDetail])
+        case movieSearchSuccess(MovieSearch)
         case movieTapped(String)
         case backBtnTapped
         case movieSearchTimerEnded
+        case morePageLoadingRequest
+        case movieSearchRequest
     }
     
     enum TimerKey: Equatable {
@@ -65,8 +69,10 @@ struct SearchFeature: Reducer {
                 }
                 
             case .movieSearchSuccess(let data):
-                state.searchResult = data
+                state.searchResult.append(contentsOf: data.result.movieDetailList)
+                state.nowPage += 1
                 state.nowSearching = false
+                state.totalCount = data.result.totalCount
                 return .none
                 
             case .backBtnTapped:
@@ -75,15 +81,24 @@ struct SearchFeature: Reducer {
                 }
                 
             case .movieSearchTimerEnded:
-                let nowState = state
+                state.nowPage = 0
+                state.totalCount = 0
+                state.searchResult = []
                 
-                if state.searchQuery.isEmpty {
-                    state.searchResult = []
+                return .send(.movieSearchRequest)
+                
+            case .morePageLoadingRequest:
+                if state.searchQuery.isEmpty || (state.nowPage * 10) > state.totalCount  {
                     return .none
+                } else {
+                    return .send(.movieSearchRequest)
                 }
                 
+            case .movieSearchRequest:
+                let nowState = state
+                
                 return .run(operation: { send in
-                    let data = try await self.kobisManager.movieSearchRequest(query: nowState.searchQuery, movieSearchType: nowState.searchType)
+                    let data = try await self.kobisManager.movieSearchRequest(query: nowState.searchQuery, movieSearchType: nowState.searchType, requestPage: nowState.nowPage + 1)
                     await send(.movieSearchSuccess(data))
                 }) { error, send in
                     // TODO: Error 처리
