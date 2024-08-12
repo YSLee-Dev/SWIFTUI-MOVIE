@@ -66,21 +66,25 @@ struct SearchView: View {
                                         .frame(width: 50, height: 75)
                                         .padding(.trailing, 10)
                                     
-                                    LazyVStack(alignment: .leading, spacing: 5) {
+                                    VStack(alignment: .leading, spacing: 5) {
                                         Text(data.movieName)
                                             .font(.system(size: 18, weight: .bold))
+                                            .lineLimit(1)
                                         
                                         if let firstDirectors = data.directors.first {
                                             Text("\(firstDirectors.name) \(data.directors.count >= 2 ? "등" : "")  |  \(data.nation)")
                                                 .font(.system(size: 14))
+                                                .lineLimit(1)
                                         }
                                         
                                         if !data.openDate.isEmpty {
                                             Text("\(data.openDate)\(data.directors.isEmpty ? " | \(data.nation)" : "")")
                                                 .font(.system(size: 14))
+                                                .lineLimit(1)
                                         } else if data.openDate.isEmpty && data.directors.isEmpty {
                                             Text(data.nation)
                                                 .font(.system(size: 14))
+                                                .lineLimit(1)
                                         }
                                     }
                                 }
