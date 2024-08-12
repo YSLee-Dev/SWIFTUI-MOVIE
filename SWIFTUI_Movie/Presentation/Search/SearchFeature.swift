@@ -68,12 +68,19 @@ struct SearchFeature: Reducer {
                      .cancellable(id: TimerKey.searchLoad)
                 }
                 
+            case .binding(\.searchType):
+                state.nowPage = 0
+                state.totalCount = 0
+                state.searchResult = []
+                state.searchQuery = ""
+                return .none
+                
             case .movieSearchSuccess(let data):
                 state.searchResult.append(contentsOf: data.result.movieDetailList)
                 state.nowPage += 1
                 state.nowSearching = false
                 state.totalCount = data.result.totalCount
-                return .none
+                return .cancel(id: TimerKey.searchLoad)
                 
             case .backBtnTapped:
                 return .run { _ in
