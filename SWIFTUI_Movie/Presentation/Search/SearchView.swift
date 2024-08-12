@@ -17,6 +17,7 @@ struct SearchView: View {
             LargeNavigationBar(title: "검색") {
                 self.store.send(.backBtnTapped)
             }
+            .padding(EdgeInsets(top: 30, leading: 20, bottom: 0, trailing: 20))
             
             Picker(selection: self.$store.searchType, label: Text("종류 선택하기")) {
                 ForEach(MovieSearchType.allCases, id: \.self) {
@@ -24,7 +25,7 @@ struct SearchView: View {
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
-            .padding(.bottom, 20)
+            .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
             
             TextField(text: self.$store.searchQuery) {
                 Text(self.store.searchType.placeHolderText)
@@ -38,7 +39,7 @@ struct SearchView: View {
                 RoundedRectangle(cornerRadius: 15)
                     .fill(Color.gray.opacity(0.1))
             }
-            .padding(.bottom, 20)
+            .padding(.horizontal, 20)
             
             ScrollView {
                 if self.store.nowSearching && !self.store.searchQuery.isEmpty {
@@ -83,6 +84,7 @@ struct SearchView: View {
                                         }
                                     }
                                 }
+                                .padding(.horizontal, 20)
                                 .frame(height: 90)
                                 .onTapGesture(perform: {
                                     self.store.send(.movieTapped(data.movieID))
@@ -92,8 +94,8 @@ struct SearchView: View {
                     }
                 }
             }
+            .padding(.top, 20)
         }
-        .padding(EdgeInsets(top: 30, leading: 20, bottom: 0, trailing: 20))
     }
 }
 
