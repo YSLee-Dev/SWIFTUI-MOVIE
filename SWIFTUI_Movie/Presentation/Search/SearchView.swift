@@ -41,7 +41,7 @@ struct SearchView: View {
             .padding(.bottom, 20)
             
             ScrollView {
-                if self.store.state.nowSearching {
+                if self.store.nowSearching && !self.store.searchQuery.isEmpty {
                     HStack {
                         Spacer()
                         ProgressView() {
@@ -52,40 +52,45 @@ struct SearchView: View {
                     
                 } else {
                     LazyVStack(alignment: .leading) {
-                        ForEach(Array(zip(self.store.searchResult.indices, self.store.searchResult)), id: \.0) { index, data in
-                            HStack(alignment: .center) {
-                                // 임시 포스터
-                                RoundedRectangle(cornerRadius: 15)
-                                    .foregroundColor(.init(uiColor: .systemGray4))
-                                    .frame(width: 50, height: 75)
-                                    .padding(.trailing, 10)
-                                
-                                VStack(alignment: .leading, spacing: 5) {
-                                    Text(data.movieName)
-                                        .font(.system(size: 18, weight: .bold))
+                        if self.store.searchResult.isEmpty && !self.store.nowSearching && !self.store.searchQuery.isEmpty {
+                            Text("검색된 영화가 없어요.")
+                                .font(.title3)
+                            
+                        } else {
+                            ForEach(Array(zip(self.store.searchResult.indices, self.store.searchResult)), id: \.0) { index, data in
+                                HStack(alignment: .center) {
+                                    // 임시 포스터
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .foregroundColor(.init(uiColor: .systemGray4))
+                                        .frame(width: 50, height: 75)
+                                        .padding(.trailing, 10)
                                     
-                                    if let firstDirectors = data.directors.first {
-                                        Text("\(firstDirectors.name) \(data.directors.count >= 2 ? "등" : "")  |  \(data.nation)")
-                                            .font(.system(size: 14))
-                                    }
-                                    
-                                    if !data.openDate.isEmpty {
-                                        Text("\(data.openDate)\(data.directors.isEmpty ? " | \(data.nation)" : "")")
-                                            .font(.system(size: 14))
-                                    } else if data.openDate.isEmpty && data.directors.isEmpty {
-                                        Text(data.nation)
-                                            .font(.system(size: 14))
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        Text(data.movieName)
+                                            .font(.system(size: 18, weight: .bold))
+                                        
+                                        if let firstDirectors = data.directors.first {
+                                            Text("\(firstDirectors.name) \(data.directors.count >= 2 ? "등" : "")  |  \(data.nation)")
+                                                .font(.system(size: 14))
+                                        }
+                                        
+                                        if !data.openDate.isEmpty {
+                                            Text("\(data.openDate)\(data.directors.isEmpty ? " | \(data.nation)" : "")")
+                                                .font(.system(size: 14))
+                                        } else if data.openDate.isEmpty && data.directors.isEmpty {
+                                            Text(data.nation)
+                                                .font(.system(size: 14))
+                                        }
                                     }
                                 }
+                                .frame(height: 90)
+                                .onTapGesture(perform: {
+                                    self.store.send(.movieTapped(data.movieID))
+                                })
                             }
-                            .frame(height: 90)
-                            .onTapGesture(perform: {
-                                self.store.send(.movieTapped(data.movieID))
-                            })
                         }
                     }
                 }
-               
             }
         }
         .padding(EdgeInsets(top: 30, leading: 20, bottom: 0, trailing: 20))

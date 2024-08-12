@@ -26,7 +26,7 @@ struct SearchFeature: Reducer {
         case movieSearchSuccess([MovieSearchDetail])
         case movieTapped(String)
         case backBtnTapped
-        case movieSearchTimerEnd
+        case movieSearchTimerEnded
     }
     
     enum TimerKey: Equatable {
@@ -47,7 +47,7 @@ struct SearchFeature: Reducer {
                         .run { send in
                             do {
                                 try await Task.sleep(for: .seconds(1)) //1초간 입력이 일어나지 않을 때 로딩 요청
-                                await send(.movieSearchTimerEnd)
+                                await send(.movieSearchTimerEnded)
                             }  catch {
                             }
                         }
@@ -58,8 +58,8 @@ struct SearchFeature: Reducer {
                      return  .run { send in
                             do {
                                 try await Task.sleep(for: .seconds(1)) //1초간 입력이 일어나지 않을 때 로딩 요청
-                                await send(.movieSearchTimerEnd)
-                            } 
+                                await send(.movieSearchTimerEnded)
+                            }
                         }
                      .cancellable(id: TimerKey.searchLoad)
                 }
@@ -74,10 +74,13 @@ struct SearchFeature: Reducer {
                     await self.dismiss()
                 }
                 
-            case .movieSearchTimerEnd:
+            case .movieSearchTimerEnded:
                 let nowState = state
                 
-                if state.searchQuery.isEmpty {return .none}
+                if state.searchQuery.isEmpty {
+                    state.searchResult = []
+                    return .none
+                }
                 
                 return .run(operation: { send in
                     let data = try await self.kobisManager.movieSearchRequest(query: nowState.searchQuery, movieSearchType: nowState.searchType)
