@@ -248,6 +248,7 @@
 		FF9C9F962C50C38C006BB902 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				FFA7A1492C57590900D52009 /* HomeModel.swift */,
 				FF9C9F922C50C368006BB902 /* HomeView.swift */,
 				FF9C9F942C50C387006BB902 /* HomeFeature.swift */,
 				FF9C9F982C50CBE3006BB902 /* HomeMovieView.swift */,
@@ -291,7 +292,6 @@
 			children = (
 				FF9C9FAA2C5242C9006BB902 /* BoxofficeMovie.swift */,
 				FFA7A1472C57353300D52009 /* KMDBMovieDetail.swift */,
-				FFA7A1492C57590900D52009 /* HomeModel.swift */,
 				FF723E0D2C5A1D3300F05A30 /* KobisMoiveDetail.swift */,
 				340754172C5FB9DE006D9006 /* SearchActor.swift */,
 				FF87BE512C60984D00773C17 /* ActorDetail.swift */,
