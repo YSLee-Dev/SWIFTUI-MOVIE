@@ -66,8 +66,14 @@ struct SearchView: View {
                             ForEach(Array(zip(self.store.searchResult.indices, self.store.searchResult)), id: \.0) { index, data in
                                 LazyHStack(alignment: .center) {
                                     // 임시 포스터
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .foregroundColor(.init(uiColor: .systemGray4))
+                                    KFImage(data.url)
+                                        .placeholder {
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .foregroundColor(.init(uiColor: .systemGray4))
+                                        }
+                                        .cancelOnDisappear(true)
+                                        .resizable()
+                                        .clipShape(RoundedRectangle(cornerRadius: 15))
                                         .frame(width: 50, height: 75)
                                         .padding(.trailing, 10)
                                     
@@ -77,7 +83,7 @@ struct SearchView: View {
                                             .lineLimit(1)
                                         
                                         if let firstDirectors = data.directors.first {
-                                            Text("\(firstDirectors.name) \(data.directors.count >= 2 ? "등" : "")  |  \(data.nation)")
+                                            Text("\(firstDirectors) \(data.directors.count >= 2 ? "등" : "")  |  \(data.nation)")
                                                 .font(.system(size: 14))
                                                 .lineLimit(1)
                                         }

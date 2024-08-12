@@ -11,12 +11,18 @@ import ComposableArchitecture
 @Reducer
 struct SearchFeature: Reducer {
     @Dependency (\.kobisManager) var kobisManager
+    @Dependency (\.kmdbManager) var kmdbManager
     @Dependency (\.dismiss) var dismiss
+    
+    struct UpdateRequestModel: Equatable {
+        let index: Int
+        let data: SearchModel
+    }
     
     @ObservableState
     struct State: Equatable {
         var searchQuery: String = ""
-        var searchResult: [MovieSearchDetail] = []
+        var searchResult: [SearchModel] = []
         var searchType: MovieSearchType = .movieName
         var nowSearching: Bool = false
         var nowPage: Int = 0
@@ -31,6 +37,8 @@ struct SearchFeature: Reducer {
         case movieSearchTimerEnded
         case morePageLoadingRequest
         case movieSearchRequest
+        case thumnailRequest([SearchModel])
+        case thumnailImageSuccess(UpdateRequestModel)
     }
     
     enum TimerKey: Equatable {
@@ -76,11 +84,32 @@ struct SearchFeature: Reducer {
                 return .none
                 
             case .movieSearchSuccess(let data):
-                state.searchResult.append(contentsOf: data.result.movieDetailList)
+                var searchModelDataList = data.result.movieDetailList.map { data in SearchModel(movieID: data.movieID, movieName: data.movieName, openDate: data.openDate, nation: data.nation, directors: data.directors.map {$0.name})}
+                state.searchResult.append(contentsOf: searchModelDataList)
                 state.nowPage += 1
                 state.nowSearching = false
                 state.totalCount = data.result.totalCount
-                return .cancel(id: TimerKey.searchLoad)
+                
+                return .send(.thumnailRequest(searchModelDataList))
+                
+            case .thumnailRequest(let data):
+                let nowPage = state.nowPage
+                return .concatenate(
+                    .cancel(id: TimerKey.searchLoad),
+                    .run { send in
+                        var searchModelDataList = data
+                        
+                        for index in searchModelDataList.indices {
+                            let thumnail = try? await self.kmdbManager.moiveDetailInfoRequest(title: searchModelDataList[index].movieName, openDate: searchModelDataList[index].openDate)
+                            searchModelDataList[index].thumnail = thumnail?.thumbnailURL
+                            await send(.thumnailImageSuccess(.init(index: ((nowPage - 1) * 10) + index, data: searchModelDataList[index])))
+                        }
+                    }
+                )
+                
+            case .thumnailImageSuccess(let model):
+                state.searchResult[model.index] = model.data
+                return .none
                 
             case .backBtnTapped:
                 return .run { _ in
