@@ -27,6 +27,7 @@ struct SearchFeature: Reducer {
         var nowSearching: Bool = false
         var nowPage: Int = 0
         var totalCount: Int = 0
+        var nowSearchingWord: String? = nil
     }
     
     enum Action:  BindableAction, Equatable {
@@ -35,7 +36,6 @@ struct SearchFeature: Reducer {
         case movieTapped(String)
         case backBtnTapped
         case movieSearchTimerEnded
-        case morePageLoadingRequest
         case movieSearchRequest
         case thumnailRequest([SearchModel])
         case thumnailImageSuccess(UpdateRequestModel)
@@ -51,7 +51,7 @@ struct SearchFeature: Reducer {
         Reduce { state, action in
             switch action {
             case .binding(\.searchQuery):
-                if state.searchQuery.isEmpty {return .none}
+                if state.searchQuery.isEmpty || state.nowSearchingWord == state.searchQuery {return .none}
                 
                 if  state.nowSearching {
                     return .concatenate(
@@ -81,14 +81,16 @@ struct SearchFeature: Reducer {
                 state.totalCount = 0
                 state.searchResult = []
                 state.searchQuery = ""
+                state.nowSearchingWord = ""
                 return .none
                 
             case .movieSearchSuccess(let data):
-                var searchModelDataList = data.result.movieDetailList.map { data in SearchModel(movieID: data.movieID, movieName: data.movieName, openDate: data.openDate, nation: data.nation, directors: data.directors.map {$0.name})}
+                let searchModelDataList = data.result.movieDetailList.map { data in SearchModel(movieID: data.movieID, movieName: data.movieName, openDate: data.openDate, nation: data.nation, directors: data.directors.map {$0.name})}
                 state.searchResult.append(contentsOf: searchModelDataList)
                 state.nowPage += 1
                 state.nowSearching = false
                 state.totalCount = data.result.totalCount
+                state.nowSearchingWord = state.searchQuery
                 
                 return .send(.thumnailRequest(searchModelDataList))
                 
@@ -120,18 +122,16 @@ struct SearchFeature: Reducer {
                 state.nowPage = 0
                 state.totalCount = 0
                 state.searchResult = []
+                state.nowSearchingWord = state.searchQuery
                 
                 return .send(.movieSearchRequest)
                 
-            case .morePageLoadingRequest:
-                if state.searchQuery.isEmpty || (state.nowPage * 10) > state.totalCount  {
-                    return .none
-                } else {
-                    return .send(.movieSearchRequest)
-                }
-                
             case .movieSearchRequest:
                 let nowState = state
+                
+                if state.searchQuery.isEmpty || (state.nowPage * 10) > state.totalCount  {
+                    return .none
+                }
                 
                 return .run(operation: { send in
                     let data = try await self.kobisManager.movieSearchRequest(query: nowState.searchQuery, movieSearchType: nowState.searchType, requestPage: nowState.nowPage + 1)

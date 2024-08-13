@@ -101,7 +101,7 @@ struct SearchView: View {
                                 }
                                 .onAppear {
                                     if index % 10 == 9 && self.store.nowPage < ((index + 1) / 10) + 1 {
-                                        self.store.send(.morePageLoadingRequest)
+                                        self.store.send(.movieSearchRequest)
                                     }
                                 }
                                 .padding(.horizontal, 20)
