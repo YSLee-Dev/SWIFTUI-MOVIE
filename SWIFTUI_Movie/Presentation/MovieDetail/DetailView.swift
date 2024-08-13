@@ -57,6 +57,20 @@ struct DetailView: View {
                                         Text("\(detailData.openDate)")
                                             .font(.system(size: 15, weight: .semibold))
                                             .foregroundColor(.white)
+                                    } else {
+                                        HStack {
+                                            Spacer()
+                                            VStack(spacing: 20) {
+                                                ProgressView()
+                                                    .tint(.white)
+                                                    .scaleEffect(1.5)
+                                                
+                                                Text("영화를 가져오고 있어요.")
+                                                    .font(.system(size: 20, weight: .bold))
+                                                    .foregroundColor(.white)
+                                            }
+                                            Spacer()
+                                        }
                                     }
                                     
                                     Spacer()
