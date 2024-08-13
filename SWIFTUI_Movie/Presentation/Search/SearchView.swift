@@ -98,6 +98,7 @@ struct SearchView: View {
                                                 .lineLimit(1)
                                         }
                                     }
+                                    .frame(maxWidth: UIScreen.main.bounds.width - 115)
                                 }
                                 .onAppear {
                                     if index % 10 == 9 && self.store.nowPage < ((index + 1) / 10) + 1 {
