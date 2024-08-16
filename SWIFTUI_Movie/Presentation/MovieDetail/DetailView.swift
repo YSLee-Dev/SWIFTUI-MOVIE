@@ -156,10 +156,25 @@ struct DetailView: View {
                                 .foregroundColor(.gray)
                             }
                         }
+                  
+                        DetailInfoView(title: "영화메모") {
+                            Button {
+                                self.store.send(.memoBtnTapped)
+                            } label: {
+                                let title = self.store.movieMemo == nil ? "버튼을 눌러 메모를 입력해보세요!" : self.store.movieMemo!.movieNote.isEmpty ? "메모에 저장된 텍스트가 없어요." : self.store.movieMemo!.movieNote
+                                
+                                Text(title)
+                                    .font(.subheadline)
+                                    .foregroundColor(.black)
+                            }
+                        }
                     }
                 }
             }
             .alert(self.$store.scope(state: \.alertState, action: \.alertAction))
+            .sheet(item: self.$store.scope(state: \.memoViewState, action: \.memoViewAction)) { store in
+                MovieDetailMemoView(store: store)
+            }
             .onPreferenceChange(ScrollOffsetKey.self, perform: { offset in
                 if !self.firstValueCheck {
                     self.firstValueCheck = true

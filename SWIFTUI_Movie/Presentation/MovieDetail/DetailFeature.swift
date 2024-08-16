@@ -22,7 +22,9 @@ struct DetailFeature: Reducer {
         var detailMovieInfo: KobisMovieInfo?
         var actorInfoLoading: Int?
         var isCompanyViewExpansion: Bool = false
+        var movieMemo: MovieDetailMemo? = nil
         @Presents var alertState: AlertState<Action.Alert>?
+        @Presents var memoViewState: MovieDetailMemoFeature.State?
     }
     
     enum Action: Equatable {
@@ -34,8 +36,12 @@ struct DetailFeature: Reducer {
         case actorDetailInfoRequestSuccess(String)
         case actorDetailInfoRequestFailed(AlertModel)
         case thumnailImageUpdate(URL?)
-        case alertAction(PresentationAction<Alert>)
         case companysMoreViewBtnTapped
+        case userDefaultsMemoUpdate
+        case memoBtnTapped
+        
+        case memoViewAction(PresentationAction<MovieDetailMemoFeature.Action>)
+        case alertAction(PresentationAction<Alert>)
         
         @CasePathable
         enum Alert: Equatable {
@@ -58,12 +64,15 @@ struct DetailFeature: Reducer {
                 state.detailMovieInfo = data
                 
                 if state.thumnailURL == nil && data != nil {
-                    return .run { send in
+                    return .run(operation: { send in
                         let thumnailData = try? await self.kmdbManager.moiveDetailInfoRequest(title: data!.title, openDate: data!.openDate)
                         await  send(.thumnailImageUpdate(URL(string: thumnailData?.thumbnailURL ?? "")))
+                    }) { error, send in
+                        print("DETAIL THUMNAIL REQUEST ERROR", error)
+                        await send(.userDefaultsMemoUpdate)
                     }
                 } else {
-                    return .none
+                    return .send(.userDefaultsMemoUpdate)
                 }
                 
             case .backBtnTapped:
@@ -93,6 +102,16 @@ struct DetailFeature: Reducer {
                 
             case .thumnailImageUpdate(let url):
                 state.thumnailURL = url
+                return .send(.userDefaultsMemoUpdate)
+                
+            case .userDefaultsMemoUpdate:
+                guard state.detailMovieInfo != nil else {return .none}
+                let memo = try? self.userDefaults.loadData(movieID: state.sendedMovieID, modelType: MovieDetailMemo.self)
+                
+                if let readMemo = memo {
+                    state.movieMemo = readMemo
+                }
+                
                 return .none
                 
             case .actorDetailInfoRequestSuccess:
@@ -121,9 +140,33 @@ struct DetailFeature: Reducer {
                 state.isCompanyViewExpansion =  !state.isCompanyViewExpansion
                 return .none
                 
+            case .memoBtnTapped:
+                guard let info = state.detailMovieInfo else {return .none}
+                
+                if state.movieMemo == nil {
+                    state.movieMemo = . init(movieID: state.sendedMovieID, movieTitle: info.title, movieNote: "", thumnail: state.thumnailURL)
+                }
+                state.memoViewState = .init(movieDetailNoteData: state.movieMemo!, insertedValue: state.movieMemo?.movieNote ?? "")
+                return .none
+                
+            case .memoViewAction(.presented(.returnKeyPressed)):
+                guard let memo = state.memoViewState?.insertedValue else {return .none}
+                state.movieMemo!.movieNote = memo
+                self.userDefaults.saveData(movieId: state.sendedMovieID, memoModel: state.movieMemo!)
+                
+                state.memoViewState = nil
+                return .none
+                
+            case .memoViewAction(.presented(.backBtnTapped)):
+                state.memoViewState = nil
+                return .none
+                
             default: return .none
             }
         }
         .ifLet(\.alertState, action: \.alertAction)
+        .ifLet(\.$memoViewState, action: \.memoViewAction) {
+            MovieDetailMemoFeature()
+        }
     }
 }
