@@ -10,7 +10,6 @@ import ComposableArchitecture
 
 struct ActorDetailView: View {
     @State private var store: StoreOf<ActorDetailFeature>
-    @State private var titleChageRatio: CGFloat = 0
     
     init(store: StoreOf<ActorDetailFeature>) {
         self.store = store
@@ -18,14 +17,8 @@ struct ActorDetailView: View {
     }
     
     var body: some View {
-        NavigationScrollView(
-            imageColor: .constant(.black.opacity(self.titleChageRatio)),
-            imageIconBackgroundColor: .constant(.clear),
-            titleColor: .constant(.black.opacity(self.titleChageRatio)),
-            bgColor: .constant(.white.opacity(self.titleChageRatio)), 
-            titleOffset: .constant(self.titleChageRatio),
+        StandardNavigationScrollView(
             title: "\(self.store.actorDetailInfo?.name ?? "")",
-            isIgnoresTopSafeArea: true,
             backBtnTap: {
                 self.store.send(.backBtnTapped)
             }) {
@@ -66,19 +59,6 @@ struct ActorDetailView: View {
                 }
             }
             .alert(self.$store.scope(state: \.alertState, action: \.alertAction))
-            .onPreferenceChange(ScrollOffsetKey.self, perform: { value in
-                if  -(value) > 20 && self.titleChageRatio < 1 {
-                    self.titleChageRatio = (-value - 20) / 40
-                } else if -(value) <= 60 && self.titleChageRatio >= 1 {
-                    self.titleChageRatio = max(0,  (-value - 20) / 40)
-                } else {
-                    if -(value) > 20 {
-                        self.titleChageRatio = 1
-                    } else {
-                        self.titleChageRatio = 0
-                    }
-                }
-            })
     }
 }
 

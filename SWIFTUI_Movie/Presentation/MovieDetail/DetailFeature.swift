@@ -12,6 +12,7 @@ import ComposableArchitecture
 struct DetailFeature: Reducer {
     @Dependency (\.kmdbManager) var kmdbManager
     @Dependency (\.kobisManager) var kobisManager
+    @Dependency (\.userDefaults) var userDefaults
     @Dependency (\.dismiss) var dismiss
     
     @ObservableState
