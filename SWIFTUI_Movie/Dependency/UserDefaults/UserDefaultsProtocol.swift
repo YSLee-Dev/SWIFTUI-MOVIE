@@ -8,6 +8,6 @@
 import Foundation
 
 protocol UserDefaultsProtocol {
-    func saveMovieNote<T: Encodable>(movieId: String, memoModel: T) 
-    func loadMovieNote<T: Decodable>(movieID: String) throws -> T
+    func saveData<T: Encodable>(movieId: String, memoModel: T)
+    func loadData<T: Decodable>(movieID: String, modelType: T.Type) throws -> T 
 }
