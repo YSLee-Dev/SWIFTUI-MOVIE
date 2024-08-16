@@ -9,7 +9,11 @@ import SwiftUI
 import ComposableArchitecture
 
 struct MovieDetailMemoView: View {
-    @State var store: StoreOf<MovieDetailMemoFeature>
+    @State private var store: StoreOf<MovieDetailMemoFeature>
+    
+    init(store: StoreOf<MovieDetailMemoFeature>) {
+        self.store = store
+    }
     
     var body: some View {
         VStack {
@@ -22,17 +26,23 @@ struct MovieDetailMemoView: View {
                 })
             .padding(EdgeInsets(top: 30, leading: 20, bottom: 15, trailing: 20))
             
-            DetailInfoView(title: "메모") {
-                TextEditor(text: self.$store.insertedValue)
-                    .scrollContentBackground(.hidden)
-                    .frame(height: UIScreen.main.bounds.height / 2)
-                    .onKeyPress(.return) {
-                        self.store.send(.returnKeyPressed)
-                        return .handled
-                    }
+            ScrollView {
+                DetailInfoView(title: "메모") {
+                    TextEditor(text: self.$store.insertedValue)
+                        .scrollContentBackground(.hidden)
+                        .frame(height: UIScreen.main.bounds.height / 2)
+                }
+                Button {
+                    self.store.send(.returnKeyPressed)
+                } label: {
+                    Text("저장")
+                        .tint(.black)
+                        .frame(width: UIScreen.main.bounds.width - 40, height: 50)
+                        .background(Color.gray.opacity(0.1))
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                }
+                Spacer()
             }
-            
-            Spacer()
         }
     }
 }
