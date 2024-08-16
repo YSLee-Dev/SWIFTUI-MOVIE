@@ -18,4 +18,9 @@ extension DependencyValues {
         get {self[KmdbManagerKey.self]}
         set {self[KmdbManagerKey.self] = newValue}
     }
+    
+    var userDefaults: UserDefaultsProtocol {
+        get {self[UserDefaultsKey.self]}
+        set {self[UserDefaultsKey.self] = newValue}
+    }
 }

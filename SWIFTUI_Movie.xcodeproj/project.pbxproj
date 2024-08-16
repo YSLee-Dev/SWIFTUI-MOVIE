@@ -11,6 +11,9 @@
 		340754182C5FB9DE006D9006 /* SearchActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340754172C5FB9DE006D9006 /* SearchActor.swift */; };
 		3407541C2C5FC14A006D9006 /* ActorDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3407541B2C5FC14A006D9006 /* ActorDetailView.swift */; };
 		3407541E2C5FC159006D9006 /* ActorDetailFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3407541D2C5FC159006D9006 /* ActorDetailFeature.swift */; };
+		FF0A93242C6ED601005185AA /* UserDefault+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A93232C6ED601005185AA /* UserDefault+.swift */; };
+		FF0A93262C6ED737005185AA /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A93252C6ED737005185AA /* UserDefaultsProtocol.swift */; };
+		FF0A93282C6ED77F005185AA /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A93272C6ED77F005185AA /* UserDefaultsKey.swift */; };
 		FF2DFC432C536D61005804DB /* KobisManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFC422C536D61005804DB /* KobisManagerProtocol.swift */; };
 		FF2DFC452C536DB7005804DB /* KobisManagerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2DFC442C536DB7005804DB /* KobisManagerKey.swift */; };
 		FF723E0C2C5A144000F05A30 /* NavigationView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF723E0B2C5A144000F05A30 /* NavigationView+.swift */; };
@@ -80,6 +83,9 @@
 		340754172C5FB9DE006D9006 /* SearchActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActor.swift; sourceTree = "<group>"; };
 		3407541B2C5FC14A006D9006 /* ActorDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailView.swift; sourceTree = "<group>"; };
 		3407541D2C5FC159006D9006 /* ActorDetailFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailFeature.swift; sourceTree = "<group>"; };
+		FF0A93232C6ED601005185AA /* UserDefault+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+.swift"; sourceTree = "<group>"; };
+		FF0A93252C6ED737005185AA /* UserDefaultsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocol.swift; sourceTree = "<group>"; };
+		FF0A93272C6ED77F005185AA /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		FF2DFC422C536D61005804DB /* KobisManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisManagerProtocol.swift; sourceTree = "<group>"; };
 		FF2DFC442C536DB7005804DB /* KobisManagerKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KobisManagerKey.swift; sourceTree = "<group>"; };
 		FF723E0B2C5A144000F05A30 /* NavigationView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationView+.swift"; sourceTree = "<group>"; };
@@ -164,6 +170,16 @@
 				3407541D2C5FC159006D9006 /* ActorDetailFeature.swift */,
 			);
 			path = ActorDetail;
+			sourceTree = "<group>";
+		};
+		FF0A93222C6ED5F9005185AA /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				FF0A93232C6ED601005185AA /* UserDefault+.swift */,
+				FF0A93252C6ED737005185AA /* UserDefaultsProtocol.swift */,
+				FF0A93272C6ED77F005185AA /* UserDefaultsKey.swift */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		FF72789C2C5C9F1900A22D47 /* DetailActors */ = {
@@ -272,6 +288,7 @@
 		FF9C9F9C2C52353A006BB902 /* Dependency */ = {
 			isa = PBXGroup;
 			children = (
+				FF0A93222C6ED5F9005185AA /* UserDefaults */,
 				FFA7A1442C57321000D52009 /* Kmdb */,
 				FF9C9FA42C523E1C006BB902 /* Kobis */,
 				FF9C9F9D2C52355E006BB902 /* DependencyValues.swift */,
@@ -517,9 +534,11 @@
 				FF7A3CCD2C69EBD800722491 /* SearchModel.swift in Sources */,
 				FF9C9F952C50C387006BB902 /* HomeFeature.swift in Sources */,
 				FF87BE632C65A15500773C17 /* SearchFeature.swift in Sources */,
+				FF0A93262C6ED737005185AA /* UserDefaultsProtocol.swift in Sources */,
 				FF723E0C2C5A144000F05A30 /* NavigationView+.swift in Sources */,
 				3407541E2C5FC159006D9006 /* ActorDetailFeature.swift in Sources */,
 				FF9C9FAB2C5242C9006BB902 /* BoxofficeMovie.swift in Sources */,
+				FF0A93282C6ED77F005185AA /* UserDefaultsKey.swift in Sources */,
 				FF7278A82C5CBC3E00A22D47 /* ViewStyle.swift in Sources */,
 				FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */,
 				FF9C9FA62C523E71006BB902 /* KobisManager.swift in Sources */,
@@ -541,6 +560,7 @@
 				340754182C5FB9DE006D9006 /* SearchActor.swift in Sources */,
 				FF72789B2C5C767B00A22D47 /* DetailInfoCell.swift in Sources */,
 				FFA7A14C2C5759D600D52009 /* KmdbManagerProtocol.swift in Sources */,
+				FF0A93242C6ED601005185AA /* UserDefault+.swift in Sources */,
 				FF87BE562C60BDB300773C17 /* ActorDetailFilmoModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
