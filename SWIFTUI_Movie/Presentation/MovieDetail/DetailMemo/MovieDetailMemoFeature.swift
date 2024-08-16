@@ -12,16 +12,24 @@ import ComposableArchitecture
 struct MovieDetailMemoFeature: Reducer {
     @ObservableState
     struct State: Equatable {
-        
+        let movieDetailNoteData: MovieDetailMemo
+        var insertedValue: String = ""
     }
     
-    enum Action: Equatable {
-        
+    enum Action:  BindableAction, Equatable {
+        case binding(BindingAction<State>)
+        case returnKeyPressed
+        case backBtnTapped
     }
     
     var body: some Reducer<State, Action> {
+        BindingReducer()
+        
         Reduce { state, action in
-            return .none
+            switch action {
+            default:
+                return .none
+            }
         }
     }
 }
