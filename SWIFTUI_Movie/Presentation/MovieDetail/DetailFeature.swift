@@ -20,6 +20,7 @@ struct DetailFeature: Reducer {
         var thumnailURL: URL?
         var detailMovieInfo: KobisMovieInfo?
         var actorInfoLoading: Int?
+        var isCompanyViewExpansion: Bool = false
         @Presents var alertState: AlertState<Action.Alert>?
     }
     
@@ -33,6 +34,7 @@ struct DetailFeature: Reducer {
         case actorDetailInfoRequestFailed(AlertModel)
         case thumnailImageUpdate(URL?)
         case alertAction(PresentationAction<Alert>)
+        case companysMoreViewBtnTapped
         
         @CasePathable
         enum Alert: Equatable {
@@ -112,6 +114,10 @@ struct DetailFeature: Reducer {
                 
             case .alertAction(.dismiss), .alertAction(.presented(.cancelBtnTap)):
                 state.alertState = nil
+                return .none
+                
+            case .companysMoreViewBtnTapped:
+                state.isCompanyViewExpansion =  !state.isCompanyViewExpansion
                 return .none
                 
             default: return .none

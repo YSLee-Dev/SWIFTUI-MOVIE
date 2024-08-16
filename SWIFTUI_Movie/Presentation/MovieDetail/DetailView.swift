@@ -107,7 +107,29 @@ struct DetailView: View {
                             
                             let companys = detailData.companys.filter {$0.type == "제작사"}
                             if let firstCompanys = companys.first {
-                                DetailInfoCell(imageName: "building.2.crop.circle.fill", title: "\(firstCompanys.name)\(companys.count >= 2 ? " 등" : "")")
+                                HStack(alignment: .top) {
+                                    if self.store.isCompanyViewExpansion {
+                                        VStack(alignment: .leading, spacing: 20) {
+                                            ForEach(companys, id: \.self) { data in
+                                                DetailInfoCell(imageName: "building.2.crop.circle.fill", title: data.name)
+                                            }
+                                        }
+                                    } else {
+                                        DetailInfoCell(imageName: "building.2.crop.circle.fill", title: "\(firstCompanys.name)")
+                                    }
+                                    if companys.count >= 2 {
+                                        Button(action: {
+                                            self.store.send(.companysMoreViewBtnTapped)
+                                        }, label: {
+                                            Image(systemName: self.store.isCompanyViewExpansion ? "chevron.up" : "chevron.down")
+                                                .resizable()
+                                                .frame(width: 17, height: 10)
+                                                .foregroundColor(.black)
+                                        })
+                                        .padding(.top, 15)
+                                    }
+                                    Spacer()
+                                }
                             }
                         }
                         
