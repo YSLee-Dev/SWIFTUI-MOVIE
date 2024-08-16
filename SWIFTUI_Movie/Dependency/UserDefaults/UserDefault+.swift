@@ -8,16 +8,17 @@
 import Foundation
 
 extension UserDefaults: UserDefaultsProtocol {
-    func saveMovieNote(movieId: String, memo: String) {
-        UserDefaults.standard.setValue(memo, forKey: movieId)
+    func saveMovieNote<T: Encodable>(movieId: String, memoModel: T) {
+        let data = try? PropertyListEncoder().encode(memoModel)
+        UserDefaults.standard.setValue(data, forKey: movieId)
     }
     
-    func loadMovieNote(movieID: String) throws -> String {
-       let saveMemo = UserDefaults.standard.value(forKey: movieID)
+    func loadMovieNote<T: Decodable>(movieID: String) throws -> T {
+        let saveMemo = UserDefaults.standard.data(forKey: movieID)
         
         if let saveMemo = saveMemo {
-            if let stringMemo = saveMemo as? String {
-                return stringMemo
+            if let decodingMemo =  try? PropertyListDecoder().decode(T.self, from: saveMemo) {
+                return decodingMemo
             } else {
                 throw URLError.init(.cannotDecodeContentData)
             }
