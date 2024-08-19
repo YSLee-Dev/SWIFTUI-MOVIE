@@ -32,6 +32,7 @@
 		FF7A3CCD2C69EBD800722491 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7A3CCC2C69EBD800722491 /* SearchModel.swift */; };
 		FF7B82B32C72C8BE0022E3E1 /* TotalMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7B82B22C72C8BE0022E3E1 /* TotalMemoView.swift */; };
 		FF7B82B52C72C8C90022E3E1 /* TotalMemoFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7B82B42C72C8C90022E3E1 /* TotalMemoFeature.swift */; };
+		FF7B82B72C72D9700022E3E1 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF7B82B62C72D9700022E3E1 /* AppFeature.swift */; };
 		FF87BE522C60984D00773C17 /* ActorDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF87BE512C60984D00773C17 /* ActorDetail.swift */; };
 		FF87BE542C60B13600773C17 /* LargeNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF87BE532C60B13600773C17 /* LargeNavigationBar.swift */; };
 		FF87BE562C60BDB300773C17 /* ActorDetailFilmoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF87BE552C60BDB300773C17 /* ActorDetailFilmoModel.swift */; };
@@ -41,7 +42,7 @@
 		FF87BE632C65A15500773C17 /* SearchFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF87BE622C65A15500773C17 /* SearchFeature.swift */; };
 		FF87BE652C65D93200773C17 /* MovieSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF87BE642C65D93200773C17 /* MovieSearch.swift */; };
 		FF9C9F682C50C1AD006BB902 /* SWIFTUI_MovieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */; };
-		FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F692C50C1AD006BB902 /* ContentView.swift */; };
+		FF9C9F6A2C50C1AD006BB902 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F692C50C1AD006BB902 /* AppView.swift */; };
 		FF9C9F6C2C50C1AF006BB902 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF9C9F6B2C50C1AF006BB902 /* Assets.xcassets */; };
 		FF9C9F702C50C1AF006BB902 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF9C9F6F2C50C1AF006BB902 /* Preview Assets.xcassets */; };
 		FF9C9F7A2C50C1AF006BB902 /* SWIFTUI_MovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9C9F792C50C1AF006BB902 /* SWIFTUI_MovieTests.swift */; };
@@ -110,6 +111,7 @@
 		FF7A3CCC2C69EBD800722491 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		FF7B82B22C72C8BE0022E3E1 /* TotalMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalMemoView.swift; sourceTree = "<group>"; };
 		FF7B82B42C72C8C90022E3E1 /* TotalMemoFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalMemoFeature.swift; sourceTree = "<group>"; };
+		FF7B82B62C72D9700022E3E1 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		FF87BE512C60984D00773C17 /* ActorDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetail.swift; sourceTree = "<group>"; };
 		FF87BE532C60B13600773C17 /* LargeNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeNavigationBar.swift; sourceTree = "<group>"; };
 		FF87BE552C60BDB300773C17 /* ActorDetailFilmoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorDetailFilmoModel.swift; sourceTree = "<group>"; };
@@ -120,7 +122,7 @@
 		FF87BE642C65D93200773C17 /* MovieSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearch.swift; sourceTree = "<group>"; };
 		FF9C9F642C50C1AD006BB902 /* SWIFTUI_Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWIFTUI_Movie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWIFTUI_MovieApp.swift; sourceTree = "<group>"; };
-		FF9C9F692C50C1AD006BB902 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FF9C9F692C50C1AD006BB902 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		FF9C9F6B2C50C1AF006BB902 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF9C9F6D2C50C1AF006BB902 /* SWIFTUI_Movie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SWIFTUI_Movie.entitlements; sourceTree = "<group>"; };
 		FF9C9F6F2C50C1AF006BB902 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -265,7 +267,8 @@
 				FF9C9FAC2C524760006BB902 /* SWIFTUI-Movie-Info.plist */,
 				340754152C5FB42E006D9006 /* RequestToken.plist */,
 				FF9C9F672C50C1AD006BB902 /* SWIFTUI_MovieApp.swift */,
-				FF9C9F692C50C1AD006BB902 /* ContentView.swift */,
+				FF9C9F692C50C1AD006BB902 /* AppView.swift */,
+				FF7B82B62C72D9700022E3E1 /* AppFeature.swift */,
 				FF9C9F6D2C50C1AF006BB902 /* SWIFTUI_Movie.entitlements */,
 				FF9C9F6B2C50C1AF006BB902 /* Assets.xcassets */,
 				FF7A3CCE2C69F19100722491 /* Extension */,
@@ -579,7 +582,7 @@
 				FF0A93282C6ED77F005185AA /* UserDefaultsKey.swift in Sources */,
 				FF7278A82C5CBC3E00A22D47 /* ViewStyle.swift in Sources */,
 				FF0A93322C6EE339005185AA /* StandardNavigationScrollView.swift in Sources */,
-				FF9C9F6A2C50C1AD006BB902 /* ContentView.swift in Sources */,
+				FF9C9F6A2C50C1AD006BB902 /* AppView.swift in Sources */,
 				FF9C9FA62C523E71006BB902 /* KobisManager.swift in Sources */,
 				FF87BE612C65A14C00773C17 /* SearchView.swift in Sources */,
 				FF2DFC432C536D61005804DB /* KobisManagerProtocol.swift in Sources */,
@@ -594,6 +597,7 @@
 				FF9C9FA02C523618006BB902 /* NetworkManager.swift in Sources */,
 				FFA7A1462C57324A00D52009 /* KmdbManager.swift in Sources */,
 				FFA7A1482C57353300D52009 /* KMDBMovieDetail.swift in Sources */,
+				FF7B82B72C72D9700022E3E1 /* AppFeature.swift in Sources */,
 				3407541C2C5FC14A006D9006 /* ActorDetailView.swift in Sources */,
 				FF7278A22C5CA28400A22D47 /* NavigationBar.swift in Sources */,
 				FF723E0E2C5A1D3300F05A30 /* KobisMoiveDetail.swift in Sources */,

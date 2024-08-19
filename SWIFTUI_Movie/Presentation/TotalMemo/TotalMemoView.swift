@@ -9,11 +9,13 @@ import SwiftUI
 import ComposableArchitecture
 
 struct TotalMemoView: View {
+    @State var store: StoreOf<TotalMemoFeature>
+    
     var body: some View {
         Text("1")
     }
 }
 
 #Preview {
-    TotalMemoView()
+    TotalMemoView(store: .init(initialState: .init(), reducer: {TotalMemoFeature()}))
 }

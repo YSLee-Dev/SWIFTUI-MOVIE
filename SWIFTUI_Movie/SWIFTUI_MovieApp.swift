@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct SWIFTUI_MovieApp: App {
+    let store: StoreOf<AppFeature> = .init(initialState: .init(homeState: .init(), totalMemoState: .init()), reducer: {AppFeature()})
+    
     var body: some Scene {
         WindowGroup {
-            HomeView(store: .init(initialState: .init(), reducer: {HomeFeature()}))
+            AppView(store: self.store)
         }
     }
 }
