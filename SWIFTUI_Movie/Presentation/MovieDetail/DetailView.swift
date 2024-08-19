@@ -151,7 +151,10 @@ struct DetailView: View {
                                 Button(action: {
                                     self.store.send(.actorsMoreBtnTapped(detailData))
                                 }) {
-                                    Text("더보기")
+                                    HStack {
+                                        Text("더보기")
+                                        Spacer()
+                                    }
                                 }
                                 .foregroundColor(.gray)
                             }
@@ -163,9 +166,12 @@ struct DetailView: View {
                             } label: {
                                 let title = self.store.movieMemo == nil ? "버튼을 눌러 메모를 입력해보세요!" : self.store.movieMemo!.movieNote.isEmpty ? "메모에 저장된 텍스트가 없어요." : self.store.movieMemo!.movieNote
                                 
-                                Text(title)
-                                    .font(.subheadline)
-                                    .foregroundColor(.black)
+                                HStack {
+                                    Text(title)
+                                        .font(.subheadline)
+                                        .foregroundColor(.black)
+                                    Spacer()
+                                }
                             }
                         }
                     }
