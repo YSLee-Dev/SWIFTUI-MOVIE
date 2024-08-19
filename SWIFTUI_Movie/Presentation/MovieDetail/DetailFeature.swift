@@ -150,11 +150,18 @@ struct DetailFeature: Reducer {
                 return .none
                 
             case .memoViewAction(.presented(.returnKeyPressed)):
-                guard let memo = state.memoViewState?.insertedValue else {return .none}
+                guard let memo = state.memoViewState?.insertedValue,
+                      !memo.isEmpty
+                else { // 값이 없거나, 아무런 값을 입력하지 않을 때
+                    state.memoViewState = nil
+                    state.movieMemo = nil
+                    self.userDefaults.saveData(movieId: state.sendedMovieID, memoModel: state.movieMemo)
+                    return .none
+                }
                 state.movieMemo!.movieNote = memo
                 self.userDefaults.saveData(movieId: state.sendedMovieID, memoModel: state.movieMemo!)
-                
                 state.memoViewState = nil
+                
                 return .none
                 
             case .memoViewAction(.presented(.backBtnTapped)):
