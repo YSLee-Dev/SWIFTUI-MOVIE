@@ -12,19 +12,48 @@ struct AppView: View {
     @State var store: StoreOf<AppFeature>
     
     var body: some View {
-        TabView(selection: self.$store.nowTappedIndex) {
-            HomeView(store: self.store.scope(state: \.homeState, action: \.homeAction))
-                .tabItem {
-                    Image(systemName: "house")
+        NavigationStack(path: self.$store.scope(state: \.path, action: \.path), root: {
+            TabView(selection: self.$store.nowTappedIndex) {
+                HomeView(store: self.store.scope(state: \.homeState, action: \.homeAction))
+                    .tabItem {
+                        Image(systemName: "house")
+                    }
+                    .tag(0)
+                
+                TotalMemoView(store: self.store.scope(state: \.totalMemoState, action: \.totalMemoAction))
+                    .tabItem {
+                        Image(systemName: "folder")
+                    }
+                    .tag(1)
+            }
+            .onAppear {
+                UITabBar.appearance().barTintColor = .white
+            }
+        }) { store in
+            switch store.state {
+            case .detailState:
+                if let store = store.scope(state: \.detailState, action: \.detailAction) {
+                    DetailView(store: store)
+                        .navigationBarBackButtonHidden()
                 }
-                .tag(0)
-            
-            TotalMemoView(store: self.store.scope(state: \.totalMemoState, action: \.totalMemoAction))
-                .tabItem {
-                    Image(systemName: "folder")
+            case .detailActorsState(_):
+                if let store = store.scope(state: \.detailActorsState, action: \.detailActorsAction) {
+                    DetailActorsView(store: store)
+                        .navigationBarBackButtonHidden()
                 }
-                .tag(1)
+            case .actorDetailState(_):
+                if let store = store.scope(state: \.actorDetailState, action: \.actorDetailAction) {
+                    ActorDetailView(store: store)
+                        .navigationBarBackButtonHidden()
+                }
+            case .searchState(_):
+                if let store = store.scope(state: \.searchState, action: \.searchAction) {
+                    SearchView(store: store)
+                        .navigationBarBackButtonHidden()
+                }
+            }
         }
+   
     }
 }
 

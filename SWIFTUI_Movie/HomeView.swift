@@ -17,115 +17,90 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationStack(path: self.$store.scope(state: \.path, action: \.path), root: {
-            VStack(alignment: .leading) {
-                Text("홈")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
+        VStack(alignment: .leading) {
+            Text("홈")
+                .font(.title)
+                .fontWeight(.bold)
+                .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
+            
+            ScrollView {
+                Button(action: {
+                    self.store.send(.searchBarTapped)
+                }) {
+                    RoundedRectangle(cornerRadius: 15)
+                        .fill(Color.gray.opacity(0.1))
+                        .overlay {
+                            HStack(alignment: .center) {
+                                Image(systemName: "magnifyingglass")
+                                    .resizable()
+                                    .foregroundColor(.black)
+                                    .frame(width: 15, height: 15)
+                                    .padding(.leading, 10)
+                                
+                                Text("관심있는 영화 검색하기")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                                
+                                Spacer()
+                            }
+                        }
+                }
+                .frame(height: 50)
+                .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
                 
-                ScrollView {
-                    Button(action: {
-                        self.store.send(.searchBarTapped)
-                    }) {
-                        RoundedRectangle(cornerRadius: 15)
+                VStack(alignment: .leading) {
+                    Text("전일 박스 오피스")
+                        .font(.title2)
+                        .bold()
+                        .padding(.horizontal, 20)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack(alignment: .center) {
+                            ForEach(Array(zip(self.store.yesterdayMoiveList.indices, self.store.yesterdayMoiveList)), id: \.0) { index, data in
+                                HomeMovieView(rank: data.rank, title: data.title, url: data.url, date: data.openDate)
+                                    .onTapGesture {
+                                        self.store.send(.movieTapped(.yesterday, index))
+                                    }
+                            }
+                        }
+                    }
+                    .frame(height: 250)
+                    .background {
+                        RoundedRectangle(cornerRadius: 0)
                             .fill(Color.gray.opacity(0.1))
-                            .overlay {
-                                HStack(alignment: .center) {
-                                    Image(systemName: "magnifyingglass")
-                                        .resizable()
-                                        .foregroundColor(.black)
-                                        .frame(width: 15, height: 15)
-                                        .padding(.leading, 10)
-                                    
-                                    Text("관심있는 영화 검색하기")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                    
-                                    Spacer()
-                                }
-                            }
                     }
-                    .frame(height: 50)
-                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
+                }
+                .scrollTargetBehavior(ScrollViewPageing(totalCount: self.store.yesterdayMoiveList.count))
+                .padding(.bottom, 20)
+                
+                VStack(alignment: .leading) {
+                    Text("금주 박스 오피스")
+                        .font(.title2)
+                        .bold()
+                        .padding(.horizontal, 20)
                     
-                    VStack(alignment: .leading) {
-                        Text("전일 박스 오피스")
-                            .font(.title2)
-                            .bold()
-                            .padding(.horizontal, 20)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            LazyHStack(alignment: .center) {
-                                ForEach(Array(zip(self.store.yesterdayMoiveList.indices, self.store.yesterdayMoiveList)), id: \.0) { index, data in
-                                    HomeMovieView(rank: data.rank, title: data.title, url: data.url, date: data.openDate)
-                                        .onTapGesture {
-                                            self.store.send(.movieTapped(.yesterday, index))
-                                        }
-                                }
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack(alignment: .center) {
+                            ForEach(Array(zip(self.store.weekMoiveList.indices, self.store.weekMoiveList)), id: \.0) { index, data in
+                                HomeMovieView(rank: data.rank, title: data.title, url: data.url, date: data.openDate)
+                                    .onTapGesture {
+                                        self.store.send(.movieTapped(.week, index))
+                                    }
                             }
                         }
-                        .frame(height: 250)
-                        .background {
-                            RoundedRectangle(cornerRadius: 0)
-                                .fill(Color.gray.opacity(0.1))
-                        }
                     }
-                    .scrollTargetBehavior(ScrollViewPageing(totalCount: self.store.yesterdayMoiveList.count))
-                    .padding(.bottom, 20)
+                    .frame(height: 250)
+                    .background {
+                        RoundedRectangle(cornerRadius: 0)
+                            .fill(Color.gray.opacity(0.1))
+                    }
+                    .scrollTargetBehavior(ScrollViewPageing(totalCount: self.store.weekMoiveList.count))
                     
-                    VStack(alignment: .leading) {
-                        Text("금주 박스 오피스")
-                            .font(.title2)
-                            .bold()
-                            .padding(.horizontal, 20)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            LazyHStack(alignment: .center) {
-                                ForEach(Array(zip(self.store.weekMoiveList.indices, self.store.weekMoiveList)), id: \.0) { index, data in
-                                    HomeMovieView(rank: data.rank, title: data.title, url: data.url, date: data.openDate)
-                                        .onTapGesture {
-                                            self.store.send(.movieTapped(.week, index))
-                                        }
-                                }
-                            }
-                        }
-                        .frame(height: 250)
-                        .background {
-                            RoundedRectangle(cornerRadius: 0)
-                                .fill(Color.gray.opacity(0.1))
-                        }
-                        .scrollTargetBehavior(ScrollViewPageing(totalCount: self.store.weekMoiveList.count))
-                        
-                        Spacer()
-                    }
-                }
-            }
-            .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
-        }) { store in
-            switch store.state {
-            case .detailState:
-                if let store = store.scope(state: \.detailState, action: \.detailAction) {
-                    DetailView(store: store)
-                        .navigationBarBackButtonHidden()
-                }
-            case .detailActorsState(_):
-                if let store = store.scope(state: \.detailActorsState, action: \.detailActorsAction) {
-                    DetailActorsView(store: store)
-                        .navigationBarBackButtonHidden()
-                }
-            case .actorDetailState(_):
-                if let store = store.scope(state: \.actorDetailState, action: \.actorDetailAction) {
-                    ActorDetailView(store: store)
-                        .navigationBarBackButtonHidden()
-                }
-            case .searchState(_):
-                if let store = store.scope(state: \.searchState, action: \.searchAction) {
-                    SearchView(store: store)
-                        .navigationBarBackButtonHidden()
+                    Spacer()
                 }
             }
         }
+        .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
     }
 }
 

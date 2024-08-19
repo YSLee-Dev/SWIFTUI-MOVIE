@@ -17,7 +17,6 @@ struct HomeFeature: Reducer {
     struct State: Equatable {
         var yesterdayMoiveList: [HomeModel] = []
         var weekMoiveList: [HomeModel] = []
-        var path = StackState<Path.State>()
     }
     
     enum Action: Equatable {
@@ -26,13 +25,13 @@ struct HomeFeature: Reducer {
         case viewInitialized
         case thumbnailURLRequest([BoxOfficeList], BoxOfficeType)
         case listUpdated([HomeModel], BoxOfficeType)
-        case path(StackAction<Path.State, Path.Action>)
     }
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .viewInitialized:
+                if !state.yesterdayMoiveList.isEmpty {return .none}
                 return .merge(
                     .run { send in
                         do {
@@ -74,84 +73,8 @@ struct HomeFeature: Reducer {
                     state.yesterdayMoiveList = data
                 }
                 return .none
-             
-            case .movieTapped(let type, let index):
-                let tappedData = type == .week ? state.weekMoiveList[index] : state.yesterdayMoiveList[index]
-                state.path.append(.detailState(.init(sendedMovieID: tappedData.moiveID, thumnailURL: tappedData.url)))
-                return .none
-                
-            case .path(.element(id: _, action: .detailAction(.actorsMoreBtnTapped(let info)))):
-                state.path.append(.detailActorsState(.init(moiveTitle: info.title, actorList: info.actors)))
-                return .none
-                
-            case .path(.element(id: _, action: .detailAction(.actorDetailInfoRequestSuccess(let actorID)))):
-                state.path.append(.actorDetailState(.init(actorID: actorID)))
-                return .send(.path(.element(id: state.path.ids[state.path.ids.count - 2], action: .detailActorsAction(.actorDetailInfoRequestEND)))) // 만약 등장인물 상세보기가 열려있었다면
-                
-            case .path(.element(id: let pathID, action: .detailAction(.actorDetailInfoRequestFailed(_)))):
-                if state.path.ids.last != pathID {
-                    state.path.removeLast()
-                }
-                return .none
-                
-            case .path(.element(id: _, action: .detailActorsAction(.actorTapped(let index)))):
-                // 배우 더보기는 movieDetail을 무조건 통해야하기 때문에 count로 최근 열린 movieDetail 확인
-                return .send(.path(.element(id: state.path.ids[state.path.ids.count - 2], action: .detailAction(.actorTapped(index)))))
-                
-            case .path(.element(id: _, action: .actorDetailAction(.movieTapped(let id)))):
-                state.path.append(.detailState(.init(sendedMovieID: id)))
-                return .none
-                
-            case .searchBarTapped:
-                state.path.append(.searchState(.init()))
-                return .none
-                
-            case .path(.element(id: _, action: .searchAction(.movieTapped(let id)))):
-                state.path.append(.detailState(.init(sendedMovieID: id)))
-                return .none
                 
             default: return .none
-            }
-        }
-        .forEach(\.path, action: \.path) {
-            Path()
-        }
-    }
-}
-
-extension HomeFeature {
-    @Reducer
-    struct Path: Reducer {
-        @ObservableState
-        enum State: Equatable {
-            case detailState(DetailFeature.State)
-            case detailActorsState(DetailActorsFeature.State)
-            case actorDetailState(ActorDetailFeature.State)
-            case searchState(SearchFeature.State)
-        }
-        
-        enum Action: Equatable {
-            case detailAction(DetailFeature.Action)
-            case detailActorsAction(DetailActorsFeature.Action)
-            case actorDetailAction(ActorDetailFeature.Action)
-            case searchAction(SearchFeature.Action)
-        }
-        
-        var body: some Reducer<State, Action> {
-            Scope(state: \.detailState, action: \.detailAction) {
-               DetailFeature()
-            }
-            
-            Scope(state: \.detailActorsState, action: \.detailActorsAction) {
-                DetailActorsFeature()
-            }
-            
-            Scope(state: \.actorDetailState, action: \.actorDetailAction) {
-                ActorDetailFeature()
-            }
-            
-            Scope(state: \.searchState, action: \.searchAction) {
-                SearchFeature()
             }
         }
     }
