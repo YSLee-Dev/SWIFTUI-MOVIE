@@ -19,8 +19,8 @@ extension DependencyValues {
         set {self[KmdbManagerKey.self] = newValue}
     }
     
-    var userDefaults: UserDefaultsProtocol {
-        get {self[UserDefaultsKey.self]}
-        set {self[UserDefaultsKey.self] = newValue}
+    var movieMemoManager: MovieMemoManagerProtocol {
+        get {self[MovieMemoManagerKey.self]}
+        set {self[MovieMemoManagerKey.self] = newValue}
     }
 }

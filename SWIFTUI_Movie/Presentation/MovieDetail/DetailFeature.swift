@@ -12,7 +12,7 @@ import ComposableArchitecture
 struct DetailFeature: Reducer {
     @Dependency (\.kmdbManager) var kmdbManager
     @Dependency (\.kobisManager) var kobisManager
-    @Dependency (\.userDefaults) var userDefaults
+    @Dependency (\.movieMemoManager) var memoManager
     @Dependency (\.dismiss) var dismiss
     
     @ObservableState
@@ -106,7 +106,7 @@ struct DetailFeature: Reducer {
                 
             case .userDefaultsMemoUpdate:
                 guard state.detailMovieInfo != nil else {return .none}
-                let memo = try? self.userDefaults.loadData(movieID: state.sendedMovieID, modelType: MovieDetailMemo.self)
+                let memo = self.memoManager.getMovieMemo(forKey: state.sendedMovieID)
                 
                 if let readMemo = memo {
                     state.movieMemo = readMemo
@@ -155,11 +155,11 @@ struct DetailFeature: Reducer {
                 else { // 값이 없거나, 아무런 값을 입력하지 않을 때
                     state.memoViewState = nil
                     state.movieMemo = nil
-                    self.userDefaults.saveData(movieId: state.sendedMovieID, memoModel: state.movieMemo)
+                    self.memoManager.removeMovieMemo(forKey: state.sendedMovieID)
                     return .none
                 }
                 state.movieMemo!.movieNote = memo
-                self.userDefaults.saveData(movieId: state.sendedMovieID, memoModel: state.movieMemo!)
+                self.memoManager.movieMemoSave(data: state.movieMemo!)
                 state.memoViewState = nil
                 
                 return .none

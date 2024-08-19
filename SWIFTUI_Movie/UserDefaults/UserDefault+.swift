@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension UserDefaults: UserDefaultsProtocol {
+extension UserDefaults {
     func saveData<T: Encodable>(movieId: String, memoModel: T?) {
         let data = try? PropertyListEncoder().encode(memoModel)
         UserDefaults.standard.setValue(data, forKey: movieId)

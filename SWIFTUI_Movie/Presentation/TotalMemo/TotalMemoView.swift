@@ -12,7 +12,15 @@ struct TotalMemoView: View {
     @State var store: StoreOf<TotalMemoFeature>
     
     var body: some View {
-        Text("1")
+        VStack(alignment: .leading) {
+            Text("메모")
+                .font(.title)
+                .fontWeight(.bold)
+                .padding(EdgeInsets(top: 30, leading: 20, bottom: 20, trailing: 20))
+            
+            ScrollView {
+            }
+        }
     }
 }
 
