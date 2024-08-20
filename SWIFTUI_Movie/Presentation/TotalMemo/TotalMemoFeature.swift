@@ -10,18 +10,24 @@ import ComposableArchitecture
 
 @Reducer
 struct TotalMemoFeature: Reducer {
+    @Dependency (\.movieMemoManager) var memoManager
+    
     @ObservableState
     struct State: Equatable {
-        
+        var nowMemoList: [MovieDetailMemo] = []
     }
     
-    struct Action: Equatable {
-        
+    enum Action: Equatable {
+        case viewShowed
     }
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
-            return .none
+            switch action {
+            case .viewShowed:
+                state.nowMemoList = self.memoManager.getMovieMemoAll()
+                return .none
+            }
         }
     }
 }

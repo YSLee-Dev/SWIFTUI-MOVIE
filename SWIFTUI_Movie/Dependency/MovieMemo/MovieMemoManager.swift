@@ -62,7 +62,7 @@ struct MovieMemoPreviewManager: MovieMemoManagerProtocol {
     static var shared = MovieMemoPreviewManager()
     
     private var tempMemoDataList: [MovieDetailMemo] = [
-        .init(movieID: "1", movieTitle: "범죄도시", movieNote: "범죄도시는 재미있다.", thumnail: nil),
+        .init(movieID: "1", movieTitle: "범죄도시", movieNote: "범죄도시는 재미있다. 그냥 뭔가 사람을 재미있게 하는 재주가 있다.", thumnail: nil),
         .init(movieID: "2", movieTitle: "파일럿", movieNote: "재미있었지만, 뭔가 슬펐다..", thumnail: nil),
         .init(movieID: "3", movieTitle: "7번방의 선물", movieNote: "눈물을 엄청 흘려서 머리가 아팠다.\n다시 보고 싶다.", thumnail: nil),
         .init(movieID: "4", movieTitle: "스파이더맨", movieNote: "재미는 있었지만 머리가 아팠다.", thumnail: nil),
