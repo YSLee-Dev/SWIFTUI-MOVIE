@@ -13,19 +13,18 @@ struct MovieMemoManager: MovieMemoManagerProtocol {
     }
     
     static var shared = MovieMemoManager()
-    let isInit = false
-    private init() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            MovieMemoManager.shared.nowMemoList =  (try? UserDefaults.standard.loadData(movieID: Key.saveKey.rawValue, modelType: [MovieDetailMemo].self)) ?? []
-        }
-       
-    }
+    private init() {}
     private var nowMemoList: [MovieDetailMemo] = [] {
         didSet {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 UserDefaults.standard.saveData(movieId: Key.saveKey.rawValue, memoModel: MovieMemoManager.shared.nowMemoList)
             }
         }
+    }
+
+    // 프로토콜 내부에서는 사용할 수 없음
+    func shardValueInit() {
+        MovieMemoManager.shared.nowMemoList =  (try? UserDefaults.standard.loadData(movieID: Key.saveKey.rawValue, modelType: [MovieDetailMemo].self)) ?? []
     }
     
     func getMovieMemoAll() -> [MovieDetailMemo] {

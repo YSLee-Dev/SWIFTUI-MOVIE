@@ -12,6 +12,10 @@ import ComposableArchitecture
 struct SWIFTUI_MovieApp: App {
     let store: StoreOf<AppFeature> = .init(initialState: .init(homeState: .init(), totalMemoState: .init()), reducer: {AppFeature()})
     
+    init() {
+        MovieMemoManager.shared.shardValueInit() // UserDefaults 세팅
+    }
+    
     var body: some Scene {
         WindowGroup {
             AppView(store: self.store)
