@@ -10,5 +10,5 @@ import ComposableArchitecture
 
 enum MovieMemoManagerKey: DependencyKey {
     static var liveValue: MovieMemoManagerProtocol = MovieMemoManager.shared
-    static var testValue: any MovieMemoManagerProtocol = MovieMemoManager.shared
+    static var previewValue: any MovieMemoManagerProtocol = MovieMemoPreviewManager.shared
 }
