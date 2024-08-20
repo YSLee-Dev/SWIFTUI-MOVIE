@@ -21,7 +21,7 @@ struct TotalMemoView: View {
             
             ScrollView {
                 LazyVStack(alignment: .center,  spacing: 20) {
-                    ForEach(self.store.nowMemoList, id: \.movieID) { data in
+                    ForEach(Array(zip(self.store.nowMemoList.indices, self.store.nowMemoList)), id: \.0) { index, data in
                         HStack {
                             KFImage(data.thumnail)
                                 .resizable()
@@ -54,6 +54,9 @@ struct TotalMemoView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 15))
                         }
                         .padding(.horizontal, 20)
+                        .onTapGesture {
+                            self.store.send(.memoTapped(index))
+                        }
                     }
                 }
             }

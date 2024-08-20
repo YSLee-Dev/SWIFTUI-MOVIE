@@ -19,6 +19,7 @@ struct TotalMemoFeature: Reducer {
     
     enum Action: Equatable {
         case viewShowed
+        case memoTapped(Int)
     }
     
     var body: some Reducer<State, Action> {
@@ -26,6 +27,9 @@ struct TotalMemoFeature: Reducer {
             switch action {
             case .viewShowed:
                 state.nowMemoList = self.memoManager.getMovieMemoAll()
+                return .none
+                
+            default:
                 return .none
             }
         }

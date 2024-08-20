@@ -64,6 +64,11 @@ struct AppFeature: Reducer {
                 state.path.append(.detailState(.init(sendedMovieID: id)))
                 return .none
                 
+            case .totalMemoAction(.memoTapped(let index)):
+                let tappedData = state.totalMemoState.nowMemoList[index]
+                state.path.append(.detailState(.init(sendedMovieID: tappedData.movieID, thumnailURL: tappedData.thumnail)))
+                return .none
+                
             case .homeAction(.searchBarTapped):
                 state.path.append(.searchState(.init()))
                 return .none
