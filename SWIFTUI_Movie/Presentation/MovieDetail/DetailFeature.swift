@@ -19,6 +19,7 @@ struct DetailFeature: Reducer {
     struct State: Equatable {
         let sendedMovieID: String
         var thumnailURL: URL?
+        var scrollToMemoRequested: Bool = false
         var detailMovieInfo: KobisMovieInfo?
         var actorInfoLoading: Int?
         var isCompanyViewExpansion: Bool = false
@@ -39,6 +40,7 @@ struct DetailFeature: Reducer {
         case companysMoreViewBtnTapped
         case userDefaultsMemoUpdate
         case memoBtnTapped
+        case scrollToMemoSuccss
         
         case memoViewAction(PresentationAction<MovieDetailMemoFeature.Action>)
         case alertAction(PresentationAction<Alert>)
@@ -166,6 +168,10 @@ struct DetailFeature: Reducer {
                 
             case .memoViewAction(.presented(.backBtnTapped)):
                 state.memoViewState = nil
+                return .none
+                
+            case .scrollToMemoSuccss:
+                state.scrollToMemoRequested = false
                 return .none
                 
             default: return .none
