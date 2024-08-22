@@ -12,10 +12,8 @@ import ComposableArchitecture
 struct PopupFeature: Reducer {
     @ObservableState
     struct State: Equatable {
-        var isShow: Bool = false
         let alertModel: AlertModel
-        let leftBtnTitle: String
-        let rightBtntTitle: String?
+        var isShow: Bool = false
     }
     
     enum Action: Equatable {

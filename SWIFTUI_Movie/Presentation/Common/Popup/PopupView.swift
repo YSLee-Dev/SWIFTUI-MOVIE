@@ -22,20 +22,20 @@ struct PopupView: View {
             
             VStack(alignment: .leading, spacing: 15) {
                 Text(self.store.alertModel.title)
-                    .font(.title)
+                    .font(.title2)
                     .bold()
                 
                 Divider()
                 
                 Text(self.store.alertModel.msg)
-                    .font(.system(size: 20))
+                    .font(.system(size: 17))
                     .padding(.bottom, 20)
                 
                 HStack {
                     Button(action: {
                         self.store.send(.btnsTapped(true))
                     }) {
-                        Text(self.store.leftBtnTitle)
+                        Text(self.store.alertModel.leftBtnTitle)
                             .foregroundColor(.black)
                             .frame(maxWidth: .infinity, maxHeight: 50)
                             .background {
@@ -43,7 +43,7 @@ struct PopupView: View {
                                     .cornerRadius(15)
                             }
                     }
-                    if let right = self.store.rightBtntTitle {
+                    if let right = self.store.alertModel.rightBtnTitle {
                         Button(action: {
                             self.store.send(.btnsTapped(false))
                         }) {
@@ -74,5 +74,5 @@ struct PopupView: View {
 }
 
 #Preview {
-    PopupView(store: .init(initialState: .init(alertModel: AlertModel(title: "오류", msg: "오류 발생"), leftBtnTitle: "취소", rightBtntTitle: "확인"), reducer: {PopupFeature()}))
+    PopupView(store: .init(initialState: .init(alertModel: AlertModel(id: "1", title: "오류", msg: "오류 발생", leftBtnTitle: "취소", rightBtnTitle: "확인")), reducer: {PopupFeature()}))
 }
