@@ -19,7 +19,10 @@ struct ErrorHandler {
             ("데이터 오류", "현재 데이터를 로드할 수 없습니다.")
             
         case URLError.badServerResponse:
-            ("네트워크 오류", "현재 네트워크 통신이 불안정합니다.")
+            ("서버오류", " 현재 서버가 불안정합니다.\n잠시 후 다시시도해주세요.")
+            
+        case URLError.notConnectedToInternet:
+            ("네트워크 오류", "현재 네트워크에 연결되어 있지 않습니다.\n네트워크 연결 상태를 확인해주세요.")
             
         default:
             ("오류", "잠시 후 다시 시도해주세요.")
