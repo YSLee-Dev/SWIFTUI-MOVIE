@@ -11,7 +11,6 @@ import ComposableArchitecture
 struct PopupView: View {
     private let deviceSize = UIScreen.main.bounds.size
     @State private var store: StoreOf<PopupFeature>
-    @State private var isShow = false
     
     init(store: StoreOf<PopupFeature>) {
         self.store = store
@@ -34,7 +33,7 @@ struct PopupView: View {
                 
                 HStack {
                     Button(action: {
-                        self.store.send(.leftBtnTapped)
+                        self.store.send(.btnsTapped(true))
                     }) {
                         Text(self.store.leftBtnTitle)
                             .foregroundColor(.black)
@@ -46,7 +45,7 @@ struct PopupView: View {
                     }
                     if let right = self.store.rightBtntTitle {
                         Button(action: {
-                            self.store.send(.rightBtnTapped)
+                            self.store.send(.btnsTapped(false))
                         }) {
                             Text(right)
                                 .foregroundColor(.black)
@@ -63,13 +62,14 @@ struct PopupView: View {
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 15))
             .padding(20)
-            .offset(y: self.isShow ? 0 : 100)
-            .animation(.spring(duration: 0.4, bounce: 0.35), value: self.isShow)
+            .offset(y: self.store.isShow ? 0 : 300)
+            .animation(.spring(duration: 0.5, bounce: 0.3), value: self.store.isShow)
         }
         .onAppear {
-            self.isShow = true
+            self.store.send(.viewOnAppear)
         }
-        .background(Color.black.opacity(0.3))
+        .background(self.store.isShow ? Color.black.opacity(0.3) : .clear)
+        .animation(.easeInOut(duration: 0.2), value: self.store.isShow)
     }
 }
 
