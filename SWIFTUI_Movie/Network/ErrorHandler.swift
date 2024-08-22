@@ -26,8 +26,8 @@ struct ErrorHandler {
         }
     }
     
-    static func getAlertModel(error: Error) -> AlertModel {
+    static func getAlertModel(id: String, error: Error, leftBtnTitle: String, rightBtnTitle: String? = nil) -> AlertModel {
         let de = ErrorHandler.getDescription(error: error)
-        return .init(title: de.title, msg: de.msg)
+        return .init(id: id, title: de.title, msg: de.msg, leftBtnTitle: leftBtnTitle, rightBtnTitle: rightBtnTitle)
     }
 }

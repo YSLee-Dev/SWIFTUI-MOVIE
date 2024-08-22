@@ -24,7 +24,8 @@ struct DetailFeature: Reducer {
         var actorInfoLoading: Int?
         var isCompanyViewExpansion: Bool = false
         var movieMemo: MovieDetailMemo? = nil
-        @Presents var alertState: AlertState<Action.Alert>?
+        
+        var popupState: PopupFeature.State?
         @Presents var memoViewState: MovieDetailMemoFeature.State?
     }
     
@@ -35,33 +36,35 @@ struct DetailFeature: Reducer {
         case actorsMoreBtnTapped(KobisMovieInfo)
         case actorTapped(Int)
         case actorDetailInfoRequestSuccess(String)
-        case actorDetailInfoRequestFailed(AlertModel)
         case thumnailImageUpdate(URL?)
         case companysMoreViewBtnTapped
         case userDefaultsMemoUpdate
         case memoBtnTapped
         case scrollToMemoSuccss
+        case popupShowRequest(AlertModel)
         
         case memoViewAction(PresentationAction<MovieDetailMemoFeature.Action>)
-        case alertAction(PresentationAction<Alert>)
-        
-        @CasePathable
-        enum Alert: Equatable {
-            case cancelBtnTap
-        }
+        case popupAction(PopupFeature.Action)
+    }
+    
+    enum PopupID: String, Equatable {
+        case actorError
+        case viewInit
     }
     
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
             case .viewInitialized:
-                if state.detailMovieInfo != nil {return .none}
+                if state.detailMovieInfo != nil, state.popupState == nil {return .none}
                 let id = state.sendedMovieID
-                return .run { send in
-                    let data = try? await self.kobisManager.detailMovieInfoRequest(moiveID: id).movieInfoResult.moiveInfo
+                return .run(operation: { send in
+                    let data = try await self.kobisManager.detailMovieInfoRequest(moiveID: id).movieInfoResult.moiveInfo
                     await  send(.detailInfoUpdate(data))
+                }) { error, send in
+                    let model = ErrorHandler.getAlertModel(id: PopupID.viewInit.rawValue, error: error, leftBtnTitle: "확인")
+                    await send(.popupShowRequest(model))
                 }
-                
             case .detailInfoUpdate(let data):
                 state.detailMovieInfo = data
                 
@@ -95,10 +98,9 @@ struct DetailFeature: Reducer {
                     if let first = filtered.first {
                         await send(.actorDetailInfoRequestSuccess(first.id))
                     }
-                    
                 }, catch: { error, send in
-                    let alertModel = ErrorHandler.getAlertModel(error: error)
-                    await send(.actorDetailInfoRequestFailed(alertModel))
+                    let alertModel = ErrorHandler.getAlertModel(id: PopupID.actorError.rawValue, error: error, leftBtnTitle: "확인", rightBtnTitle: "재시도")
+                    await send(.popupShowRequest(alertModel))
                     print("ERROR", error)
                 })
                 
@@ -120,22 +122,8 @@ struct DetailFeature: Reducer {
                 state.actorInfoLoading = nil
                 return .none
                 
-            case .actorDetailInfoRequestFailed(let alertModel):
-                state.actorInfoLoading = nil
-                state.alertState = AlertState {
-                    TextState(alertModel.title)
-                } actions: {
-                    ButtonState(role: .cancel){
-                        TextState("확인")
-                    }
-                } message: {
-                    TextState(alertModel.msg)
-                }
-                
-                return .none
-                
-            case .alertAction(.dismiss), .alertAction(.presented(.cancelBtnTap)):
-                state.alertState = nil
+            case .popupShowRequest(let alertModel):
+                state.popupState = .init(alertModel: alertModel)
                 return .none
                 
             case .companysMoreViewBtnTapped:
@@ -166,18 +154,43 @@ struct DetailFeature: Reducer {
                 
                 return .none
                 
-            case .memoViewAction(.presented(.backBtnTapped)):
-                state.memoViewState = nil
-                return .none
-                
             case .scrollToMemoSuccss:
                 state.scrollToMemoRequested = false
                 return .none
                 
+            case .popupAction(.leftBtnTapped):
+                state.actorInfoLoading = nil
+                state.popupState = nil
+                guard let popupState = state.popupState, let type = PopupID(rawValue: popupState.alertModel.id) else {return .none}
+                if case .viewInit = type {
+                    return .run { _ in
+                        await self.dismiss()
+                    }
+                } else {
+                    return .none
+                }
+                
+            case .popupAction(.rightBtnTapped):
+                let actorIndex = state.actorInfoLoading
+                state.actorInfoLoading = nil
+                
+                guard let popupState = state.popupState, let type = PopupID(rawValue: popupState.alertModel.id) else {
+                    state.popupState = nil
+                    return .none
+                }
+                state.popupState = nil
+                
+                switch type {
+                case.actorError:  return .send(.actorTapped(actorIndex!))
+                case .viewInit:  return .none
+                }
+                
             default: return .none
             }
         }
-        .ifLet(\.alertState, action: \.alertAction)
+        .ifLet(\.popupState, action: \.popupAction) {
+            PopupFeature()
+        }
         .ifLet(\.$memoViewState, action: \.memoViewAction) {
             MovieDetailMemoFeature()
         }

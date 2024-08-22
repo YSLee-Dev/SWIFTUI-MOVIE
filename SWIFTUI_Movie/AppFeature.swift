@@ -46,12 +46,6 @@ struct AppFeature: Reducer {
                 state.path.append(.actorDetailState(.init(actorID: actorID)))
                 return .send(.path(.element(id: state.path.ids[state.path.ids.count - 2], action: .detailActorsAction(.actorDetailInfoRequestEND)))) // 만약 등장인물 상세보기가 열려있었다면
                 
-            case .path(.element(id: let pathID, action: .detailAction(.actorDetailInfoRequestFailed(_)))):
-                if state.path.ids.last != pathID {
-                    state.path.removeLast()
-                }
-                return .none
-                
             case .path(.element(id: _, action: .detailActorsAction(.actorTapped(let index)))):
                 // 배우 더보기는 movieDetail을 무조건 통해야하기 때문에 count로 최근 열린 movieDetail 확인
                 return .send(.path(.element(id: state.path.ids[state.path.ids.count - 2], action: .detailAction(.actorTapped(index)))))

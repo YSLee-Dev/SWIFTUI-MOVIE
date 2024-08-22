@@ -8,6 +8,9 @@
 import Foundation
 
 struct AlertModel: Equatable {
+    let id: String
     let title: String
     let msg: String
+    let leftBtnTitle: String
+    let rightBtnTitle: String?
 }

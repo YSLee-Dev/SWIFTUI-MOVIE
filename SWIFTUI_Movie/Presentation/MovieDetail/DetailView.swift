@@ -188,8 +188,12 @@ struct DetailView: View {
                         }
                     }
                 }
+                .overlay {
+                    if let store =  self.store.scope(state: \.popupState, action: \.popupAction) {
+                        PopupView(store: store)
+                    }
+                }
         }
-        .alert(self.$store.scope(state: \.alertState, action: \.alertAction))
         .sheet(item: self.$store.scope(state: \.memoViewState, action: \.memoViewAction)) { store in
             MovieDetailMemoView(store: store)
         }
