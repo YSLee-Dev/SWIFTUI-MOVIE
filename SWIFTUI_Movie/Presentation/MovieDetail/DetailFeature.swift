@@ -164,6 +164,7 @@ struct DetailFeature: Reducer {
                     state.popupState = nil
                     return .none
                 }
+                state.popupState = nil
                 if case .viewInit = type {
                     return .run { _ in
                         await self.dismiss()
