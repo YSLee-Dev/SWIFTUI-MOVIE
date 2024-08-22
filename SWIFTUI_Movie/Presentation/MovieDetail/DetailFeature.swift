@@ -160,8 +160,10 @@ struct DetailFeature: Reducer {
                 
             case .popupAction(.leftBtnTapped):
                 state.actorInfoLoading = nil
-                state.popupState = nil
-                guard let popupState = state.popupState, let type = PopupID(rawValue: popupState.alertModel.id) else {return .none}
+                guard let popupState = state.popupState, let type = PopupID(rawValue: popupState.alertModel.id) else {
+                    state.popupState = nil
+                    return .none
+                }
                 if case .viewInit = type {
                     return .run { _ in
                         await self.dismiss()
