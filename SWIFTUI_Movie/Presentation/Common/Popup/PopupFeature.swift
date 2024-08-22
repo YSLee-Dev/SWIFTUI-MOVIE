@@ -12,8 +12,7 @@ import ComposableArchitecture
 struct PopupFeature: Reducer {
     @ObservableState
     struct State: Equatable {
-        let title: String
-        let msg: String
+        let alertModel: AlertModel
         
         let leftBtnTitle: String
         let rightBtntTitle: String?

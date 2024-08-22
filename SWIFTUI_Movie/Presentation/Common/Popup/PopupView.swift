@@ -22,16 +22,16 @@ struct PopupView: View {
             Spacer()
             
             VStack(alignment: .leading, spacing: 15) {
-            Text(self.store.title)
-                .font(.title)
-                .bold()
-            
-            Divider()
-            
-            Text(self.store.msg)
-                .font(.system(size: 20))
-                .padding(.bottom, 20)
-            
+                Text(self.store.alertModel.title)
+                    .font(.title)
+                    .bold()
+                
+                Divider()
+                
+                Text(self.store.alertModel.msg)
+                    .font(.system(size: 20))
+                    .padding(.bottom, 20)
+                
                 HStack {
                     Button(action: {
                         self.store.send(.leftBtnTapped)
@@ -74,5 +74,5 @@ struct PopupView: View {
 }
 
 #Preview {
-    PopupView(store: .init(initialState: .init(title: "알림", msg: "현재 오류 발생", leftBtnTitle: "취소", rightBtntTitle: "확인"), reducer: {PopupFeature()}))
+    PopupView(store: .init(initialState: .init(alertModel: AlertModel(title: "오류", msg: "오류 발생"), leftBtnTitle: "취소", rightBtntTitle: "확인"), reducer: {PopupFeature()}))
 }
