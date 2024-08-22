@@ -18,7 +18,6 @@ struct DetailView: View {
     
     init(store: StoreOf<DetailFeature>) {
         self.store = store
-        self.store.send(.viewInitialized)
     }
     
     var body: some View {
@@ -193,6 +192,9 @@ struct DetailView: View {
                         PopupView(store: store)
                     }
                 }
+        }
+        .onAppear {
+            self.store.send(.viewInitialized)
         }
         .sheet(item: self.$store.scope(state: \.memoViewState, action: \.memoViewAction)) { store in
             MovieDetailMemoView(store: store)
