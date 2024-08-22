@@ -13,7 +13,6 @@ struct ActorDetailView: View {
     
     init(store: StoreOf<ActorDetailFeature>) {
         self.store = store
-        self.store.send(.viewInitialized)
     }
     
     var body: some View {
@@ -58,7 +57,14 @@ struct ActorDetailView: View {
                     }
                 }
             }
-            .alert(self.$store.scope(state: \.alertState, action: \.alertAction))
+            .onAppear {
+                self.store.send(.viewInitialized)
+            }
+            .overlay {
+                if let store =  self.store.scope(state: \.popupState, action: \.popupAction) {
+                    PopupView(store: store)
+                }
+            }
     }
 }
 

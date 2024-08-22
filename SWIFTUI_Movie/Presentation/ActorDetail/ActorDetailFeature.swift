@@ -19,7 +19,7 @@ struct ActorDetailFeature: Reducer {
         let actorID: String
         var actorDetailInfo: ActorDetailInfo?
         var filmoList: [ActorDetailFilmoModel] = []
-        @Presents var alertState: AlertState<Action.Alert>?
+        var popupState: PopupFeature.State?
     }
     
     enum Action: Equatable {
@@ -29,12 +29,7 @@ struct ActorDetailFeature: Reducer {
         case filmoListRequestSuccess([ActorDetailFilmoModel])
         case filmoListRequestFailed(AlertModel)
         case movieTapped(String)
-        case alertAction(PresentationAction<Alert>)
-        
-        enum Alert: Equatable {
-            case retryBtnTapped
-            case cancelBtnTapped
-        }
+        case popupAction(PopupFeature.Action)
     }
     
     var body: some Reducer<State, Action> {
@@ -47,7 +42,7 @@ struct ActorDetailFeature: Reducer {
                     let data = try  await self.kobisManager.actorDetailReqeust(actorID: actorID)
                     await send(.actorDetailRequestSuccess(data))
                 },catch: { error, send in
-                    let alertModel = ErrorHandler.getAlertModel(error: error)
+                    let alertModel = ErrorHandler.getAlertModel(id: "", error: error, leftBtnTitle: "확인", rightBtnTitle: "재시도")
                     await send(.filmoListRequestFailed(alertModel))
                 })
                 
@@ -79,24 +74,15 @@ struct ActorDetailFeature: Reducer {
                 return .none
                 
             case .filmoListRequestFailed(let model):
-                state.alertState = AlertState {
-                    TextState(model.title)
-                } actions: {
-                    ButtonState(action: .retryBtnTapped) {
-                        TextState("재시도")
-                    }
-                    ButtonState(role: .cancel, action: .cancelBtnTapped) {
-                        TextState("취소")
-                    }
-                }
+                state.popupState = .init(alertModel: model)
                 return .none
             
-            case .alertAction(.presented(.retryBtnTapped)):
-                state.alertState = nil
+            case .popupAction(.rightBtnTapped):
+                state.popupState = nil
                 return .send(.viewInitialized)
                 
-            case .alertAction(.presented(.cancelBtnTapped)):
-                state.alertState = nil
+            case .popupAction(.leftBtnTapped):
+                state.popupState = nil
                 return .run { _ in
                    await self.dismiss()
                 }
@@ -104,6 +90,8 @@ struct ActorDetailFeature: Reducer {
             default: return .none
             }
         }
-        .ifLet(\.alertState, action: \.alertAction)
+        .ifLet(\.popupState, action: \.popupAction) {
+            PopupFeature()
+        }
     }
 }
