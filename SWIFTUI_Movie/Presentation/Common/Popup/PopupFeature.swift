@@ -6,3 +6,27 @@
 //
 
 import Foundation
+import ComposableArchitecture
+
+@Reducer
+struct PopupFeature: Reducer {
+    @ObservableState
+    struct State: Equatable {
+        let title: String
+        let msg: String
+        
+        let leftBtnTitle: String
+        let rightBtntTitle: String?
+    }
+    
+    enum Action: Equatable {
+        case leftBtnTapped
+        case rightBtnTapped
+    }
+    
+    var body: some Reducer<State, Action> {
+        Reduce { state, action in
+            return .none
+        }
+    }
+}
