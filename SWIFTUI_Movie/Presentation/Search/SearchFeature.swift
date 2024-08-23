@@ -28,6 +28,7 @@ struct SearchFeature: Reducer {
         var nowPage: Int = 0
         var totalCount: Int = 0
         var nowSearchingWord: String? = nil
+        var popupState: PopupFeature.State?
     }
     
     enum Action:  BindableAction, Equatable {
@@ -39,6 +40,8 @@ struct SearchFeature: Reducer {
         case movieSearchRequest
         case thumnailRequest([SearchModel])
         case thumnailImageSuccess(UpdateRequestModel)
+        case popupShowRequest(AlertModel)
+        case popupAction(PopupFeature.Action)
     }
     
     enum TimerKey: Equatable {
@@ -137,12 +140,29 @@ struct SearchFeature: Reducer {
                     let data = try await self.kobisManager.movieSearchRequest(query: nowState.searchQuery, movieSearchType: nowState.searchType, requestPage: nowState.nowPage + 1)
                     await send(.movieSearchSuccess(data))
                 }) { error, send in
-                    // TODO: Error 처리
+                    let alertModel = ErrorHandler.getAlertModel(id: "", error: error, leftBtnTitle: "확인", rightBtnTitle: "재시도")
+                    await send(.popupShowRequest(alertModel))
                 }
                 
+            case .popupShowRequest(let model):
+                state.nowSearching = false
+                state.popupState = .init(alertModel: model)
+                return .none
+                
+            case .popupAction(.leftBtnTapped):
+                state.popupState = nil
+                return .none
+                
+            case .popupAction(.rightBtnTapped):
+                state.popupState = nil
+                return .send(.movieSearchTimerEnded)
+            
             default:
                 return .none
             }
+        }
+        .ifLet(\.popupState, action: \.popupAction) {
+            PopupFeature()
         }
     }
 }

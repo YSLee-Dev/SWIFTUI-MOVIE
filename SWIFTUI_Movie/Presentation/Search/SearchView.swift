@@ -117,6 +117,11 @@ struct SearchView: View {
             }
             .padding(.top, 20)
         }
+        .overlay {
+            if let store = self.store.scope(state: \.popupState, action: \.popupAction) {
+                PopupView(store: store)
+            }
+        }
     }
 }
 
