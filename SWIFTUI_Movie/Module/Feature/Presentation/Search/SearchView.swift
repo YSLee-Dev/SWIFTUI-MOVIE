@@ -11,6 +11,7 @@ import Kingfisher
 
 struct SearchView: View {
     @State var store: StoreOf<SearchFeature>
+    @FocusState private var isFocus: Bool?
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -33,6 +34,7 @@ struct SearchView: View {
                     .foregroundColor(.gray)
                     .padding(.leading, 20)
             }
+            .focused(self.$isFocus, equals: true)
             .padding(.leading, 20)
             .frame(height: 50)
             .background {
@@ -116,6 +118,11 @@ struct SearchView: View {
                 }
             }
             .padding(.top, 20)
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                self.isFocus = true
+            }
         }
         .overlay {
             if let store = self.store.scope(state: \.popupState, action: \.popupAction) {

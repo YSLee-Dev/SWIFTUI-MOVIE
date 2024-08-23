@@ -10,6 +10,7 @@ import ComposableArchitecture
 
 struct MovieDetailMemoView: View {
     @State private var store: StoreOf<MovieDetailMemoFeature>
+    @FocusState private var isFocus: Bool?
     
     init(store: StoreOf<MovieDetailMemoFeature>) {
         self.store = store
@@ -29,6 +30,7 @@ struct MovieDetailMemoView: View {
             ScrollView {
                 DetailInfoView(title: "메모") {
                     TextEditor(text: self.$store.insertedValue)
+                        .focused(self.$isFocus, equals: true)
                         .scrollContentBackground(.hidden)
                         .frame(height: UIScreen.main.bounds.height / 2)
                 }
@@ -42,6 +44,11 @@ struct MovieDetailMemoView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                 }
                 Spacer()
+            }
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                self.isFocus = true
             }
         }
     }
