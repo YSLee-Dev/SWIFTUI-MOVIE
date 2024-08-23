@@ -9,11 +9,10 @@ import SwiftUI
 import ComposableArchitecture
 
 struct HomeView: View {
-    @State var store: StoreOf<HomeFeature>
+    @State private var store: StoreOf<HomeFeature>
     
     init(store: StoreOf<HomeFeature>) {
         self.store = store
-        self.store.send(.viewInitialized)
     }
     
     var body: some View {
@@ -100,7 +99,15 @@ struct HomeView: View {
                 }
             }
         }
+        .onAppear {
+            self.store.send(.viewInitialized)
+        }
         .padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
+        .overlay {
+            if let store = self.store.scope(state: \.popupState, action: \.popupAction) {
+                PopupView(store: store)
+            }
+        }
     }
 }
 
