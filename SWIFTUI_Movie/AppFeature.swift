@@ -58,6 +58,12 @@ struct AppFeature: Reducer {
                 state.path.append(.detailState(.init(sendedMovieID: id)))
                 return .none
                 
+            case .path(.element(id: let pathID, action: .detailAction(.popupShowRequest(_)))):
+                if state.path.ids.last != pathID {
+                    _ = state.path.popLast()
+                }
+                return .none
+                
             case .totalMemoAction(.memoTapped(let index)):
                 let tappedData = state.totalMemoState.nowMemoList[index]
                 state.path.append(.detailState(.init(sendedMovieID: tappedData.movieID, thumnailURL: tappedData.thumnail, scrollToMemoRequested: true)))
