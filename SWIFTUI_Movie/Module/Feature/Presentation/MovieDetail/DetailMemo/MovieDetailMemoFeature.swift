@@ -10,6 +10,8 @@ import ComposableArchitecture
 
 @Reducer
 struct MovieDetailMemoFeature: Reducer {
+    @Dependency (\.dismiss) var dismiss
+    
     @ObservableState
     struct State: Equatable {
         let movieDetailNoteData: MovieDetailMemo
@@ -27,6 +29,11 @@ struct MovieDetailMemoFeature: Reducer {
         
         Reduce { state, action in
             switch action {
+            case .backBtnTapped:
+                return .run { _ in
+                    await self.dismiss()
+                }
+                
             default:
                 return .none
             }
