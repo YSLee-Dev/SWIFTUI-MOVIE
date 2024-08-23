@@ -146,7 +146,9 @@ struct SearchFeature: Reducer {
                 
             case .popupShowRequest(let model):
                 state.nowSearching = false
-                state.popupState = .init(alertModel: model)
+                if state.popupState == nil {
+                    state.popupState = .init(alertModel: model)
+                }
                 return .none
                 
             case .popupAction(.leftBtnTapped):
